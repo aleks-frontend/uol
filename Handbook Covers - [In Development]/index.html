@@ -178,7 +178,7 @@
 
       .pageColumn {
         position: relative;
-       flex: 1;
+        flex: 1;
         overflow: hidden;
       }
 
@@ -189,9 +189,12 @@
         flex-direction: column;
       }
 
-      .fit { padding: 60pt 60pt; }
-      
-      .layoutOrientation--landscape .fit { padding: 60pt 55pt; }
+      .fit { padding: 65pt 65pt 54pt 65pt; }
+
+      .fit--backPage { padding-bottom: 60pt; }
+
+      .page--landscape .fit--frontPage { padding: 65pt 74pt 61pt 57pt; }
+      .page--landscape .fit--backPage { padding: 65pt 57pt 58pt 71pt; }
 
       .pageColumn:nth-child(1) .container {
         right: -3mm;
@@ -209,12 +212,12 @@
       }
 
       .header {
-        height: 51pt;
+        height: 57pt;
         padding: 8pt 11pt;
       }
 
       .logo {
-        width: 123pt;
+        width: 139pt;
         object-fit: contain;
         object-position: bottom;
       }
@@ -226,17 +229,34 @@
       }
 
       .layout--version-1 .logo__container,
-      .layout--version-2 .logo__container,
       .layout--version-4 .logo__container,
-      .layout--version-5 .logo__container {    
-        right: 60pt;
-        bottom: 60pt;
+      .layout--version-5 .logo__container {  
+        right: 65pt;
+        bottom: 59pt;
+      }
+
+      .layout--version-2 .logo__container {
+        right: 64pt;
+        bottom: 59pt;
       }
 
       .layout--version-3 .logo__container {     
-        left: 60pt;
-        bottom: 60pt;
+        left: 64pt;
+        bottom: 59pt;
       }
+
+      .layout--version-1 .page--landscape .logo__container,
+      .layout--version-2 .page--landscape .logo__container,
+      .layout--version-4 .page--landscape .logo__container,
+      .layout--version-5 .page--landscape .logo__container {
+        right: 74pt;
+        bottom: 59pt;
+      }
+
+      .layout--version-3 .page--landscape .logo__container {
+        left: 56pt;
+      }
+
 
       .logo--thirdParty {
         max-width: 123pt;
@@ -266,11 +286,11 @@
         flex: 1;
       }
 
-      .layout--version-1 .body--frontPage { padding: 408pt 192pt 0pt 0pt; }
-      .layout--version-2 .body--frontPage { padding: 189pt 101pt 0pt 69pt; }
-      .layout--version-3 .body--frontPage { padding: 189pt 48pt 0pt 122pt; }
-      .layout--version-4 .body--frontPage { padding: 249pt 66pt 0pt 101pt; }
-      .layout--version-5 .body--frontPage { padding: 162pt 178pt 0pt 0pt; }
+      .layout--version-1 .body--frontPage { padding: 397pt 179pt 0 0; }
+      .layout--version-2 .body--frontPage { padding: 177pt 97pt 0 62pt; }
+      .layout--version-3 .body--frontPage { padding: 177pt 42pt 0 116pt; }
+      .layout--version-4 .body--frontPage { padding: 239pt 61pt 0 98pt; }
+      .layout--version-5 .body--frontPage { padding: 151pt 166pt 0 0; }
 
       .body--backPage {
         display: flex;
@@ -434,14 +454,14 @@
 
 
     <div class="page page--portrait">
-
+  
       <div class="bleed">
 
-        <div class="container fit">
+        <div class="container fit fit--backPage">
 
           <div class="header">
             <img class="logo" src="{{{account.logos.reversed}}}">
-             <div class="website" data-max-line="1">{{{UOL_website--hcs}}}</div><!--website-->
+            <div class="website" data-max-line="1">{{{UOL_website--hcs}}}</div><!--website-->
           </div><!--header-->
           <div class="body body--backPage">
             <div class="info">
@@ -492,7 +512,6 @@
               {{/spreadsheet.UOL_social-assets--hc}}
             </div><!--info-->
           </div><!--body--backPage-->
-
         </div><!--container fit-->
 
       </div><!--bleed-->
@@ -507,7 +526,7 @@
 
         <div class="pageColumn__container">
           <div class="pageColumn">
-            <div class="container fit">
+            <div class="container fit fit--frontPage">
               <div class="backgroundImage backgroundImage--top {{^UOL_top-image--hc}}withoutImage{{/UOL_top-image--hc}}"><div class="reposition-fix">{{{UOL_top-image--hc}}}</div></div><!--backgroundImage--top-->
               <div class="backgroundImage backgroundImage--bottom {{^UOL_bottom-image--hc}}withoutImage{{/UOL_bottom-image--hc}}"><div class="reposition-fix">{{{UOL_bottom-image--hc}}}</div></div><!--backgroundImage--bottom-->
               <div class="header">
@@ -540,7 +559,7 @@
           </div><!--page__column-->
 
           <div class="pageColumn">
-            <div class="container fit">
+            <div class="container fit fit--backPage">
 
               <div class="header">
                 <img class="logo" src="{{{account.logos.reversed}}}">
@@ -600,7 +619,6 @@
 
           </div><!--page__column-->
         </div><!--pageColumn__container-->
-
       </div><!--bleed-->
 
     </div><!--page-->
