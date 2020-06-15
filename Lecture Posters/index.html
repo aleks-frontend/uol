@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      {{{account.snippets.fonts}}}
+
+      /* order inputs */
+
+      /*
+      {{show-crop}}
+      {{{UOL_layout-choice--lp}}}
+      {{{UOL_logo-container-direction--lp}}}
+      {{{UOL_theme-colours--lp}}}
+      {{{UOL_top-image--lp}}}
+      {{{UOL_bottom-image--lp}}}
+      {{{UOL_website--lp}}}
+      {{{UOL_secondary-information--lp}}}
+      {{{UOL_heading--lp}}}
+      {{{UOL_standfirst--lp}}}
+      {{{UOL_body-copy--lp}}}
+      {{{UOL_info-text--lp}}}
+      {{{UOL_third-party-logo-1--lp}}}
+      {{{UOL_third-party-logo-2--lp}}}
+      */
+
+      :root {
+        --white: {{{account.colors.white}}};
+        --core-red: {{{account.colors.core-red}}};
+        --orange: {{{account.colors.orange}}};
+        --green: {{{account.colors.green}}};
+        --blue: {{{account.colors.blue}}};
+        --purple: {{{account.colors.purple}}};
+        --grey: {{{account.colors.grey-1}}};
+        --light-grey: {{{account.colors.grey-4}}};
+      }
+
+      .themeColor--orange { --dynamic-colour: var(--orange); }
+      .themeColor--green { --dynamic-colour: var(--green); }
+      .themeColor--blue { --dynamic-colour: var(--blue); }
+      .themeColor--purple { --dynamic-colour: var(--purple); }
+
+
+      html {
+        font-family: 'Maison Neue';
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      .layout--version-1 .backgroundImage--top {
+        right: 187pt;
+        bottom: 215pt;
+      }
+
+      .layout--version-2 .backgroundImage--top {
+        left: 184pt;
+        bottom: 525pt;
+      }
+
+      .layout--version-3 .backgroundImage--top {
+        right: 168pt;
+        bottom: 544.5pt;
+      }
+
+      .layout--version-4 .backgroundImage--top {
+        left: 258pt;
+        bottom: 505.5pt;
+      }
+
+      .layout--version-5 .backgroundImage--top {
+        left: 258pt;
+        bottom: 519.5pt;
+      }
+
+      .layout--version-6 .backgroundImage--top {
+        right: 116pt;
+        bottom: 426.5pt;
+      }
+      
+       .layout--version-1 .backgroundImage--bottom {
+        display: none;
+      }
+
+      .layout--version-2 .backgroundImage--bottom {
+        top: 404pt;
+        right: 399pt;
+        bottom: 248pt;
+      }
+
+      .layout--version-3 .backgroundImage--bottom {
+        top: 357pt;
+        left: 401pt;
+        bottom: 233pt;
+      }
+
+      .layout--version-4 .backgroundImage--bottom {
+        top: 413pt;
+        right: 133pt;
+        bottom: 199pt;
+      }
+
+      .layout--version-5 .backgroundImage--bottom {
+        top: 397pt;
+        right: 358pt;
+        bottom: 114pt;
+      }
+
+      .layout--version-6 .backgroundImage--bottom {
+        top: 568pt;
+        left: 366pt;
+      }
+      
+      .withoutImage.backgroundImage {
+        background-color: var(--light-grey);
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 61pt 0pt 59pt;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        height: 52pt;
+        margin: 0pt 60pt;
+        padding: 8pt 11pt;
+        background: var(--core-red);
+      }
+
+      .logo {
+        width: 121.7pt;
+        object-fit: contain;
+        object-position: bottom;
+      }
+
+      .website {
+        flex: 1;
+        margin-left: 50pt;
+        margin-bottom: 3.5pt;
+        text-align: right;
+        font-size: 10.95pt;
+        line-height: 1.2em;
+        color: var(--white);
+      } 
+
+      .body {
+        position: relative;
+        flex: 1;
+        display: flex;
+      }
+
+      .layout--version-1 .body,
+      .layout--version-2 .body,
+      .layout--version-3 .body {
+        padding: 165.5pt 37.4pt 0pt;
+      }
+
+      .layout--version-1 .body,
+      .layout--version-2 .body {
+        justify-content: flex-end;
+      }
+
+      .layout--version-3 .body {
+        justify-content: flex-start;
+      }
+
+      .layout--version-4 .body {
+        padding: 45pt 35pt 0pt 60pt;
+      }
+
+      .layout--version-5 .body {
+        padding: 96pt 30pt 51pt 100pt;
+      }
+
+      .layout--version-6 .body {
+        padding: 120pt 58pt 39pt 39pt;
+      }
+
+      .layout--version-1 .body__inner,
+      .layout--version-2 .body__inner,
+      .layout--version-3 .body__inner {
+        width: 361.5pt;
+        background-color: var(--white);
+      }
+
+      .layout--version-1 .body__inner {
+        padding: 21pt 21pt 20pt;
+      }
+
+      .layout--version-2 .body__inner {
+        padding: 21pt 21pt 20pt;
+      }
+
+      .layout--version-3 .body__inner {
+        padding: 19pt 22pt 20pt;
+      }
+
+      .layout--version-4 .body__inner,
+      .layout--version-5 .body__inner,
+      .layout--version-6 .body__inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .layout--version-1 .body__top,
+      .layout--version-2 .body__top,
+      .layout--version-3 .body__top {
+        margin-bottom: 37pt;
+      }
+
+      .layout--version-4 .body__top,
+      .layout--version-5 .body__top,
+      .layout--version-6 .body__top {
+        padding: 20pt 21pt 20pt;
+        background-color: var(--white);
+      }
+
+      .layout--version-4 .body__top,
+      .layout--version-6 .body__top {
+        width: 361.5pt;
+      }
+
+      .layout--version-5 .body__top {
+        width: 370.5pt;
+      }
+
+      .layout--version-6 .body__top {
+        width: 358.5pt;
+        margin-left: 160pt;
+      }
+      
+      .layout--version-6.is-safari .body__top { padding: 20pt 19pt 20pt; }
+
+      .preheading {
+        position: relative;
+        margin-bottom: 16pt;
+        font-size: 10.23pt;
+        letter-spacing: 0.19em;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        color: var(--dynamic-colour);
+      }
+
+      .heading {
+        position: relative;
+        max-height: 175pt;
+        margin-bottom: 12pt;
+        font-size: 38.4pt;
+        font-weight: bold;
+        word-spacing: 0.062em;
+        color: var(--dynamic-colour);
+      }
+
+      .heading__inner {
+        line-height: 1.15em;
+      }
+
+      .standfirst {
+        font-family: 'Tiempos Headline';
+        font-size: 15.6pt;
+        line-height: 1.25em;
+      }
+
+      .layout--version-4 .body__bottom,
+      .layout--version-5 .body__bottom,
+      .layout--version-6 .body__bottom {
+        width: 320pt;
+        background-color: var(--white);
+      }
+
+      .layout--version-4 .body__bottom {
+        margin-left: 197pt;
+        padding: 20pt 21pt 0pt;
+      }
+
+      .layout--version-5 .body__bottom {
+        margin-left: 162pt;
+        padding: 22pt 21pt;
+      }
+
+      .layout--version-6 .body__bottom {
+        padding: 22pt 21pt;
+      }
+
+      .copy {
+        position: relative;
+      }
+
+      .copy h3 {
+        font-size: 14.73pt;
+        line-height: 1.3em;
+        color: var(--dynamic-colour);
+      }
+
+      .copy h4 {
+        margin-bottom: 14.2pt;
+        font-size: 14.5pt;
+        line-height: 1.35em;
+      }
+
+      .copy h4:last-child {
+        margin-bottom: 0;
+      }
+
+      .copy + .info {
+        margin-top: 13.5pt;
+      }
+
+      .info {
+        font-size: 11.7pt;
+        line-height: 1.3em;
+        color: var(--grey);
+      }
+
+      .logo__container {
+        position: absolute;
+        display: flex;
+      }
+
+      .logoContainerDirection--vertical .logo__container  {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 185pt;
+      }
+
+      .logoContainerDirection--vertical .logo__container  {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+        width: 185pt;
+      }
+
+      .layout--version-1 .logo__container,
+      .layout--version-2 .logo__container,
+      .layout--version-4 .logo__container {
+        bottom: 59pt;
+        left: 37.4pt;
+      }
+
+      .layout--version-3 .logo__container {
+        bottom: 61pt;
+        right: 27.4pt;
+      }
+
+      .layout--version-5 .logo__container {
+        bottom: 37pt;
+        left: 279pt;
+      }
+
+      .layout--version-6 .logo__container {
+        bottom: 37pt;
+        left: 60pt;
+      }
+
+      .logoContainerDirection--vertical .logo--thirdParty{
+        width: 100%;
+        height: 50pt;
+        object-position: center bottom;
+      }
+
+      .logoContainerDirection--horizontal .logo--thirdParty  {
+        max-width: 123pt;
+        height: 50pt;
+        object-position: left bottom;
+      }
+
+      .logoContainerDirection--vertical .logo + .logo {
+        margin-top: 19pt;
+      }
+
+      .logoContainerDirection--horizontal .logo + .logo {
+        margin-left: 21pt;
+      }
+
+      .overflow.textFit--vertical:hover:after{
+        content: 'Minimum text size exceeded';        
+      }
+
+      .overflow.textFit--vertical:before {
+        font-size: 0.7em;
+      }
+
+      .overflow.textFit--vertical:hover:after {
+        font-size: 0.7em;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        data-crop="{{show-crop}}" 
+        data-reduce-export-font-size-by-percent="0" 
+        data-reduce-firefox-font-size-by-percent="0" 
+        data-prevent-export-overflow="false"
+        class="logoContainerDirection--{{{UOL_logo-container-direction--lp}}}{{^UOL_logo-container-direction--lp}}vertical{{/UOL_logo-container-direction--lp}}
+               layout--{{{UOL_layout-choice--lp}}}{{^UOL_layout-choice--lp}}version-1{{/UOL_layout-choice--lp}}
+               themeColor--{{{UOL_theme-colours--lp}}}{{^UOL_theme-colours--lp}}blue{{/UOL_theme-colours--lp}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage backgroundImage--top {{^UOL_top-image--lp}}withoutImage{{/UOL_top-image--lp}}"><div class="reposition-fix">{{{UOL_top-image--lp}}}</div></div><!--backgroundImage--top-->
+          <div class="backgroundImage backgroundImage--bottom {{^UOL_top-image--lp}}withoutImage{{/UOL_top-image--lp}}"><div class="reposition-fix">{{{UOL_bottom-image--lp}}}</div></div><!--backgroundImage--bottom-->
+          <div class="header">
+            <img class="logo" src="{{{account.logos.reversed}}}">
+            <div class="website" data-max-line="1">{{{UOL_website--lp}}}</div><!--website-->
+          </div><!--header-->
+          <div class="body">
+            <div class="body__inner">
+              <div class="body__top {{^UOL_secondary-information--lp}}u{{/UOL_secondary-information--lp}}{{^UOL_heading--lp}}-{{/UOL_heading--lp}}{{^UOL_standfirst--lp}}hide{{/UOL_standfirst--lp}}">
+                {{#UOL_secondary-information--lp}}
+                <div class="preheading" data-max-line="1">{{{UOL_secondary-information--lp}}}</div> <!--preheading-->
+                {{/UOL_secondary-information--lp}}
+                {{#UOL_heading--lp}}
+                <div class="heading">
+                  <div class="heading__inner textFit--vertical">{{{UOL_heading--lp}}}</div> <!--heading__inner-->
+                </div> <!--heading-->
+                {{/UOL_heading--lp}}
+                {{#UOL_standfirst--lp}}
+                <div class="standfirst" data-max-line="3">{{{UOL_standfirst--lp}}}</div> <!--copy-->
+                {{/UOL_standfirst--lp}}
+              </div> <!--body__top-->
+              <div class="body__bottom">
+                <div class="content">
+                  {{#UOL_body-copy--lp}}
+                  <div class="copy u-heading-patch" data-max-height="150">{{{UOL_body-copy--lp}}}</div> <!--copy-->
+                  {{/UOL_body-copy--lp}}
+                  {{#UOL_info-text--lp}}
+                  <div class="info" data-max-line="3">{{{UOL_info-text--lp}}}</div> <!--info-->
+                  {{/UOL_info-text--lp}}
+                </div> <!--content-->
+              </div> <!--body__bottom-->
+            </div> <!--body__inner-->
+          </div> <!--body-->
+          <div class="logo__container">
+            {{#UOL_third-party-logo-1--lp}}
+            <img class="logo logo--thirdParty" src="{{{UOL_third-party-logo-1--lp}}}">
+            {{/UOL_third-party-logo-1--lp}}
+            {{#UOL_third-party-logo-2--lp}}
+            <img class="logo logo--thirdParty" src="{{{UOL_third-party-logo-2--lp}}}">
+            {{/UOL_third-party-logo-2--lp}}
+          </div> <!--logo__container-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Maison Neue', 'Tiempos Headline'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+      TextFit.fit ({
+        selector: '.textFit--vertical',
+        fitMode: 'vertical',
+        alignItems: 'flex-start'
+      });
+
+      setInterval(() => { textFitMin('.textFit--vertical', 25); }, 1000);
+
+
+    </script>
+
+
+  </body>
+</html>
