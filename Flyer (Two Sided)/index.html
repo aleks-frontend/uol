@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html data-sign="OSL">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #fff;
+      }
+      
+      ul {
+        list-style: disc;
+        margin-left: 15pt;
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      } 
+
+      .theme-1 .backgroundImage {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/de1a001d259e3dd180383e77f22a2519/Lecture%20Poster%20Simple%201%20cmyk.jpg);
+      }
+
+      .theme-2 .backgroundImage {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/329fdb0c27cc15a36d83f114b31c9d98/Flyer-2sided-2.jpg);
+      }
+
+      .theme-3 .backgroundImage{
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/61a9013a135f8b7c92b2a03b66d114b1/Flyer-2sided-3.jpg);
+      }
+
+      .theme-4 .backgroundImage {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/3d820cc0b509e662fb90f20e1fe58552/Flyer-2sided-4.jpg);
+      }
+
+      .theme-5 .backgroundImage {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/2a785be98f58662391a622909135c115/Flyer-2sided-5.jpg);
+      }
+
+      .theme-6 .backgroundImage {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/8caf58d6bcd641003152be4abb9ab5a6/fyler-2sided-6.jpg);
+      }
+
+      .fit--back {       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #000;
+        padding: 47.6pt 28.2pt 23.8pt;
+      }
+
+      .logo {
+        position: absolute;
+        top: 38pt;
+        left: 29.3pt;
+        width: 99pt;
+      }
+      
+      .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 4.2rem;
+        height: 100%;
+      }
+
+      .title {        
+        position: relative;
+        min-height: 20pt;
+        margin: 0 29.8pt;
+        padding: 37pt 0 3.9pt 78pt;
+        text-align: right;
+        border-bottom: 1.7pt solid #fff;
+        font-family: 'Frutiger 65';
+        text-transform: uppercase;
+        line-height: 1.08em;
+        font-size: {{LTCf2s_title-font-size}}{{^LTCf2s_title-font-size}}20{{/LTCf2s_title-font-size}}pt;
+      }
+
+      .title::before,
+      .title::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 16.8pt;
+        height: 29.3pt;
+      }
+
+      .title::before {
+        right: 0;
+        top: 0;
+        border-top: 5.6pt solid #fff;
+        border-right: 5.6pt solid #fff;
+      }
+
+      .title::after {
+        left: 0;
+        bottom: 5.1pt;
+        border-bottom: 5.6pt solid #fff;
+        border-left: 5.6pt solid #fff;
+      }
+
+      .subtitle {      
+        position: relative;
+        margin: 0 29.9pt;
+        padding: 14.1pt 0pt 0 81pt;
+        text-align: right;
+        font-family: 'Frutiger 65';
+        font-size: 13.5pt;
+        line-height: 1.3em;
+      }
+
+      .body {
+        position: relative;
+        column-count: 2;
+        column-gap: 14pt;
+        font-family: 'Frutiger 45';
+        font-weight: 300;
+        font-size: 9pt;
+        line-height: 1.4em;
+      }
+
+      .body h1 {
+        margin-bottom: 5pt;
+        font-size: 12pt;
+        font-weight: bold;
+        line-height: 1.3em;
+        font-family: 'Frutiger 65';
+      }
+
+      .body h1::last-child {
+        margin-bottom: 0;
+      }
+      
+      .body h2 {
+        margin-bottom: 5pt;
+        font-size: 10pt;
+        font-weight: bold;
+        font-family: 'Frutiger 65';
+      }
+      
+      .body h2::last-child {
+        margin-bottom: 0;
+      }
+
+      .body p {
+        margin-bottom: 6pt;
+      }
+
+      p::last-child {
+        margin-bottom: 0;
+      }
+
+      .footer {
+        height: 63pt;
+        padding-top: 18pt;
+        border-top: 1pt solid #5e646d;
+      }
+
+      .details {
+        width: 50%;
+        font-family: 'Frutiger 55 Roman';
+        font-size: 8.6pt; 
+        line-height: 1.4em;
+      }
+
+      .details a {
+        color: #000;
+        text-decoration: none;
+        letter-spacing: 0.1pt;
+        font-size: 9.2pt;
+      }
+
+      .info {
+        display: block;
+        font-size: 8pt;
+      }
+      
+      .logoAlt {
+        width: 2.7561rem;
+        bottom: 0.6rem;
+        left: 0.95rem;
+        margin-top: 0.4438rem;
+        z-index: 1;
+        position: absolute;
+      }
+      .logoAlt img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="" class="{{ placeholder-toggle }} {{LTCp2s_theme}}{{^LTCp2s_theme}}theme-1{{/LTCp2s_theme}}">    
+    <div class="placeholderMaster">
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"></div>
+          <img src="{{account.logos.reversed}}" class="logo"><!--logo-->
+          
+          <div class="contentWrapper">
+          {{#LCTf2s_title}}
+          <div class="title">
+            <div style="max-height: 5.8em;">
+              <div class="check-overflow"> 
+                {{{LCTf2s_title}}}</div><!--title-->
+            </div><!--check-overflow-->
+          </div><!--max-height-->
+          {{/LCTf2s_title}}
+          {{#LTCf2s_subtitle}}
+          <div class="subtitle">
+            <div style="max-height: 5.6em;">
+              <div class="check-overflow"> 
+                {{{LTCf2s_subtitle}}}
+              </div><!--check-overflow-->
+            </div><!--max-height-->
+          </div><!--subtitle-->
+          {{/LTCf2s_subtitle}}
+            <div class="logoAlt">
+              {{#logo-alt}}
+              <img src="{{{logo-alt}}}">
+              {{/logo-alt}}
+            </div>
+          </div><!-- end contentWrapper -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit fit--back">
+          {{#LTCf2s_information}}
+          <div class="body">
+            <div style="max-height: 107em;">
+              <div class="check-overflow"> 
+                {{{LTCf2s_information}}}
+              </div><!--check-overflow-->
+            </div><!--max-height-->
+          </div><!--body-->
+          {{/LTCf2s_information}}          
+          {{#LTCp2s_additional-details}}        
+          <div class="footer">   
+            <div class="details">
+              <div style="max-height: 5.7em;">
+                <div class="check-overflow">
+                  {{{LTCp2s_additional-details}}}
+                </div><!--check-overflow-->
+              </div><!--max-height-->
+            </div><!--details-->
+          </div><!--footer-->
+          {{/LTCp2s_additional-details}}
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+      placeholderControler();       
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html data-sign="OSS">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #000;
+      }
+
+      body {
+        color: #fff;
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+      
+      .overflow[data-char-limit]:hover:after {
+        content: 'Character limit exceeded';        
+      }
+
+      /* Placeholder */   
+
+      .placeholder__container {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+        transition: 0.3s all;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: url({{{ placeholder-image }}}); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;   
+        opacity: 0.4;
+      }
+
+      .u-placeholder-locked .placeholder__container {
+        opacity: 1;  
+      }
+
+      .u-placeholder-hidden .placeholder__container,
+      .u-placeholder-hidden .placeholder__trigger {
+        display: none;
+      }
+
+      .placeholder__trigger {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        border-bottom-left-radius: 1rem;
+        background: #467BE3;
+        transition: all 0.3s;
+        transform: translate(30%, -30%);
+        opacity: 0;
+        z-index: 9999;
+      }   
+
+      .bleed:hover .placeholder__trigger:hover {
+        cursor: pointer;
+        opacity: 1;        
+      }
+
+      .placeholder__trigger svg {
+        width: 50%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-25%, -50%);
+      }
+
+      .bleed:hover .placeholder__trigger {
+        transform: translate(0, 0);
+        opacity: 0.5;
+      }      
+
+      .bleed:hover .placeholder__trigger:hover + .placeholder__container {
+        opacity: 1;
+      }      
+
+      .placeholderBtn__container {
+        position: absolute;
+        top: 0;
+        left: -0.6rem;
+        bottom: -0.6rem;
+        right: 0;
+        transition: 0.3s all;
+        transform: rotate(-90deg);
+        transform-origin: top right;
+        opacity: 0;
+      }
+
+      .placeholder__trigger:hover .placeholderBtn__container {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+
+      .placeholderBtn {
+        position: absolute;
+        left: 0;
+        top: 0.04rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #467BE3;
+        color: #fff;
+        font-size: 0.27rem;
+        text-decoration: none;
+        line-height: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }     
+
+      .placeholderBtn--plus::before {
+        content: '+';
+      }            
+
+      .placeholderBtn--minus {
+        top: 0.68rem;
+        left: 0.4rem;       
+      }    
+
+      .placeholderBtn--minus::before {
+        content: '-';        
+      }
+
+      .placeholderBtn--lock {
+        bottom: 0;
+        top: auto;
+        right: 0.04rem;
+        left: auto;
+      }
+
+      .placeholderBtn--lock::before {
+        content: 'L';
+      }
+
+      .u-placeholder-locked .placeholderBtn--lock::before {
+        content: 'U';
+      }            
+
+      /* End Placeholder */    
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }    
+      
+      .fit {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .backgroundImage--1 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/3bfb15d31cca71b9b0d9f13c51d3c3b4/Postcard%20bg-1.png);
+      }
+
+      .backgroundImage--2 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/65cb5f1e6d45c3fc286c741681995d26/Postcard%20%20bg-2.png);
+      }
+
+      .backgroundImage--3 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/93dfd287ac715199413ee82e51c0f9a5/Postcard%20%20bg-3.png);
+      }
+
+      .backgroundImage--4 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/7c511b06bce0035e9f75e56ef9ea7a9d/Asset-4-new.jpg);
+      }
+
+      .backgroundImage--5 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/b3bf41820f2fd45359a0afc68d132f14/asset-5-new-jpg.jpg);
+      }
+
+      .backgroundImage--6 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/89e3491a5108d5a479c123beeee655db/Asset6.jpg);
+      }
+
+      .body {
+        position: relative;       
+        text-align: right;
+        padding: 2.0173rem 0rem 0.3rem 0rem;
+        margin: 0 1.25rem 1.25rem 1.25rem;
+        border-bottom: 2px solid #fff;
+      }
+
+      .body::before,
+      .body::after {
+        content: "";
+        position: absolute;
+        width: 0.75rem;
+        height: 1.2rem;
+      }
+
+      .body::before {
+        right: 0;
+        top: 0; 
+        border-top: 0.245rem solid #fff;
+        border-right: 0.245rem solid #fff;
+      }
+
+      .body::after {
+        left: 0.01rem;
+        bottom: 0.21rem;
+        border-bottom: 0.245rem solid #fff;
+        border-left: 0.245rem solid #fff;
+      }
+
+      .body__maxHeight {
+        max-height: 283px;
+      }
+
+      .logoMain {
+        position: absolute;
+        top: 1.56rem;
+        left: 1.26rem;
+        width: 4.9896rem;
+      }
+
+      .main {
+        padding-left: 24%;
+      }
+
+      .main__maxHeight {
+        max-height: 6rem;
+      }  
+
+      .secondary {
+        width: 85%;
+        margin-bottom: 0.2569rem;
+      }
+
+      .heading {
+        text-transform: uppercase;
+        font-family: 'Frutiger 65';
+        font-size: 0.95rem;
+        font-weight: bold;
+        line-height: 1em;
+        letter-spacing: -0.1px;
+        word-spacing: 1.3px;
+      }
+
+      .subheading {
+        margin-top: 0.3rem;
+        font-family: 'Frutiger 65';
+        font-size: 0.575rem;
+        font-weight: bold;
+        line-height: 1.4em;
+        word-spacing: 0.5px;
+      }
+
+      .description {
+        margin-top: 0.36rem;
+        font-family: 'Frutiger 55 Roman';
+        font-size: 0.444rem;
+        line-height: 1.35em;
+        font-weight: 400;
+        word-spacing: 0.3px;
+        letter-spacing: -0.02px;
+      }
+
+      .additionalInf {
+        font-family: 'Frutiger 55 Roman';
+        bottom: 0;
+        left: 0;
+        margin-top: -11px;
+        margin-right: 50px;
+        font-size: 0.455rem;
+        font-weight: 300;
+        line-height: 1.34em;
+        word-spacing: -1.2px;
+      }
+
+      .additionalInf p {
+        padding-top: 2.8px;
+      }
+      
+      .additionalInf strong {
+        font-size: 12.2px;
+        letter-spacing: 0.1px;
+      }
+      
+      .additionalInf p strong {
+        letter-spacing: 0.9px
+      }
+
+      a {
+        text-decoration: none;
+        color: #fff; 
+      }
+      
+      .body2 {
+        width: 100%;
+        height: 20%;
+        position: relative;
+        text-align: right;
+        margin-left: 10px;
+      }
+      
+      .logoAlt {
+        width: 5rem;
+        bottom: 1rem;
+        left: 1em;
+        z-index: 1;
+        position: absolute;
+      }
+      .logoAlt img {
+        width: 100%;
+        height: 100%;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="{{LCTpwi_background-choice}} {{LCTpwi_headline-size}} {{{LCTpwi_title}}}" class="{{{ placeholder-toggle }}}">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <span class="placeholder__trigger">   
+          <div class="placeholderBtn__container">
+            <a href="#" class="placeholderBtn placeholderBtn--operation placeholderBtn--plus" data-operation="plus"></a>
+            <a href="#" class="placeholderBtn placeholderBtn--operation placeholderBtn--minus" data-operation="minus"></a>
+            <a href="#" class="placeholderBtn placeholderBtn--lock"></a>
+          </div>
+          <svg viewBox="0 0 144 100" preserveAspectRatio xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#ffffff" id="svg_1" d="m89.668,38.786c0,-10.773 -8.731,-19.512 -19.51,-19.512s-19.512,8.736 -19.512,19.512c0,10.774 8.732,19.511 19.512,19.511c10.776,0 19.51,-8.736 19.51,-19.511m38.684,-0.059c-13.315,17.599 -34.426,28.972 -58.193,28.972c-23.77,0 -44.879,-11.373 -58.194,-28.972c13.314,-17.598 34.424,-28.971 58.193,-28.971c23.769,0 44.878,11.373 58.194,28.971m11.962,0.033c-14.648,-23.282 -40.589,-38.76 -70.156,-38.76s-55.51,15.478 -70.158,38.76c14.648,23.312 40.591,38.81 70.158,38.81s55.508,-15.498 70.156,-38.81"/>
+            </g>
+          </svg>
+        </span><!-- end placeholder__trigger -->
+        <div class="placeholder__container">
+          <div class="placeholder"></div>
+        </div><!-- end placeholder__container -->
+
+        <div class="container fit">
+
+          <div class="backgroundImage backgroundImage--{{LCTpwi_background-choice}} {{^LCTpwi_background-choice}} backgroundImage--1 {{/LCTpwi_background-choice}}"></div>
+
+          <img src="{{{account.logos.reversed}}}" class="logoMain">    
+          <div class="body">
+            <div  class="body__maxHeight">
+              <div class="check-overflow">                        
+                <div class="main">
+                  {{#LCTpwi_title}}
+                  <div class="heading">
+                    <div style="font-size: {{LCTpwi_headline-size}}{{^LCTpwi_headline-size}}100{{/LCTpwi_headline-size}}%; line-height: 1.07em;">
+                      <div style="max-height: 6rem;">
+                        <div class="check-overflow">
+                          {{{LCTpwi_title}}}
+                        </div><!-- end check-overflow -->
+                      </div><!-- end max-height -->
+                    </div>
+                  </div><!-- end heading -->
+                  {{/LCTpwi_title}}
+                  
+                  {{#LCTpwi_subtitle}}
+                  <div class="subheading">
+                    <div style="max-height: 2.8em;">
+                      <div class="check-overflow">
+                        {{{LCTpwi_subtitle}}}
+                      </div><!-- end check-overflow -->
+                    </div><!-- end max-height -->
+                  </div><!-- end subheading -->
+                  {{/LCTpwi_subtitle}}
+
+                  {{#LCTpwi_description}}
+                  <div class="description">
+                    <div style="max-height: 5.4em;">
+                      <div class="check-overflow">
+                        {{{LCTpwi_description}}}
+                      </div><!-- end check-overflow -->
+                    </div><!-- end max-height -->
+                  </div><!-- end description --> 
+                  {{/LCTpwi_description}}
+                  
+                </div><!-- end main -->
+              </div><!-- end check-overflow -->
+            </div><!-- end body__maxHeight -->
+          </div><!-- end body -->
+          
+          <div class ="body2">
+            {{#LCTpwi_additional-details}}
+            <div class="additionalInf">
+              <div class="additionalInf__maxHeight">
+                <div class="check-overflow">
+                  {{{LCTpwi_additional-details}}}
+                </div><!-- end check-overflow -->
+              </div><!-- end additionalInf__maxHeight -->
+            </div><!-- end additionalInf -->
+            {{/LCTpwi_additional-details}}
+              <div class="logoAlt">
+                {{#logo-alt}}
+                <img src="{{{logo-alt}}}">
+                {{/logo-alt}}
+            </div>
+          </div><!--end body2-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+
+      // Dynamic controls for the placeholder image
+      function lockPlaceholder(e) {
+        document.body.classList.toggle('u-placeholder-locked');
+
+        e.preventDefault();        
+      }
+
+      function opacityControl(e) {
+        const placeholder = document.querySelector('.placeholder');
+        const compStyles = window.getComputedStyle(placeholder);
+        const currentOpacity = parseFloat(compStyles.getPropertyValue('opacity'));
+        const operation = this.dataset.operation;
+
+        if ( operation == 'plus' && currentOpacity < 1 ) {
+          placeholder.style.opacity = currentOpacity + 0.1; 
+        } else if ( operation == 'minus' && currentOpacity > 0 ) {
+          placeholder.style.opacity = currentOpacity - 0.1; 
+        }
+
+        e.preventDefault();          
+      }
+
+      function placeholderControler() {
+        const operationButtons = document.querySelectorAll('.placeholderBtn--operation');
+        const lockButton = document.querySelector('.placeholderBtn--lock');        
+
+        operationButtons.forEach(button => {
+          button.addEventListener('click', opacityControl);        
+        });        
+
+        lockButton.addEventListener('click', lockPlaceholder);        
+      }    
+
+      placeholderControler();       
+
+    </script>
+
+
+  </body>
+</html>
