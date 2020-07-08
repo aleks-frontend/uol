@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html data-sign="OSL">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #fff;
+      }
+
+      .overflow {
+        border: 0.0362rem dashed red !important;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      } 
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      } 
+
+      .theme-1 .backgroundImage,
+      .theme-1 .lshape {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/de1a001d259e3dd180383e77f22a2519/Lecture%20Poster%20Simple%201%20cmyk.jpg);
+      }
+
+      .theme-2 .backgroundImage,
+      .theme-2 .lshape  {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/ee7ad3f41a2d20b6f6174a419569aa21/2sided-2-jpg.jpg);
+      }
+
+      .theme-3 .backgroundImage,
+      .theme-3 .lshape {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/3c57d16cf28dd93e1be00cbbb214344e/2sided-3-jpg.jpg);
+      }
+
+      .theme-4 .backgroundImage,
+      .theme-4 .lshape {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/18457a2ed19c6635245b11076de162a6/2sided-4.jpg);
+      }
+
+      .theme-5 .backgroundImage,
+      .theme-5 .lshape {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/6a38d6c7ba7c80ffc0e45ae01e211233/2sided-5.jpg);
+      }
+
+      .theme-6 .backgroundImage,
+      .theme-6 .lshape {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/4bde8b3155f3c86f94feec60a26731fc/2sided-6.jpg);
+      }
+
+      .fit--back {       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 66.6pt 24pt 23.8pt;        
+        color: #000;
+      }
+
+      .logo {
+        position: absolute;
+        top: 31pt;
+        left: 24.8pt;
+        width: 100pt;
+      }
+
+      .contentWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+      }
+
+      .title {     
+        position: relative;
+        min-height: 20pt;
+        margin: 0 26pt;
+        padding: 31pt 0 2.9pt 131pt;
+        text-align: right;
+        border-bottom: 1.7pt solid #fff;
+        font-family: 'Frutiger 65';
+        text-transform: uppercase;
+        line-height: 1.08em;
+      }
+
+      .title h1 {
+        font-size: {{LTCp2s_title-font-size}}{{^LTCp2s_title-font-size}}20{{/LTCp2s_title-font-size}}pt;
+      }
+
+      .title::before,
+      .title::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 13.8pt;
+        height: 23.5pt;
+      }
+
+      .title::before {
+        top: -4pt;
+        right: 1pt;
+        border-top: 4.6pt solid #fff;
+        border-right: 4.6pt solid #fff;
+      }
+
+      .title::after {
+        left: 0;
+        bottom: 4.4pt;
+        border-bottom: 4.6pt solid #fff;
+        border-left: 4.6pt solid #fff;
+      }
+
+      .subtitle {      
+        margin: 0 26pt;
+        padding-top: 6.8pt;
+        padding-left: 131pt;
+        text-align: right;
+        font-family: 'Frutiger 65';
+        font-size: 11.5pt;
+        line-height: 1.4em;
+      }
+
+      .body {
+        position: relative;
+        column-count: 2;
+        column-gap: 14pt;      
+        font-family: 'Frutiger 45';
+        font-size: 8.9pt;
+        line-height: 1.4em;
+      }
+
+      .body p {
+        margin-bottom: 4pt;
+      }
+
+      .body ul {
+        list-style: none;
+        margin-left: 10pt;
+        list-style-type: disc;
+      }
+
+      .body h1 {
+        font-family: 'Frutiger 65';
+        text-transform: uppercase;
+        line-height: 1.08em;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-bottom: 5pt;
+      }
+
+      .body h2 {
+        font-family: 'Frutiger 65';
+        font-size: 10pt;
+        font-weight: bold;
+        line-height: 1.4em;
+        margin-bottom: 0.2rem;
+      }
+
+      .body h1:last-child,
+      .body h2:last-child,
+      p:last-child{
+        margin-bottom: 0;
+      }
+
+
+      .footer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        text-align: right;
+        border-bottom: 1.7pt solid #5e646d; 
+        padding-bottom: 5pt;     
+      }
+
+      .details {
+        width: 50%;
+        font-family: 'Frutiger 55 Roman';
+        font-size: 9pt; 
+        line-height: 1.3em;
+      }
+
+      a {
+        color: #000;
+        text-decoration: none;
+        letter-spacing: 0.1pt;
+      }
+
+      .lshape {
+        position: absolute;
+        top: 0;
+        left:0;
+        right: 0;
+        bottom: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;  
+        z-index: 100;
+      }
+
+      .lshape--top {
+        clip-path: polygon(91% 9.7%, 94.4% 9.7%, 94.4% 17.9%, 93.2% 17.9%,93.2% 11.4%,91% 11.4%);    
+      }
+
+      .lshape--bottom {
+        clip-path: polygon(5.6% 82.4%,6.8% 82.4%,6.8% 88.8%,8.8% 88.8%,8.8% 90.5%,5.5% 90.5%);
+      }
+      
+      .logo-alt{
+        max-width: 5em;
+        margin-left: 26pt;
+        bottom: 19pt;
+        position: absolute;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="" class="{{ placeholder-toggle }} {{LTCp2s_theme}}{{^LTCp2s_theme}}theme-1{{/LTCp2s_theme}}">    
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit">
+
+          <div class="backgroundImage"></div>
+          <img src="{{account.logos.reversed}}" class="logo"><!--logo-->
+
+          <div class="contentWrapper">
+            {{#LCTp2s_title}}
+            <div class="title">
+              <div style="max-height: 113pt;">
+                <div class="check-overflow"> 
+                  {{{LCTp2s_title}}}</div><!--title-->
+              </div><!--check-overflow-->
+            </div><!--max-height-->
+            {{/LCTp2s_title}}
+            {{#LTCp2s_subtitle}}
+            <div class="subtitle">
+              <div style="max-height: 5.6em;">
+                <div class="check-overflow"> 
+                  {{{LTCp2s_subtitle}}}
+                </div><!--check-overflow-->
+              </div><!--max-height-->
+            </div><!--subtitle-->
+            {{/LTCp2s_subtitle}}
+            <div class="logo-alt"><img src="{{logo-alt}}" /></div>
+
+          </div><!-- end contentWrapper -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="lshape lshape--top"></div><!--lshape--top-->
+        <div class="lshape lshape--bottom"></div><!--lshape--bottom-->
+        <div class="container fit fit--back">
+          {{#LTCp2s_information}}
+          <div class="body">
+            <div style="max-height: 38em;">
+              <div class="check-overflow"> 
+                {{{LTCp2s_information}}}
+              </div><!--check-overflow-->
+            </div><!--max-height-->
+          </div><!--body-->
+          {{/LTCp2s_information}}          
+          {{#LTCp2s_additional-details}}        
+          <div class="footer">
+            <div class="details">
+              <div style="max-height: 3.9em;">
+                <div class="check-overflow"> 
+                  {{{LTCp2s_additional-details}}}
+                </div><!--check-overflow-->
+              </div><!--max-height-->
+            </div><!--details-->
+          </div><!--footer-->
+          {{/LTCp2s_additional-details}}
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+      placeholderControler();       
+
+    </script>
+
+
+  </body>
+</html>

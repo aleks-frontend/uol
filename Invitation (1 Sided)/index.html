@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --red: {{{account.colors.primary-red-update}}};
+        --grey: {{{account.colors.grey}}};
+        --blue: {{{account.colors.navy}}};
+      }
+
+      .theme--redGlow,
+      .theme--redBurst {
+        --dynamic-text-colour: var(--red);
+      }
+
+      .theme--blueGlow,
+      .theme--blueBurst {
+        --dynamic-text-colour: var(--blue);
+      }
+
+      .theme--pinkGlow,
+      .theme--orangeGlow {
+        --dynamic-text-colour: var(--grey);
+      }
+
+
+      html {
+        font-family: "Frutiger";
+        font-size: 11pt;
+        color: var(--grey);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        height: 97pt;
+        padding-top: 37pt;
+        padding-left: 29.8pt;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .theme--redGlow .header {
+        background-image: url(https://files.outfit.io/media_library_items/113041/Invite%2520Red%2520Glow.jpg);
+      }
+
+      .theme--redBurst .header {
+        background-image: url(https://files.outfit.io/media_library_items/113043/Invite%2520Red%2520Burst.jpg);
+      }
+
+      .theme--blueGlow .header {
+        background-image: url(https://files.outfit.io/media_library_items/113042/Invite%2520Blue%2520Glow.jpg);
+      }
+
+      .theme--blueBurst .header {
+        background-image: url(https://files.outfit.io/media_library_items/113039/Invite%2520Blue%2520Burst.jpg);
+      }
+
+      .theme--pinkGlow .header {
+        background-image: url(https://files.outfit.io/media_library_items/113038/Invite%2520Pink%2520Glow.jpg);
+      }
+
+      .theme--orangeGlow .header {
+        background-image: url(https://files.outfit.io/media_library_items/113040/Invite%2520Orange%2520Glow.jpg);
+      }
+
+      .logo {
+        width: 99pt;
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+        position: relative;
+        padding: 52.7pt 28pt 45pt 30pt;
+      }
+
+      .body:before, .body:after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 17pt;
+        height: 29pt;
+      } 
+
+      .body:before {
+        right: 30pt;
+        top: 13pt;
+        border-top: 5.7pt solid var(--grey);
+        border-right: 5.7pt solid var(--grey);
+      }
+
+      .body:after {
+        left: 30pt;
+        bottom: 6pt;
+        border-bottom: 5.7pt solid var(--grey);
+        border-left: 5.7pt solid var(--grey);
+      }
+
+      .content {
+        position: relative;
+        width: 375pt;
+        padding-right: 40pt;
+        max-height: 94.1%;
+      }
+
+      .content:after {
+        content : "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0.5pt;
+        z-index: 100;
+        height: 100%;
+        background: var(--grey);
+      }
+
+      .invite {
+        margin-bottom: 15.5pt;
+        font-size: 10.1pt;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        font-family: "Frutiger 55 Roman";
+      }
+
+      .title {
+        margin-bottom: 3.7pt;
+        font-size: 24.7pt;
+        text-transform: uppercase;
+        font-family: "Adobe Caslon Pro";
+        font-weight: 600;
+        color: var(--dynamic-text-colour);
+      }
+
+      .title__inner {
+        line-height: 1.2em;
+      }
+
+      .subtitle {
+        margin-bottom: 14pt;
+        font-size: 13.8pt;
+        line-height: 1.2em;
+        font-family: 'Frutiger 45';
+        font-weight: 300;
+      }
+
+      .information {
+        margin-bottom: 15pt;
+        font-size: 10pt;
+        line-height: 1.4em;
+        font-family: "Frutiger 55 Roman";
+      }
+
+      .addiotionalInfo {
+        font-size: 10pt;
+        line-height: 1.3em;
+        font-family: "Frutiger 45";
+        font-weight: 300;
+      }
+
+      .side {    
+        margin-top: -1pt;
+        padding-left: 11pt;
+        display: flex;
+        flex-direction: column;
+        max-height: 280px;
+      }
+
+      .side__inner {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .side__top {
+        align-content: flex-start;
+      }
+
+      .info {
+        margin-bottom: 9.1pt;
+        font-size: 9pt;
+        color: var(--grey);
+        font-family: "Frutiger 55 Roman"; 
+        font-weight: 500;
+        text-transform: none;
+        line-height: 1.35em;
+      }
+
+      .info:last-child {
+        margin-bottom: 10.9pt;
+      }
+
+      .info__label, .info__value {
+        line-height: 1.35em;
+      }
+
+      .info__label {
+        text-transform: uppercase;
+        color: var(--dynamic-text-colour);
+        font-weight: bold;
+        font-family: "Frutiger 65";
+      }
+
+      .info__value {
+        text-transform: none;
+        color: var(--grey);
+        font-weight: 500;
+        font-family: "Frutiger 55 Roman"; 
+      }
+
+      .footer {
+        display: flex;
+        position: relative;
+        margin: 0 28.4pt 0 30pt;
+        height: 37pt;
+        padding-top: 2.8pt;
+        justify-content: flex-end;
+        border-top: 1pt solid var(--grey);
+        font-family: "Frutiger 55 Roman";
+      }
+
+      .footer__img {
+        position: absolute;
+        right: 1pt;
+        top: -25pt;
+        width: 32.5pt;
+      }
+
+
+      .footer__date {
+        font-size: 7.5pt;
+        letter-spacing: -0.16pt;
+      }
+      
+      .info .eventDetails .tinymce_style--dark {
+          font-family: 'Frutiger 65';
+          margin-right: 0.1rem;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: var(--dynamic-text-colour);
+      }
+
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         theme--{{UOL_theme--inv1}}{{^UOL_theme--inv1}}redGlow{{/UOL_theme--inv1}}" 
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            <img class="logo" src="{{{account.logos.reversed}}}" /><!--logo-->
+          </div> <!--header-->
+
+          <div class="body">
+            <div class="content">
+              <div data-max-height="255">
+                <div class="invite" data-max-line="1">{{{backInvitationPreTitle}}}</div> <!--invite-->
+                {{#UOL_title--inv1}}
+                <div class="title">
+                  <div title="title__inner" style="font-size:{{{UOL_title-size--inv1}}}%;" data-max-line="2">
+                    {{{UOL_title--inv1}}}
+                  </div> <!--title__inner-->
+                </div> <!--title-->
+                {{/UOL_title--inv1}}
+                {{#UOL_subtitle--inv1}}
+                <div class="subtitle" data-max-line="2">{{{UOL_subtitle--inv1}}}</div> <!--subheading-->
+                {{/UOL_subtitle--inv1}}
+                {{#UOL_information--inv1}}
+                <div class="information" data-max-line="5">{{{UOL_information--inv1}}}</div> <!--information-->
+                {{/UOL_information--inv1}}
+                {{#UOL_extra-information--inv1}}
+                <div class="addiotionalInfo" data-max-line="2">{{{UOL_extra-information--inv1}}}</div> <!--addiotionalInfo-->
+                {{/UOL_extra-information--inv1}}
+              </div>
+            </div> <!--content-->
+
+            <div class="side" data-max-height="css">
+              <div class="side__inner" data-max-height="dynamic">
+                <div class="side__top">
+                  <div class="info"><div class="eventDetails">{{{LE_eventDetails--inv2}}}</div></div>
+                </div> <!--side__top-->
+
+                <div class="side__bottom">
+                  {{#UOL_confirmation--inv1}}
+                  <div class="info">
+                    <div class="info__label">To Confirm Your Place:</div> <!--info__label-->
+                    <div class="info__value">{{{UOL_confirmation--inv1}}}</div> <!--info__value-->
+                  </div> <!--info-->
+                  {{/UOL_confirmation--inv1}}
+                </div> <!--side__bottom-->
+              </div> <!--side__inner-->
+            </div> <!--side-->
+          </div> <!--body-->
+
+          <div class="footer">
+            <img class="footer__img" src="https://files.outfit.io/media_library_items/113064/100.svg" /> <!--footer__img-->
+            <div class="footer__date">1921-2021</div> <!--footer__date-->
+          </div> <!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
