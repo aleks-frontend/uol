@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="placeholder-controller.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #000;
+      }
+
+      body {
+        color: #fff;
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .overflow[data-char-limit]:hover:after {
+        content: 'Character limit exceeded';        
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }    
+
+      .backgroundImage--1 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/c075bea8f4ae746d5c0a78127c312d80/A2%20Background%20Expanded%201.jpg);
+      }
+
+      body.hide-crop .backgroundImage--1 {
+        background-image: url('https://files.outfit.io/media_library_items/62630/A2-Background-Expanded-1-compressor.jpg') !important;
+      }
+
+      .backgroundImage--2 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/336bf014652e27ad5221eaf086fc4b3c/A2%20Background%20Expanded%202.jpg);
+      }      
+
+      body.hide-crop .backgroundImage--2 {
+        background-image: url('https://files.outfit.io/media_library_items/62631/A2-Background-Expanded-2-compressor.jpg') !important;
+      }
+
+      .backgroundImage--3 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/17ceae7ca33fcd72b64eb3d974ddca5a/A2%20Background%20Expanded%203.jpg);
+      }
+
+      body.hide-crop .backgroundImage--3 {
+        background-image: url('https://files.outfit.io/media_library_items/62632/A2-Background-Expanded-3-compressor.jpg') !important;
+      }
+
+      .backgroundImage--4 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/e702d9fe5187b57719dac39f4dd474e7/A2%20Background%20Expanded%204.jpg);
+      }
+
+      body.hide-crop .backgroundImage--4 {
+        background-image: url('https://files.outfit.io/media_library_items/62633/A2-Background-Expanded-4-compressor.jpg') !important;
+      }
+
+      .backgroundImage--5 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/a28d551cdf52d2cf68b4406673572698/A2%20Background%20Expanded%205.png);
+      }
+
+      body.hide-crop .backgroundImage--5 {
+        background-image: url('https://files.outfit.io/media_library_items/62634/A2-Background-Expanded-5-compressor.png') !important;
+      }
+
+      .backgroundImage--6 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/4ca08b154119f587c3781df692905f75/A2%20Background%20Expanded%206.png);
+      }
+
+      body.hide-crop .backgroundImage--6 {
+        background-image: url('https://files.outfit.io/media_library_items/62635/A2%2520Background%2520Expanded%25206-compressor.png') !important;
+      }
+
+      .logoMain {
+        position: absolute;
+        top: 1.25rem;
+        left: 0.96rem;
+        max-width: 3.2rem;
+      }
+
+      .content__container {
+        position: relative;
+        top: 2.54rem;
+      }
+
+      .content {
+        position: relative;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin: 0rem 0.96rem;
+        align-items: flex-end;
+      }
+
+
+      .content::before {
+        content: "";
+        top: -1.37rem;
+        right: 0rem;
+        display: inline-block;
+        position: relative;
+        width: 0.5839rem;
+        height: 0.9809rem;
+        border-top: 0.19rem solid #fff;
+        border-right: 0.19rem solid #fff;
+      }
+
+      .title,
+      .subtitle,
+      .description,
+      .additional-details {
+        width: 73.6%;
+      }
+
+      .title {
+        margin-top: -0.1rem;
+        margin-left: -0.03rem;
+        text-transform: uppercase;
+        font-weight: 700;.
+        font-size: 0.76rem;
+        line-height: 0.786rem;
+        letter-spacing: -0.02rem;
+        margin-bottom: 0.35rem;
+        word-spacing: -0.06rem;
+      }
+
+      .subtitle {
+        font-size: 0.47rem;
+        font-weight: 700;
+        line-height: 0.57rem;
+        letter-spacing: -0.02rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .description {
+        font-size: 0.3rem;
+        line-height: 0.402rem;
+        margin-bottom: 0.9rem;
+        font-family: 'Frutiger 55 Roman';	
+      }
+
+      .description p {
+        margin-bottom: 0.2rem;
+      }
+
+      .description p:last-child {
+        margin-bottom: 0;
+      }
+
+      .description ul {
+        list-style: disc;
+        margin-left: 0.39rem;
+      }
+
+      .additional-details__container {
+        position: absolute;
+        left: 0.95rem;
+        bottom: 1.2rem;
+        width: 86.8%;
+        border-bottom: 0.04671rem solid #fff;
+      }
+
+      .additional-details__container::after {
+        content: "";
+        display: inline-block;
+        position: relative;
+        width: 0.5839rem;
+        height: 0.9809rem;
+        left: 0%;
+        top: 0.1rem;
+        border-bottom: 0.19rem solid #fff;
+        border-left: 0.19rem solid #fff;
+      }
+
+      .additional-details {
+        position: absolute;
+        bottom: 1.05rem;
+        font-size: 0.3rem;
+        line-height: 0.40rem;
+        margin-left: 3.2rem;
+        font-family: 'Frutiger 55 Roman';
+      }
+
+      .logoAlt {
+        width: 2.7561rem;
+        bottom: 0;
+        right: 0;
+        margin-top: 0.4438rem;
+        z-index: 1;
+        position: absolute;
+      }
+      .logoAlt img {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="{{LCT_background-choice}} {{LCTfo_title-size}}" class="{{ placeholder-toggle }}">    
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+      {{#placeholder-image-2}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      {{/placeholder-image-2}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit">
+
+          <div class="backgroundImage backgroundImage--{{LCT_background-choice}}"></div> <!-- end of backgroundIMage -->
+
+          <img src="{{{account.logos.reversed}}}" class="logoMain">
+          <div class="content__container">
+            <div style="max-height: 13.6rem">
+              <div class="check-overflow">
+                <div class="content">
+                  {{ #LCf_title }}
+                  <div class="title">
+                    <div style="max-height: 4em">
+                      <div class="check-overflow">
+                        <div style="font-size: {{LCTfo_title-size}}{{^LCTfo_title-size}}100{{/LCTfo_title-size}}%; line-height: 1em;">
+                          {{{ LCf_title}}}
+                        </div><!-- headline-size -->
+                      </div><!-- end of check-overflow -->
+                    </div><!-- end of max-height -->
+                  </div><!-- end of title -->
+                  {{ /LCf_title }}
+                  {{# LCf_subtitle }}
+                  <div class="subtitle">
+                    <div style="max-height: 4.9em">
+                      <div class="check-overflow">
+                        {{{ LCf_subtitle}}}
+                      </div><!-- end of check-overflow -->
+                    </div><!-- end of max-height -->
+                  </div><!-- end of subtitle -->
+                  {{/ LCf_subtitle }}
+                  {{# LCf_description }}
+                  <div class="description">
+                    {{{ LCf_description }}}
+                  </div><!-- end of description -->
+                  {{/ LCf_description }}  
+                </div><!-- end of content -->
+              </div><!-- end of check-overflow -->
+            </div><!-- end of max-height -->
+          </div><!-- end of content__container-->
+          <div class="additional-details__container">
+            {{# LCf_additional-details}}   
+            <div class="additional-details">
+              <div style="max-height: 6.8em">
+                <div class="check-overflow">
+                  {{{ LCf_additional-details}}}
+                </div><!-- end of check-overflow -->
+              </div><!-- end of max-height -->
+            </div><!-- end of additional-details -->
+            <div class="logoAlt">
+              {{#logo-alt}}
+              <img src="{{{logo-alt}}}">
+              {{/logo-alt}}
+            </div>
+              <div class="steve">{{/ LCf_additional-details }} </div>
+          </div><!-- additional-details__container -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();
+      placeholderControler();       
+
+    </script>
+
+
+  </body>
+</html>

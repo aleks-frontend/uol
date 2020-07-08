@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+    <style>
+
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #000;
+      }
+      
+      body {
+        font-size: 0.2569rem;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .center-children {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2em;
+      }
+      
+      .item {
+        width: 30%;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.25rem;
+        padding: 0.25rem;
+      }
+      
+      .item img {
+        width: 80%;
+      }
+      
+      .red {
+        background-color: {{account.colors.primary}};
+      }
+      
+      .red-2 {
+        background-color: {{account.colors.primary-red-update}};
+      }
+      
+      .navy {
+        background-color: {{account.colors.navy}};
+      }
+      
+      .grey {
+        background-color: {{account.colors.grey}};
+      }
+      
+      .border-grey {
+        border: 1pt solid {{account.colors.grey}};
+      }
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white">    
+    <div class="page">
+      <div class="bleed center-children">
+        <div class="logos flex">
+          <div class="item border-grey"><img src="{{account.logos.mono}}"/></div>
+          <div class="item red"><img src="{{account.logos.reversed}}"></div>
+          <div class="item border-grey"><img src="{{account.logos.primary}}"></div>
+        </div>
+        
+        <div class="colours flex">
+          <div class="item red-2">199</div>
+          <div class="item red">200</div>
+          <div class="item navy"></div>
+          <div class="item grey"></div>
+        </div>
+      </div><!--bleed-->
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+  </body>
+</html>
