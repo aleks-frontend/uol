@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --primary: {{{account.colors.primary-red-update}}};
+        --secondary: {{{account.colors.grey}}};
+        --black: #000000;
+      }
+
+      html {
+        font-family: "Frutiger";
+        font-size: 19pt;
+        color: var(--secondary);
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      .fit {
+        /*padding: 29pt 29pt 0;*/
+        display: flex;
+        padding-top: 28pt;
+      }
+
+      .hero {
+        position: relative;
+        grid-column: 1 / -1;
+        grid-row: 3 / 4;
+      }
+
+      .hero:after {
+        content: '';
+        position: absolute;
+        left: 43.1%;
+        height: 100%;
+        width: 1px;
+        background-color: var(--secondary);
+      }
+
+      .hero--small {
+        height: 82pt;
+      }
+
+      .hero--medium {
+        height: 115pt;
+      }
+
+      .hero--large {
+        height: 165pt;
+      }
+
+      .toggleImage--hide .hero,
+      .toggleImage--hide .grid__item--image {
+        display: none;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 43.3% 1fr;
+        grid-template-rows: 45pt 15pt auto auto auto minmax(120px, 1fr);
+        width: 100%;
+      }
+
+      .toggleImage--hide .grid {
+        grid-template-rows: 45pt 14pt auto auto 1fr;
+      }
+
+      .grid__item,
+      .table__item {
+        display: flex;
+        align-items: center;
+        font-size: 14.6pt;
+        line-height: 1em;
+        font-weight: 300;
+        letter-spacing: 0.4pt;
+      }
+
+      .table__item {
+        align-items: flex-start;
+        min-height: 50px;
+        padding: 6pt 14pt;
+      }
+
+      .table__item--right .tinymce_style--light {
+        display: block;
+        margin-top: 1.9pt;
+        font-size: 9.2pt;
+        line-height: 1.2em;
+        color: var(--primary);
+      }
+
+      .table__item--right .tinymce_style--dark {
+        color: var(--secondary);
+        text-transform: uppercase;
+      }
+
+      .grid__item strong {
+        font-family: 'Frutiger 65';
+        font-weight: bold;
+      }
+
+      .grid__item a {
+        font-family: 'Frutiger 65';
+        font-weight: bold;
+        color: var(--secondary);
+        text-decoration: none;       
+      }
+
+      .grid__item--separator {
+        grid-column: 1 / -1;
+      }
+
+      .grid__item--logo {
+        grid-column: span 1 / -1;
+      }
+
+      .grid--item__table {
+        display: block;
+        grid-column: 1 / -1;
+        padding: 0;
+      }
+
+      .logo {
+        max-width: 158pt;
+        max-height: 42pt;
+      }
+
+      .logo--support {
+        max-height: 32.7pt;
+      }
+
+      .logo--secondary {
+
+        position: absolute;
+        right: 30pt;
+        bottom: 29pt;
+        width: 141pt;
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .heading {
+        font-size: 19pt;
+        letter-spacing: 0.3pt;
+      }
+
+      .heading .tinymce_style--light {
+        color: var(--primary);
+      }
+
+      .heading .tinymce_style--dark {
+        color: var(--secondary);
+      }
+
+      .table {
+        display: grid;
+        grid-template-columns: 42.3% 1fr;
+        height: 100%;
+      }
+
+      .table__item:nth-child(8) {
+        grid-column: 2 / 3;
+        line-height: 1.2em;
+      }
+
+      .table__item:last-child,
+      .table__item:nth-last-child(2) {
+        border-bottom: none;
+      }
+    
+      .u-pl-29 { padding-left: 29pt; }
+      .u-pr-29 {padding-right: 29pt; }
+      .u-p-10-14 { padding: 10pt 14pt; }
+      .u-pl-9 { padding-left: 9pt; }
+      .u-pr-9 { padding-right: 9pt; }
+      .u-pb-12 { padding-bottom: 12pt; }
+      .u-pt-12 { padding-top: 12pt; }
+      .u-pl-12 { padding-left: 12pt; }
+      .u-pl-13 { padding-left: 13pt; }
+      .u-pt-0 { padding-top: 0; }
+      .u-p-0 { padding: 0; }
+      .u-ml-29 { margin-left: 29pt; }
+      .u-mr-29 { margin-right: 29pt; }
+
+      .u-border-left { border-left: 1pt solid var(--secondary);  }
+      .u-border-right { border-right: 1pt solid var(--secondary);  }
+      .u-border-top { border-top: 1pt solid var(--secondary);  }
+      .u-border-bottom { border-bottom: 1pt solid var(--secondary);  }
+
+      .u-flex-col {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .u-flex-start {
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      .u-text-color-primary {
+        color: var(--primary);
+      }
+
+      .u-text-uppercase-bold {
+        font-family: 'Frutiger';
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .u-text-align-right {
+        justify-content: flex-end;
+      }
+
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 29pt;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}} toggleImage--{{{LU_toggle-image--tvs}}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="grid" data-max-height="dynamic">
+            <div class="grid__item u-pl-29 u-border-right">
+              <img src="{{{account.logos.primary}}}" class="logo" />
+            </div> <!-- grid__item -->
+            <div class="hero hero--{{{LU_hero-size--tvs}}}{{^LU_hero-size--tvs}}large{{/LU_hero-size--tvs}}"><div class="reposition-fix"> {{{LU_hero--tvs}}} {{^LU_hero--tvs}} Insert Image Here {{/LU_hero--tvs}} </div> <!-- reposition-fix --></div> <!-- hero -->
+            <div class="grid__item u-pl-12 u-pr-29">
+              <img src="{{{LU_logo-support--tvs}}}" class="logo logo--support" />
+            </div> <!-- grid__item -->
+            <div class="grid__item grid__item--separator"> </div> <!-- grid__item -->
+        
+            <div class="grid__item u-border-right u-border-bottom  u-ml-29"> </div> <!-- grid__item -->
+            <div class="grid__item u-p-10-14 u-border-bottom u-flex-col u-mr-29">
+              {{#LU_heading-1--tvs}}
+              <div class="heading u-text-uppercase-bold u-text-uppercase-bold">
+                <div style="font-size:{{{LU_heading-font-size--tvs}}}%; line-height: 1em; margin-top:-0.05em; margin-bottom: -0.15em;" data-max-line="4">
+                  {{{LU_heading-1--tvs}}}
+                </div> <!-- font-size-resizer --> 
+              </div> <!-- heading -->
+              {{/LU_heading-1--tvs}}
+            </div> <!-- grid__item -->
+            <div class="grid__item grid--item__table u-pl-29 u-pr-29">
+              <div class="table">
+                {{#collection.LU_table-1--tvs}}
+                {{#block.LU_table-row--tvs}}
+                <div class="table__item u-border-right u-border-bottom u-text-color-primary u-text-uppercase-bold u-text-align-right">
+                  <div data-max-line="{{{LU_left-item-max-line--tvs}}}{{^LU_left-item-max-line--tvs}}5{{/LU_left-item-max-line--tvs}}">
+                    {{{LU_table-item-left--tvs}}}
+                  </div> <!-- max-line -->
+                </div> <!-- table__item -->
+                <div class="table__item u-border-bottom table__item--right">
+                  <div data-max-line="{{{LU_right-item-max-line--tvs}}}{{^LU_right-item-max-line--tvs}}5{{/LU_right-item-max-line--tvs}}">
+                    {{{LU_table-item-right--tvs}}}
+                  </div> <!-- max-line -->
+                </div> <!-- table__item -->
+                {{/block.LU_table-row--tvs}}
+                {{/collection.LU_table-1--tvs}}
+              </div> <!-- table -->
+            </div> <!-- grid--item__table-->
+            <div class="grid__item u-border-right"></div> <!-- grid__item -->
+            <div class="grid__item">
+              <img  class="logo logo--secondary" src="https://files.outfit.io/media_library_items/68637/LU-logo.svg"><!--logo--secondary-->
+            </div> <!-- grid__item -->
+            </div> <!-- grid -->
+
+          </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+      /*  
+       function gridHelper() {
+        const table = document.querySelector('.table');
+        const tableItems = table.querySelectorAll('.table__item');
+        const tableItemsCount = tableItems.length;
+
+        table.style.gridTemplateRows = 'repeat(' + (tableItemsCount / 2 - 1) + ', auto) 1fr';
+      }
+
+      gridHelper();
+     */
+
+
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+
+
+  </body>
+</html>
