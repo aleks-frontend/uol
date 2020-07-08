@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --primary: {{{account.colors.primary-red-update}}};
+        --secondary: {{{account.colors.grey}}};
+        --pantone-200: {{{account.colors.primary-red-update}}};
+        --pantone-300: #006EB6;
+        --pantone-431: #5B6770; 
+
+      }
+
+      html {
+        font-family: "Frutiger";
+        font-size: 19pt;
+        color: var(--secondary);
+      }
+
+      strong {
+        font-weight: 900;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        padding-top: 33pt;
+      }
+
+      .hero {
+        position: relative;
+        grid-column: 1/-1;
+        height: 179pt;
+        z-index: -1;
+      }
+
+      .hero:after {
+        content: '';
+        position: absolute;
+        left: 32.48%;
+        height: 100%;
+        width: 1px;
+        background-color: var(--secondary);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 32.6% 1fr;
+        grid-template-rows: 50pt 10pt 31pt auto 1fr minmax(119pt, auto);
+        width: 100%;
+        height: 100%;
+      }
+
+      .grid--alt {
+        grid-template-rows: 50pt 13pt 1fr minmax(120pt, auto);
+      }
+
+      .grid__item {
+        position: relative;
+        display: flex;
+        padding: 0 0.303rem;
+      }
+
+      .hero + .grid__item {
+        border-right: 1pt solid var(--secondary);
+      }
+
+      .grid__item--separator {
+        grid-column: 1 / -1;
+      }
+
+      .grid__item--content {
+        padding: 27pt 15pt 10pt 15pt;
+      }
+
+      .grid__image {  
+        position: relative;
+        grid-row: 4/5;
+        grid-column: 1 / -1;
+        overflow: hidden;
+      }
+
+      .grid__label {
+        font-family: 'Frutiger';
+        font-size: 0.266rem;
+        line-height: 1em;
+        color: var(--pantone-200);
+        font-weight: 900;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .grid__contact {
+        width: 195pt;
+        font-family: 'Frutiger 65';
+        font-size: 0.275rem;
+        line-height: 1.3em;
+      }
+
+      .grid__contact a {
+        color: var(--secondary);
+        text-decoration: none;
+      }
+
+      .grid__contact .tinymce_style--dark {
+        color: var(--pantone-200);
+      }
+
+      .grid__contact strong {
+        font-size: 10pt;
+      }
+
+      .logo {
+        max-width: 148pt;
+        max-height: 48pt;
+      }
+
+      .logo--support {
+        padding-top: 6pt;
+        max-width: 115pt;
+        max-height: 38pt;
+      }
+
+      .logo--secondary {
+        position: absolute;
+        right: -2pt;
+        bottom: 36pt;
+        width: 162pt;
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .heading {
+        font-size: 21.5pt;
+        font-weight: 900;
+        letter-spacing: 1.2pt;
+        text-transform: uppercase;
+        color: var(--pantone-200);
+      }
+
+      .text__block h2 {
+        margin-bottom: 6.4pt;
+        font-size: 11.8pt;
+        line-height: 1.15em;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .text__block p,
+      .text__block a {
+        margin-bottom: 28pt;
+        font-family: 'Frutiger 45';
+        font-size: 9pt;
+        line-height: 1.3em;
+        letter-spacing: -0.2pt;
+        color: var(--pantone-431);
+      }
+
+      .text__block a {
+        font-size: 0.222rem;
+        color: var(--secondary);
+        text-decoration: none;
+      }
+
+      .text__block ul {
+        margin-bottom: 24pt;
+      }
+
+      .text__block li {
+        position: relative;
+        margin-bottom: 2pt;
+        margin-left: 9pt;
+         font-family: 'Frutiger 45';
+        font-size: 8.6pt;
+        letter-spacing: 0.35pt;
+        line-height: 1.755em;
+      }
+
+      .text__block li:last-child {
+        margin-bottom: 0;
+      }
+
+      .text__block li:before {
+        content: '\2022';
+        position: absolute;
+        left: -0.219rem;
+        top: 0rem;
+        font-size: 0.25rem;
+      }
+
+      .text__block h2:last-child,
+      .text__block p:last-child,
+      .text__block a:last-child ,
+      .text__block ul:last-child {
+        margin-bottom: 0;
+      }
+
+      .tinymce_style--dark {
+        color: var(--pantone-300);
+      }
+      
+      .tinymce_style--light {
+        color: var(--secondary);
+      }
+
+      .image__block {
+        margin-bottom: 24pt;
+      }
+
+      .image {
+        position: relative;
+        width: 100%;
+        height: 95pt;
+        overflow: hidden;
+      }
+
+      .image + .image__caption {
+        margin-top: 0.233rem;
+      }
+
+      .image__caption {
+        font-size: 0.233rem;
+        font-style: italic;
+        font-weight: 300;
+      }
+
+      .text__block {
+        margin-bottom: 23pt;
+      }
+
+      .text__block:last-child,
+      .image__block:last-child {
+        margin-bottom: 0;
+      }
+
+      .column:last-child {
+        margin-right: 0;
+      }
+      .u-ml-36 { margin-left: 36pt; }
+      .u-mr-36 { margin-right: 36pt; }
+      .u-pt-2 { padding-top: 2pt; }
+      .u-pt-12 { padding-top: 12pt; }
+      .u-pt-16 { padding-top: 16pt; }
+      .u-pl-38 { padding-left: 38pt; }
+      .u-bl-1 { border-left: 1pt solid var(--secondary); }
+      .u-flex { display: flex; flex-direction: column; }
+      .u-block { display: block; }
+      .u-border-left { border-left: 1pt solid var(--secondary);  }
+      .u-border-right { border-right: 1pt solid var(--secondary);  }
+      .u-border-top { border-top: 1pt solid var(--secondary);  }
+      .u-border-bottom { border-bottom: 1pt solid var(--secondary);  }
+
+      .u-flex-col {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+      {{#placeholder-image-2}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      {{/placeholder-image-2}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="grid">
+            <div class="grid__item u-border-right u-pl-38">
+              <img src="{{{account.logos.primary}}}" class="logo" /> 
+            </div><!--grid__item-->
+            <div class="grid__item u-pt-2"> 
+              <img src="{{{DKN_logo-support--fly}}}" class="logo logo--support" /> 
+            </div> <!-- grid__item" -->
+            <div class="grid__item grid__item--separator"></div> <!--grid__item-->
+            <div class="grid__item u-border-right"></div><!--grid__item-->
+            <div class="grid__item u-flex-col">
+              {{#UOL_main-heading--fly}}
+              <div class="heading" data-max-line="1"> {{{ UOL_main-heading--fly }}} </div> <!--heading-->
+              {{/UOL_main-heading--fly}}
+            </div><!--grid__item-->
+            <div class="hero"><div class="reposition-fix">{{{ UOL_main-image--fly }}}</div></div><!--hero-->
+            {{#collection.UOL_front-page-content--fly}}    
+            {{#block.UOL_sidebar-content--fly}}
+            <div class="grid__item grid__item--content u-flex">
+              <div data-max-height="dynamic">
+                {{#collection.UOL_sidebar-content--fly}}
+                {{#block.UOL_image-block--fly}}
+                <div class="image__block u-ml-23">
+                  {{#UOL_image--fly}}
+                  <div class="image">
+                    <div class="reposition-fix"> 
+                      {{{UOL_image--fly}}}
+                    </div> <!--reposition-fix-->
+                  </div> <!--image-->
+                  {{/UOL_image--fly}}
+                  {{#UOL_image-caption--fly}}
+                  <div class="image__caption">
+                    {{{ UOL_image-caption--fly }}}
+                  </div><!--image__caption-->
+                  {{/UOL_image-caption--fly}}
+                </div> <!--image__block-->
+                {{/block.UOL_image-block--fly}}
+                {{#block.UOL_text-block--fly}}
+                {{#UOL_text--fly}}
+                <div class="text__block">
+                  {{{UOL_text--fly}}}
+                </div> <!--image__block-->
+                {{/UOL_text--fly}}
+                {{/block.UOL_text-block--fly}}
+                {{/collection.UOL_sidebar-content--fly}}
+              </div><!--data-max-height-->
+            </div><!--grid__item-->
+            {{/block.UOL_sidebar-content--fly}}
+            {{/collection.UOL_front-page-content--fly}}
+            <div class="grid__item u-block u-ml-36 u-pt-16 u-border-top u-border-right">
+              <div class="grid__label" data-max-line="1">
+                {{{UOL_contact-footer-label--fly}}}
+              </div> <!-- grid__label -->
+            </div> <!-- grid__item -->
+            <div class="grid__item u-block u-mr-36 u-border-top u-border-top">
+              <div class="grid__contact u-pt-12" data-max-height="106">
+                {{{UOL_contact-footer-value--fly}}}
+              </div> <!-- grid__contact -->
+              <img src="https://files.outfit.io/media_library_items/68637/LU-logo.svg" class="logo logo--secondary">
+            </div><!--grid__item-->
+          </div><!--grid-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+
+    {{#collection.UOL_internal-pages--fly-1}}
+    {{#block.UOL_internal-pages--fly-1}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="grid grid--alt">
+            <div class="grid__item u-border-right u-pl-38">
+              <img src="{{{account.logos.primary}}}" class="logo" /> 
+            </div><!--grid__item-->
+            <div class="grid__item u-pt-2"> 
+              <img src="{{{DKN_logo-support--fly}}}" class="logo logo--support" /> 
+            </div> <!-- grid__item" -->
+            <div class="grid__item grid__item--separator"></div> <!--grid__item-->
+            {{#collection.UOL_back-page-content--fly}}    
+            {{#block.UOL_back-sidebar-content--fly}}
+            <div class="grid__item grid__item--content u-flex u-border-right">
+              <div data-max-height="dynamic">
+                {{#collection.UOL_back-sidebar-content--fly}}
+                {{#block.UOL_back-image-block--fly}}
+                <div class="image__block u-ml-23">
+                  {{#UOL_image-back--fly}}
+                  <div class="image">
+                    <div class="reposition-fix"> 
+                      {{{UOL_image-back--fly}}}
+                    </div> <!--reposition-fix-->
+                  </div> <!--image-->
+                  {{/UOL_image-back--fly}}
+                  {{#UOL_image-caption--fly}}
+                  <div class="image__caption">
+                    {{{ UOL_image-caption--fly }}}
+                  </div><!--image__caption-->
+                  {{/UOL_image-caption--fly}}
+                </div> <!--image__block-->
+                {{/block.UOL_back-image-block--fly}}
+                {{#block.UOL_back-text-block--fly}}
+                {{#UOL_text--fly}}
+                <div class="text__block">
+                  {{{UOL_text--fly}}}
+                </div> <!--image__block-->
+                {{/UOL_text--fly}}
+                {{/block.UOL_back-text-block--fly}}
+                {{/collection.UOL_back-sidebar-content--fly}}
+              </div><!--data-max-height-->
+            </div><!--grid__item-->
+            {{/block.UOL_back-sidebar-content--fly}}
+            {{/collection.UOL_back-page-content--fly}}
+            <div class="grid__item u-block u-ml-36 u-pt-16 u-border-top u-border-right">
+              <div class="grid__label" data-max-line="1">
+                {{{UOL_contact-footer-label--fly}}}
+              </div> <!-- grid__label -->
+            </div> <!-- grid__item -->
+            <div class="grid__item u-block u-mr-36 u-border-top u-border-top">
+              <div class="grid__contact u-pt-12" data-max-height="106">
+                {{{UOL_contact-footer-value--fly}}}
+              </div> <!-- grid__contact -->
+              <img src="https://files.outfit.io/media_library_items/68637/LU-logo.svg" class="logo logo--secondary">
+            </div><!--grid__item-->
+          </div><!--grid-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UOL_internal-pages--fly-1}}
+    {{/collection.UOL_internal-pages--fly-1}}
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+        <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+
+
+  </body>
+</html>
