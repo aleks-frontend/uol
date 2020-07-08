@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/arial/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/arial-2/stylesheet.css);
+
+      :root {
+        --primary: {{{account.colors.primary-red-update}}};
+        --secondary: {{{account.colors.grey}}};
+      }
+
+      html {
+        font-family: "Frutiger";
+        font-size: 19pt;
+        color: var(--secondary);
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 32.5% 1fr 32.7%;
+        grid-template-rows: 0.933rem 0.443rem auto 4.104rem 1fr;
+        padding-top: 0.863rem;
+      }
+
+      .grid--internal {
+        grid-template-columns: 32.5% 1fr;
+        grid-template-rows: 0.933rem 0.443rem auto;
+      }
+
+      .grid--last {
+        grid-template-rows: 0.933rem 0.443rem auto 2.332rem;
+      }
+
+      .grid__item {
+        position: relative;
+        display: flex;
+        padding: 0 0.303rem;
+      }
+
+      .grid__item--span-2-col {
+        grid-column: span 2 / -1;
+      }
+
+      .grid__item--span-3-col {
+        grid-column: 1 / -1;
+      }
+
+      .grid__item--picture {
+        grid-row: 4/5;
+        grid-column: 2/3;
+      }
+
+      .grid__item--content {
+        padding: 0.676rem 0.490rem 0.466rem 0.910rem;
+      }
+
+      .grid__item--content + .grid__item--content {
+        grid-column: span 2 / -1;
+        padding: 0.599rem 1.667rem 0.466rem 0.455rem;
+        border-left: 1pt solid var(--secondary);
+      }
+
+      .grid__item--table {
+        display: flex;
+        flex: 1;
+      }
+
+      .grid__item--footer {
+        background: aqua;
+      }
+
+      .grid__image {  
+        position: relative;
+        grid-row: 4/5;
+        grid-column: 1 / -1;
+        overflow: hidden;
+      }
+
+      .grid__label {
+        font-family: Arial;
+        font-size: 0.266rem;
+        line-height: 1em;
+        color: var(--primary);
+        font-weight: bold;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .grid__contact {
+        font-family: Arial;
+        font-size: 0.275rem;
+        line-height: 1.6em;
+      }
+
+      .grid__contact a {
+        color: var(--secondary);
+        text-decoration: none;
+      }
+
+      .grid__contact .tinymce_style--dark a {
+        color: var(--primary);
+      }
+
+      .logo {
+        max-width: 3.428rem;
+        max-height: 0.917rem;
+      }
+
+      .logo--support {
+        max-height: 0.714rem;
+      }
+
+      .logo--secondary {
+        max-width: 3.918rem;
+        max-height: 1.586rem;
+      }
+
+      .heading {
+        min-height: 0.793rem;
+        margin-top: -4pt;
+        font-size: 0.385rem;
+        font-weight: bold;
+        letter-spacing: 0.124rem;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+
+      .text__block h2 {
+        font-family: Arial;
+        font-size: 0.256rem;
+        line-height: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 0.303rem;
+      }
+
+
+      .text__block p,
+      .text__block a {
+        font-family: Arial;
+        font-size: 0.212rem;
+        line-height: 1.2em;
+        font-weight: 300; 
+        margin-bottom: 0.5rem;
+      }
+
+      .text__block a {
+        font-size: 0.222rem;
+        color: var(--secondary);
+        text-decoration: none;
+      }
+
+      .text__block ul {
+        margin-bottom: 0.303rem;
+      }
+
+      .text__block li {
+        position: relative;
+        margin-left: 0.233rem;
+        font-family: Arial;
+        font-size: 0.232rem;
+        line-height: 1.755em;
+      }
+
+      .text__block li:before {
+        content: '\2022';
+        position: absolute;
+        left: -0.219rem;
+        top: 0rem;
+        font-size: 0.25rem;
+      }
+
+      .column .text__block h2:last-child,
+      .column .text__block p:last-child,
+      .column .text__block a:last-child ,
+      .column .text__block ul:last-child {
+        margin-bottom: 0;
+      }
+
+      .tinymce_style--dark {
+        color: var(--primary);
+      }
+
+      .image__block {
+        margin-bottom: 0.7rem;
+      }
+
+      .image {
+        position: relative;
+        width: 100%;
+        height: 2.076rem;
+        overflow: hidden;
+      }
+
+      .image + .image__caption {
+        margin-top: 0.233rem;
+      }
+
+      .image__caption {
+        font-size: 0.233rem;
+        font-style: italic;
+        font-weight: 300;
+      }
+
+      .text__block {
+        margin-bottom: 0.466rem;
+      }
+
+      .text__block:last-child,
+      .image__block:last-child {
+        margin-bottom: 0;
+      }
+
+      .column__container {
+        display: flex;
+        flex: 1;
+        padding: 0.933rem;
+      }
+
+      .column { 
+        flex: 1; 
+        margin-right: 0.455rem; 
+      }
+
+      .column:last-child {
+        margin-right: 0;
+      }
+
+      .u-p-0 { padding: 0; }
+      .u-pt-2 { padding-top: 0.070rem; }
+      .u-pt-12 { padding-top: 0.3rem; }
+      .u-pt-16 { padding-top: 0.4rem; }
+      .u-pl-24 { padding-left: 0.560rem; }
+      .u-bl-1 { border-left: 1pt solid var(--secondary); }
+
+      .u-flexEnd { justify-content: flex-end; }
+      .u-flex { display: flex; flex-direction: column; }
+      .u-block { display: block; }
+
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .grid__item--footer {
+        background: aqua;
+      }
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+      {{#placeholder-image-2}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      {{/placeholder-image-2}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit grid grid--front">
+          <div class="grid__item u-flexEnd"> <img src="{{{account.logos.primary}}}" class="logo" /> </div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-2-col u-pt-2 u-bl-1"> <img src="{{{DKN_logo-support--fly}}}" class="logo logo--support" /> </div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-3-col grid__separator"></div> <!-- grid__item" -->
+          <div class="grid__item"></div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-2-col u-bl-1 heading" data-max-line="2"> {{{ UOL_main-heading--fly }}} </div> <!-- grid__item" -->
+          <div class="grid__image"> <div class="reposition-fix"> {{{ UOL_main-image--fly }}} </div> <!-- reposition-fix --> </div> <!-- grid__image -->
+          <div class="grid__item grid__item--picture u-bl-1"></div> <!-- grid__item" -->
+          {{#collection.UOL_front-page-content--fly}}    
+          {{#block.UOL_sidebar-content--fly}}
+          <div class="grid__item grid__item--content u-flex">
+            <div data-max-height="dynamic">
+              {{#collection.UOL_sidebar-content--fly}}
+              {{#block.UOL_image-block--fly}}
+              <div class="image__block">
+                {{#UOL_image--fly}}
+                <div class="image">
+                  <div class="reposition-fix"> 
+                    {{{UOL_image--fly}}}
+                  </div> <!-- reposition-fix -->
+                </div> <!-- image -->
+                {{/UOL_image--fly}}
+                {{#UOL_image-caption--fly}}
+                <div class="image__caption">
+                  {{{ UOL_image-caption--fly }}}
+                </div> <!-- image__caption -->
+                {{/UOL_image-caption--fly}}
+              </div> <!--image__block -->
+              {{/block.UOL_image-block--fly}}
+              {{#block.UOL_text-block--fly}}
+              {{#UOL_text--fly}}
+              <div class="text__block">
+                {{{UOL_text--fly}}}
+              </div> <!-- image__block -->
+              {{/UOL_text--fly}}
+              {{/block.UOL_text-block--fly}}
+              {{/collection.UOL_sidebar-content--fly}}
+            </div> <!-- data-max-height -->
+          </div> <!-- grid__item" -->
+          {{/block.UOL_sidebar-content--fly}}
+          {{/collection.UOL_front-page-content--fly}}
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    {{#collection.UOL_internal-pages--fly}}
+    {{#block.UOL_internal-page--fly}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit grid grid--internal">
+          <div class="grid__item u-flexEnd"> <img src="{{{account.logos.primary}}}" class="logo" /> </div> <!-- grid__item" -->
+          <div class="grid__item u-pt-2 u-bl-1"> <img src="{{{DKN_logo-support--fly}}}" class="logo logo--support" /> </div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-2-col"></div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-2-col grid__item--table">
+            <div class="column__container">
+              <div style="display: flex;" data-max-height="dynamic">
+                {{#collection.UOL_internal-page-columns--fly}}    
+                {{#block.UOL_internal-page-column--fly}}
+                <div class="column">
+                  {{#collection.UOL_column-content--fly}}
+                  {{#block.UOL_image-block--fly}}
+                  {{#UOL_image--fly}}
+                  <div class="image__block">
+                    <div class="image">
+                      <div class="reposition-fix"> 
+                        {{{UOL_image--fly}}}
+                      </div> <!-- reposition-fix -->
+                    </div> <!-- image -->
+                    {{/UOL_image--fly}}
+                    <div class="image__caption">
+                      {{{ UOL_image-caption--fly }}}
+                    </div> <!-- image__caption -->
+                  </div> <!-- image__block -->
+                  {{/block.UOL_image-block--fly}}
+                  {{#block.UOL_text-block--fly}}
+                  {{#UOL_text--fly}}
+                  <div class="text__block">
+                    {{{UOL_text--fly}}}
+                  </div> <!-- image__block -->
+                  {{/UOL_text--fly}}
+                  {{/block.UOL_text-block--fly}}
+                  {{/collection.UOL_column-content--fly}}
+                </div> <!-- grid__item" -->
+                {{/block.UOL_internal-page-column--fly}}
+                {{/collection.UOL_internal-page-columns--fly}}   
+              </div> <!-- data-max-height -->
+            </div> <!-- column__container -->
+          </div> <!-- grid__ item -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UOL_internal-page--fly}}
+    {{/collection.UOL_internal-pages--fly}}
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit grid grid--last">
+          <div class="grid__item u-flexEnd"> <img src="{{{account.logos.primary}}}" class="logo" /> </div> <!-- grid__item" -->
+          <div class="grid__item u-pt-2 u-bl-1 grid__item--span-2-col"> <img src="{{{DKN_logo-support--fly}}}" class="logo logo--support" /> </div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-3-col"></div> <!-- grid__item" -->
+          <div class="grid__item grid__item--span-3-col grid__item--table">
+            <div class="column__container">
+              <div style="display: flex;" data-max-height="dynamic">
+                {{#collection.UOL_last-page-columns--fly}}    
+                {{#block.UOL_last-page-column--fly}}
+                <div class="column">
+                  {{#collection.UOL_column-content--fly}}
+                  {{#block.UOL_image-block--fly}}
+                  {{#UOL_image--fly}}
+                  <div class="image__block">
+                    <div class="image">
+                      <div class="reposition-fix"> 
+                        {{{UOL_image--fly}}}
+                      </div> <!-- reposition-fix -->
+                    </div> <!-- image -->
+                    {{/UOL_image--fly}}
+                    <div class="image__caption">
+                      {{{ UOL_image-caption--fly }}}
+                    </div> <!-- image__caption -->
+                  </div> <!-- image__block -->
+                  {{/block.UOL_image-block--fly}}
+                  {{#block.UOL_text-block--fly}}
+                  {{#UOL_text--fly}}
+                  <div class="text__block">
+                    {{{UOL_text--fly}}}
+                  </div> <!-- image__block -->
+                  {{/UOL_text--fly}}
+                  {{/block.UOL_text-block--fly}}
+                  {{/collection.UOL_column-content--fly}}
+                </div> <!-- grid__item" -->
+                {{/block.UOL_last-page-column--fly}}
+                {{/collection.UOL_last-page-columns--fly}}   
+              </div> <!-- max-height -->
+            </div> <!-- column__container -->
+          </div> <!-- grid__ item -->
+          <div class="grid__item u-block u-pt-16">
+            <div class="grid__label" data-max-line="1">
+              {{{UOL_contact-footer-label--fly}}}
+            </div> <!-- grid__label -->
+          </div> <!-- grid__item -->
+          <div class="grid__item u-pt-12 u-pl-24 u-bl-1 u-block">
+            <div class="grid__contact" data-max-line="3">
+              {{{UOL_contact-footer-value--fly}}}
+            </div> <!-- grid__contact -->
+          </div> <!-- grid__item -->
+          <div class="grid__item grid__logo u-p-0">
+            <img src="https://files.outfit.io/media_library_items/68637/LU-logo.svg" class="logo logo--secondary" />
+          </div> <!-- grid__item" -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+
+
+  </body>
+</html>

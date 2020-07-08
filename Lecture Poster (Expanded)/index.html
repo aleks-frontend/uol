@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #000;
+      }
+
+      body {
+        color: #fff;
+      }
+
+      .overflow {
+        border: 0.0362rem dashed red !important;
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      /* Placeholder */   
+
+      .placeholder__container {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+        transition: 0.3s all;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: url({{{ placeholder-image }}}); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;   
+        opacity: 0;
+      }
+
+      .u-placeholder-locked .placeholder__container {
+        opacity: 1;  
+      }
+
+      .u-placeholder-hidden .placeholder__container,
+      .u-placeholder-hidden .placeholder__trigger {
+        display: none;
+      }
+
+      .placeholder__trigger {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        border-bottom-left-radius: 1rem;
+        background: #467BE3;
+        transition: all 0.3s;
+        transform: translate(30%, -30%);
+        opacity: 0;
+        z-index: 9999;
+      }   
+
+      .bleed:hover .placeholder__trigger:hover {
+        cursor: pointer;
+        opacity: 1;        
+      }
+
+      .placeholder__trigger svg {
+        width: 50%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-25%, -50%);
+      }
+
+      .bleed:hover .placeholder__trigger {
+        transform: translate(0, 0);
+        opacity: 0.5;
+      }      
+
+      .bleed:hover .placeholder__trigger:hover + .placeholder__container {
+        opacity: 1;
+      }      
+
+      .placeholderBtn__container {
+        position: absolute;
+        top: 0;
+        left: -0.6rem;
+        bottom: -0.6rem;
+        right: 0;
+        transition: 0.3s all;
+        transform: rotate(-90deg);
+        transform-origin: top right;
+        opacity: 0;
+      }
+
+      .placeholder__trigger:hover .placeholderBtn__container {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+
+      .placeholderBtn {
+        position: absolute;
+        left: 0;
+        top: 0.04rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #467BE3;
+        color: #fff;
+        font-size: 0.27rem;
+        text-decoration: none;
+        line-height: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }     
+
+      .placeholderBtn--plus::before {
+        content: '+';
+      }            
+
+      .placeholderBtn--minus {
+        top: 0.68rem;
+        left: 0.4rem;       
+      }    
+
+      .placeholderBtn--minus::before {
+        content: '-';        
+      }
+
+      .placeholderBtn--lock {
+        bottom: 0;
+        top: auto;
+        right: 0.04rem;
+        left: auto;
+      }
+
+      .placeholderBtn--lock::before {
+        content: 'L';
+      }
+
+      .u-placeholder-locked .placeholderBtn--lock::before {
+        content: 'U';
+      }            
+
+      /* End Placeholder */         
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }    
+
+      .backgroundImage--1 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/c075bea8f4ae746d5c0a78127c312d80/A2%20Background%20Expanded%201.jpg);
+      }
+
+      body.hide-crop .backgroundImage--1 {
+        background-image: url('https://files.outfit.io/media_library_items/64852/A2%2520Background%2520Expanded%25201.jpg') !important;
+      }
+
+      .backgroundImage--2 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/336bf014652e27ad5221eaf086fc4b3c/A2%20Background%20Expanded%202.jpg);
+      }      
+
+      body.hide-crop .backgroundImage--2 {
+        background-image: url('https://files.outfit.io/media_library_items/64855/A2%2520Background%2520Expanded%25202.jpg') !important;
+      }
+
+      .backgroundImage--3 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/17ceae7ca33fcd72b64eb3d974ddca5a/A2%20Background%20Expanded%203.jpg);
+      }
+
+      body.hide-crop .backgroundImage--3 {
+        background-image: url('https://files.outfit.io/media_library_items/64853/A2%2520Background%2520Expanded%25203.jpg') !important;
+      }
+
+      .backgroundImage--4 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/e702d9fe5187b57719dac39f4dd474e7/A2%20Background%20Expanded%204.jpg);
+      }
+
+      body.hide-crop .backgroundImage--4 {
+        background-image: url('https://files.outfit.io/media_library_items/64854/A2%2520Background%2520Expanded%25204.jpg') !important;
+      }
+
+      .backgroundImage--5 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/a28d551cdf52d2cf68b4406673572698/A2%20Background%20Expanded%205.png);
+      }
+
+      body.hide-crop .backgroundImage--5 {
+        background-image: url('https://files.outfit.io/media_library_items/64859/A2%2520Background%2520Expanded%25206.png') !important;
+      }
+
+      .backgroundImage--6 {
+        background-image: url(https://outfit-v2-exports-production.s3-ap-southeast-2.amazonaws.com/media_library_items/4ca08b154119f587c3781df692905f75/A2%20Background%20Expanded%206.png);
+      }
+
+      body.hide-crop .backgroundImage--6 {
+        background-image: url('https://files.outfit.io/media_library_items/64858/A2%2520Background%2520Expanded%25205.png') !important;
+      }
+
+      .content {
+        font-family: 'Frutiger 55 Roman';
+        font-size: 0.28rem;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        height: 15.9058rem;
+        padding: 1.5976rem 0rem 0rem 0rem;
+        margin: 1.1818rem 0.8642rem 0;
+      }
+
+      @media screen and (width: 793.64px) {
+        .body { 
+          height: 15.84rem;
+        }
+      }
+
+      @media screen and (min-width: 1120px) {
+        .body {
+          height: 16.3058rem;
+          margin: 0.9818rem 0.81rem 0;	
+        }
+      }
+
+      @media screen and (min-width: 1580px) {
+        .body {
+          margin: 1.02rem 0.81rem 0;
+          height: 16.4058rem;
+          padding: 1.6976rem 0rem 0rem 0rem;
+        }
+
+        .logoMain {
+          top: 1.04rem;
+          left: 0.8rem;
+        }
+      }
+
+      .body::before,
+      .body::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 0.5839rem;
+        height: 0.9809rem;
+      }
+
+      .body::before {
+        right: 0;
+        top: 0;
+        border-top: 0.1868rem solid #fff;
+        border-right: 0.1868rem solid #fff;
+      }
+
+      .body::after {
+        left: 0;
+        bottom: 0;
+        border-bottom: 0.1868rem solid #fff;
+        border-left: 0.1868rem solid #fff;
+      }
+
+      .logoMain {
+        position: absolute;
+        top: 1.1912rem;
+        left: 0.8408rem;
+        width: 2.9896rem;
+      }
+
+      @media screen and (min-width: 1120px) {
+        .logoMain {
+          top: 1.01rem;
+          width: 3.03rem;
+        }
+      }
+
+      .logoAlt {
+        align-self: flex-end;
+        width: 2.6860rem;
+        margin-top: 1.2378rem;
+      }
+
+      .main, 
+      .secondary {
+        width: 53.7%;
+      }
+
+      .u-logo-hidden .main__maxHeight {
+        max-height: 11.4rem;
+      }
+
+      .u-logo-hidden .secondary {
+        margin-bottom:  0.7497rem;
+      }
+
+      .main__maxHeight {
+        max-height: 9em;
+      }      
+
+      .heading {
+        text-transform: uppercase;
+        font-size: 0.772rem;
+        font-weight: bold;
+        line-height: 1em;
+        margin-bottom: 0.2rem;
+      }
+
+      .mainSubheading {
+        font-size: 0.454rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 0.3269rem;
+      }
+
+      .subheading__name {
+        font-size: 0.3293rem;
+        font-weight: bold;
+        margin-bottom: 0.0934rem;
+      }
+
+      .subheading__description {
+        margin-bottom: 0.4671rem;
+        font-family: 'Frutiger 55 Roman';
+        font-size: 0.28rem;
+        line-height: 1.1em;
+      }
+
+      .content{
+        line-height: 1.2em;
+      }
+
+      .content ul {
+        padding-left: 0.3rem;
+        list-style-type: disc;
+        list-style-position: outside;
+      }
+
+      .content ul li {
+        margin-bottom: 0.1rem;
+      }
+
+      .content ul li:last-child {
+        margin-bottom: 0;
+      }
+
+      .secondary {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .date {
+        font-size: 0.4344rem;
+        font-weight: bold;
+      }
+
+      .date__maxHeight{
+        max-height: 2.6em;
+      }
+
+      .venue {
+        margin-top: 0.3269rem;
+        font-size: 0.3199rem;
+        font-weight: bold;
+      }
+
+      .venue__maxHeight{
+        max-height: 3.9em;
+      }
+
+      @media screen and (min-width: 1120px) {
+        .venue {
+          font-size: 0.33rem;
+        }
+
+        .date {
+          font-size: 0.44rem
+        }
+      }
+
+      @media screen and (min-width: 1580px) {
+        .u-logo-hidden .secondary {
+          margin-bottom: 1.0534rem;
+        } 
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height:2.8004rem;
+        border-top: 0.04671rem solid #fff;
+        margin: 0 0.8642rem;
+        padding-top: 0.5162rem;
+      }
+
+      .footer__col {
+        width: 35%;
+        font-size: 0.3223rem;
+        letter-spacing: 0.02102rem;
+      }
+
+      .u-fontFamily {
+        font-family: "Frutiger 65";
+        font-size: 12pt;
+        line-height: 1.2em;  
+      }
+
+      .footer__col__maxHeight {
+        max-height: 3.6em;
+      }
+
+      .footer__col--out {
+        width: 53.7%;
+      }
+
+      .info__label {
+        margin-bottom: 0.1168rem;
+        font-size: 0.2616rem;
+        letter-spacing: 0.01168rem;
+        word-spacing: -0.028027rem;   
+      }
+
+      .info__label__maxHeight{
+        max-height: 1.3em;
+      }
+
+      .info {
+        font-size: 0.2686rem;
+        font-weight: bold;
+        line-height: 1.4em;
+        letter-spacing: -0.002335rem;
+      }
+
+      .info__maxHeight {
+        max-height: 4.2em; /* Temporary solution until we decide what to do with the line breaking email */
+      }
+
+      @media screen and (min-width: 1120px) {
+        .footer {
+          height: 2.7rem;
+          margin: 0 0.84rem;
+          padding-top: 0.56rem;
+        }
+
+        .footer__col {
+          font-size: 0.33rem;
+        }
+
+        .info__label {
+          font-size: 0.27rem;
+        }
+
+        .info {
+          font-size: 0.275rem;
+        }
+      }
+
+      @media screen and (min-width: 1580px) {
+        .footer {
+          margin: 0 0.8rem;
+        }
+
+        .footer__col {
+          font-size: 0.335rem;
+          line-height: 1.2em;
+        }
+
+        .info__label {
+          line-height: 1.3em;
+          margin-bottom: 0.04rem;
+        }
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="{{LCT_background-choice}} {{LCT_headline-size}} {{{LCT_event-name}}} {{{LCT_presenter-name}}}" class="{{ placeholder-toggle }} {{^logo-alt-}}u-logo-hidden{{/logo-alt-}}">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <span class="placeholder__trigger">   
+          <div class="placeholderBtn__container">
+            <a href="#" class="placeholderBtn placeholderBtn--operation placeholderBtn--plus" data-operation="plus"></a>
+            <a href="#" class="placeholderBtn placeholderBtn--operation placeholderBtn--minus" data-operation="minus"></a>
+            <a href="#" class="placeholderBtn placeholderBtn--lock"></a>
+          </div>
+          <svg viewBox="0 0 144 100" preserveAspectRatio xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#ffffff" id="svg_1" d="m89.668,38.786c0,-10.773 -8.731,-19.512 -19.51,-19.512s-19.512,8.736 -19.512,19.512c0,10.774 8.732,19.511 19.512,19.511c10.776,0 19.51,-8.736 19.51,-19.511m38.684,-0.059c-13.315,17.599 -34.426,28.972 -58.193,28.972c-23.77,0 -44.879,-11.373 -58.194,-28.972c13.314,-17.598 34.424,-28.971 58.193,-28.971c23.769,0 44.878,11.373 58.194,28.971m11.962,0.033c-14.648,-23.282 -40.589,-38.76 -70.156,-38.76s-55.51,15.478 -70.158,38.76c14.648,23.312 40.591,38.81 70.158,38.81s55.508,-15.498 70.156,-38.81"/>
+            </g>
+          </svg>
+        </span><!-- end placeholder__trigger -->
+        <div class="placeholder__container">
+          <div class="placeholder"></div>
+        </div><!-- end placeholder__container -->
+
+        <div class="container fit">
+
+          <div class="backgroundImage backgroundImage--{{LCT_background-choice}}"></div>
+
+          <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/5ccb766f2cb19fa603826174ffa40cc2/UoL-Logo-Inverse-white.png" class="logoMain">
+
+          <div class="body">
+
+            <div class="main">
+              <div class="main__maxHeight">
+                <div class="check-overflow">
+                  <div class="heading">
+                    <div style="font-size: {{LCT_headline-size}}{{^LCT_headline-size}}100{{/LCT_headline-size}}%; line-height: 1em;">
+                      {{{LCT_event-name}}}
+                    </div>
+                  </div>
+                  <div class="mainSubheading">
+                    <div style="max-height: 2.6em;">
+                      <div class="check-overflow">
+                        {{{LCT_subheading}}}
+                      </div><!-- end check-overflow -->
+                    </div>
+                  </div> <!-- mainSubheading -->
+                  <div class="subheading">
+                    <div class="subheading__name">
+                      <div style="max-height: 1.3em;">
+                        <div class="check-overflow">
+                          {{{LCT_presenter-name}}}
+                        </div><!-- end check-overflow -->
+                      </div>
+                    </div><!-- end subheding__name -->
+                    <div class="subheading__description">
+                      <div style="max-height: 5.2em;">
+                        <div class="check-overflow">
+                          {{{LCT_presenter-description}}}
+                        </div><!-- end check-overflow -->
+                      </div>                          
+                    </div><!-- end subheading__description -->
+                  </div><!-- end subheading -->
+                  <div class="content">{{{LCT_event-description}}}</div>
+                </div><!-- end check-overflow -->
+              </div><!-- end max-height -->
+            </div><!-- end main -->
+
+            <div class="secondary">
+              <div class="date">
+                <div class="date__maxHeight">
+                  <div class="check-overflow">
+                    {{{LCT_date}}}
+                  </div><!-- end check-overflow -->
+                </div><!-- end date__maxHeight -->
+              </div><!-- end date -->
+              <div class="venue">
+                <div class="venue__maxHeight">
+                  <div class="check-overflow">
+                    VENUE {{{LCT_venue}}}
+                  </div><!-- end check-overflow -->
+                </div><!-- end venue__maxHeight -->
+              </div><!-- end venue -->
+              {{#logo-alt-}}
+              <img src="{{{logo-alt-}}}" class="logoAlt" />
+              {{/logo-alt-}}              
+            </div><!-- end secondary -->
+
+
+          </div><!-- end body -->
+
+          <div class="footer">
+            <div class="footer__col u-fontFamily">
+              <div class="footer__col__maxHeight">
+                <div class="check-overflow">
+                  {{{LCT_department-name-event-series}}}
+                </div><!-- end check-overflow -->
+              </div><!-- end info__label__maxHeight -->
+            </div><!-- end footer__col-->
+            <div class="footer__col footer__col--out">
+              <div class="info__label">
+                <div class="info__label__maxHeight">
+                  <div class="check-overflow">
+                    {{{LCT_audience}}}                  
+                  </div><!-- end check-overflow -->
+                </div><!-- end info__label__maxHeight -->
+              </div><!-- end info__label -->
+              <div class="info">
+                <div class="info__maxHeight">
+                  <div class="check-overflow">
+                    {{{LCT_more-info}}}
+                  </div><!-- end check-overflow -->
+                </div><!-- end info__maxHeight -->                
+              </div><!-- end info -->
+            </div><!-- end footer__col--out -->
+          </div><!-- end footer -->
+
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          console.log(parentHeight);
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+
+      // Dynamic controls for the placeholder image
+      function lockPlaceholder(e) {
+        document.body.classList.toggle('u-placeholder-locked');
+
+        e.preventDefault();        
+      }
+
+      function opacityControl(e) {
+        const placeholder = document.querySelector('.placeholder');
+        const compStyles = window.getComputedStyle(placeholder);
+        const currentOpacity = parseFloat(compStyles.getPropertyValue('opacity'));
+        const operation = this.dataset.operation;
+
+        if ( operation == 'plus' && currentOpacity < 1 ) {
+          placeholder.style.opacity = currentOpacity + 0.1; 
+        } else if ( operation == 'minus' && currentOpacity > 0 ) {
+          placeholder.style.opacity = currentOpacity - 0.1; 
+        }
+
+        e.preventDefault();          
+      }
+
+      function placeholderControler() {
+        const operationButtons = document.querySelectorAll('.placeholderBtn--operation');
+        const lockButton = document.querySelector('.placeholderBtn--lock');        
+
+        operationButtons.forEach(button => {
+          button.addEventListener('click', opacityControl);        
+        });        
+
+        lockButton.addEventListener('click', lockPlaceholder);        
+      }    
+
+      placeholderControler();       
+
+    </script>
+
+
+  </body>
+</html>
