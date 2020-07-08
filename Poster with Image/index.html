@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html data-sign="OSS/OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="placeholder-controller.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      html {
+        font-family: 'Frutiger';
+        color: #000;
+      }
+
+      body {
+        color: #fff;
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .overflow[data-char-limit]:hover:after {
+        content: 'Character limit exceeded';        
+      }
+
+      .posterSection {
+        position: absolute;
+        left: 0;
+        right: 0;        
+      }
+
+      .posterSection--top {
+        top: 0;
+        bottom: 44.1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: {{account.colors.primary-red-update}};
+      }
+
+      .posterSection--bottom {
+        bottom: 0;
+        height: 44.3%;
+        overflow: hidden;
+      }
+      
+      .repoImg{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;             
+        text-align: right;
+        padding: 1.2rem 0rem 0rem 0rem;
+        margin: 0 0.8408rem 0;
+      }
+
+      @media screen and (min-width: 1120px) { 
+        .body {
+          margin: 0 0.79rem 0;
+          padding-top: 1.35rem;
+        }
+      }
+
+      .body::before,
+      .body::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 0.5839rem;
+        height: 0.9809rem;
+      }
+
+      .body::before {
+        right: 0;
+        top: 0;
+        border-top: 0.1868rem solid #fff;
+        border-right: 0.1868rem solid #fff;
+      }
+
+      .body::after {
+        left: 0;
+        bottom: 0.2rem;
+        border-bottom: 0.1868rem solid #fff;
+        border-left: 0.1868rem solid #fff;
+      }
+
+      .body__maxHeight {
+        max-height: 8.3rem;
+      }
+
+      .logoMain {
+        position: absolute;
+        top: 1.1912rem;
+        left: 0.8408rem;
+        width: 2.9896rem;
+      }
+
+      @media screen and (min-width: 1120px) {
+        .logoMain {
+          top: 1.15rem;
+          left: 0.78rem;
+          width: 3.05rem;
+        }
+      }
+
+      .main {
+        width: 76%;
+      }
+
+      .u-logo-hidden .main__maxHeight {
+        max-height: 9.8rem;
+      }
+
+      .main__maxHeight {
+        max-height: 6rem;
+      }  
+
+      .secondary {
+        width: 85%;
+        margin-bottom: 0.35rem;
+      }
+
+      .heading {
+        text-transform: uppercase;
+        font-size: 1.1561rem;
+        font-weight: bold;
+        line-height: 1em;
+      }
+
+      .mainSubheading {
+        font-size: 0.6542rem;
+        margin-bottom: 0.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      @media screen and  (min-width: 1120px) {
+        .heading {
+          letter-spacing: 0.005rem;
+          line-height: 1.04em;
+        }
+      }
+
+      .subheading {
+        margin-bottom: 0.3rem;
+      }
+
+      @media screen and  (min-width: 1120px) {
+        .subheading {
+          margin-bottom: 0rem;
+        }
+      }
+
+      .subheading__name {
+        font-size: 0.3293rem;
+        font-weight: bold;
+        margin-bottom: 0.03rem;
+      }
+
+      .subheading__description {
+        margin-bottom: 0.2705rem;
+        font-size: 0.3059rem;
+        font-weight: 100;
+        line-height: 1.1em;
+      }
+
+      @media screen and  (min-width: 1120px) {
+        .subheading__description {
+          margin-bottom: 0.2905rem;
+          margin-top: 0.04rem;
+          font-size: 0.31rem;
+        }        
+      }
+
+      .content{
+        font-size: 0.3293rem;
+        line-height: 1.2em;
+      }
+
+      .secondary {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .date {
+        font-family: 'Frutiger 55 Roman';
+        font-size: 0.43rem;
+        font-weight: bold;
+      }
+
+      .date__maxHeight{
+        max-height: 1.2em;
+      }
+
+      @media screen and (min-width: 1120px) { 
+        .date__maxHeight {
+          max-height: 1.5em;
+        } 
+      }
+
+      .venue {
+        margin-top: 0.1235rem;
+        font-size: 0.3269rem;
+        font-weight: bold;
+      }
+
+      .venue p {
+        display: inline;
+      }
+
+      .venue__maxHeight{
+        max-height: 2.6em;
+      }
+
+      .additionalInf {
+        margin-top: 0.1rem;
+        font-size: 0.3527rem;
+        font-weight: 300;
+      }
+
+      .additionalInf__maxHeight {
+        max-height: 1.3em;
+      }
+
+      @media screen and (min-width: 1120px) {
+        .secondary {
+          margin-bottom: 0.3rem;
+        }
+
+        .additionalInf {
+          margin-top: 0.11rem;
+          font-size: 0.35rem;
+          word-spacing: 0.02rem;
+        }
+
+        .venue {
+          font-size: 0.333rem;
+          margin-top: 0.18rem;
+        }
+
+        .date {
+          font-size: 0.465rem;
+        }
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 0.0467rem solid #fff;
+        margin: 0 0.835rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.52rem;
+      }
+
+      .footer__col {
+        width: 35%;
+        font-size: 0.3223rem;
+        letter-spacing: 0.02102rem;
+        line-height: 1.4em;
+      }
+
+      .u-fontFamily {
+        font-family: "Frutiger 65";
+        font-size: 0.25726rem;
+      }
+
+      .footer__col__maxHeight {
+        max-height: 4.3em;
+      }
+
+      .footer__col--out {
+        width: 53.7%;
+        text-align: right;
+        line-height: 0.8em;
+      }
+
+      .info__label {
+        margin-bottom: 0.1168rem;
+        font-size: 0.2616rem;
+        letter-spacing: 0.01167rem;
+        word-spacing: -0.02802rem;   
+      }
+
+      .info__label__maxHeight{
+        max-height: 1.5em;
+      }
+
+      .info {
+        font-size: 0.2686rem;
+        font-weight: bold;
+        line-height: 1.4em;
+        letter-spacing: -0.002335rem;
+        margin-bottom: 0.035rem;
+      }
+
+      .info a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .info__maxHeight {
+        max-height: 3em; /* Temporary solution until we decide what to do with the line breaking email */
+      }
+
+      @media screen and (min-width: 1120px) {
+        .footer {
+          padding-top: 0.305rem;
+          padding-bottom: 0.42rem;
+        }
+
+        .footer__col {
+          font-size: 0.31rem;
+          letter-spacing: 0.005rem;
+          line-height: 1.17em;
+        }
+
+        .footer__col--out {
+          margin-bottom: 0.15rem;
+        }
+
+        .u-fontFamily p:first-child {
+          margin-top: 0.11rem;
+        }
+
+        @media screen and (min-width: 1120px) {           
+          .u-fontFamily p:first-child {
+            margin-top: 0.11rem;
+          }
+        }
+
+        .info {
+          font-size: 0.273rem;
+        }
+
+        .info__label {
+          margin-bottom: 0.05rem;
+          font-size: 0.267rem;
+        }
+      }
+      
+      .logoAlt {
+        width: 2.7561rem;
+        margin-top: 0.4438rem;
+        z-index: 1;
+    	position: relative;
+        left: 0.85rem;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="{{LCTpwi_headline_size}} {{{LCTpwi_event-name}}} {{{LCTpwi_presenter-name}}}" class="{{ placeholder-toggle }}">    
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit">
+
+          <div class="posterSection posterSection--top">
+            <img src="{{ account.logos.reversed }}" class="logoMain" />
+
+            <div  class="body__maxHeight">
+              <div class="check-overflow">            
+                <div class="body">
+                  <div class="main">
+                    {{#LCTpwi_event-name}}
+                    <div class="heading">
+                      <div style="font-size: {{LCTpwi_headline_size}}{{^LCTpwi_headline_size}}100{{/LCTpwi_headline_size}}%; line-height: 1em;">
+                        <div style="max-height: 3.5rem;">
+                          <div class="check-overflow">
+                            {{{LCTpwi_event-name}}}
+                          </div><!-- end check-overflow -->
+                        </div><!-- end max-height -->
+                      </div><!--end font-size-->
+                    </div><!-- end heading-->
+                    {{/LCTpwi_event-name}}
+                    {{#LCTpwi_subheading}}
+                    <div class="mainSubheading">
+                      <div style="font-size: {{LCTpwi_subheading_size}}%; line-height: 1.1em;">
+                        {{{LCTpwi_subheading}}}
+                      </div><!-- end font-size -->
+                    </div><!--end mainSubheading-->
+                    {{/LCTpwi_subheading}}
+                    <div class="subheading">
+                      {{#LCTpwi_presenter-name}}
+                      <div class="subheading__name">
+                        <div style="max-height: 2em;">
+                          <div class="check-overflow">
+                            {{{LCTpwi_presenter-name}}}
+                          </div><!-- end check-overflow -->
+                        </div><!-- end max-height -->
+                      </div><!-- end subheding__name -->
+                      {{/LCTpwi_presenter-name}}
+                      {{#LCTpwi_presenter-description}}
+                      <div class="subheading__description">
+                        <div style="max-height: 3.7em;">
+                          <div class="check-overflow">
+                            {{{LCTpwi_presenter-description}}}
+                          </div><!-- end check-overflow -->
+                        </div><!-- end max-height -->
+                      </div><!-- end subheading__description -->
+                      {{/LCTpwi_presenter-description}}
+                    </div><!-- end subheading -->
+                  </div><!-- end main -->
+                  <div class="secondary">
+                    {{#LCTpwi_date}}
+                    <div class="date">
+                      <div class="date__maxHeight">
+                        <div class="check-overflow">
+                          {{{LCTpwi_date}}}
+                        </div><!-- end check-overflow -->
+                      </div><!-- end date__maxHeight -->
+                    </div><!-- end date -->
+                    {{/LCTpwi_date}}
+                    {{#LCTpwi_venue}}
+                    <div class="venue">
+                      <div class="venue__maxHeight">
+                        <div class="check-overflow">
+                          VENUE {{{LCTpwi_venue}}}
+                        </div><!-- end check-overflow -->
+                      </div><!-- end venue__maxHeight -->
+                    </div><!-- end venue -->
+                    {{/LCTpwi_venue}}
+                    {{#LCTpwi_additional-notes}}
+                    <div class="additionalInf">
+                      {{{LCTpwi_additional-notes}}}
+                    </div><!--end  aditionalInfo -->
+                    {{/LCTpwi_additional-notes}}
+                  </div><!-- end secondary -->
+                </div><!-- end body -->
+              </div><!-- end check-overflow -->
+            </div><!-- end body__maxHeight -->
+            <div class="footer">
+              <div class="footer__col u-fontFamily">
+                <div class="footer__col__maxHeight">
+                  <div class="check-overflow">
+                    {{{LCTpwi_department-name-event-series}}}
+                  </div><!-- end check-overflow -->
+                </div><!-- end info__label__maxHeight -->
+              </div><!-- end footer__col-->
+              <div class="footer__col footer__col--out">
+                {{#LCTpwi_audience}}    
+                <div class="info__label">
+                  <div class="info__label__maxHeight">
+                    <div class="check-overflow">
+                      {{{LCTpwi_audience}}}                  
+                    </div><!-- end check-overflow -->
+                  </div><!-- end info__label__maxHeight -->
+                </div><!-- end info__label -->
+                {{/LCTpwi_audience}}   
+                {{#LCTpwi_more-info}}
+                <div class="info">
+                  <div class="info__maxHeight">
+                    <div class="check-overflow">
+                      {{{LCTpwi_more-info}}}
+                    </div><!-- end check-overflow -->
+                  </div><!-- end info__maxHeight -->                
+                </div><!-- end info -->
+                {{/LCTpwi_more-info}}
+              </div><!-- end footer__col--out -->
+            </div><!-- end footer -->
+          </div><!-- end posterSection -->
+          <div class="posterSection posterSection--bottom">
+            {{#logo-alt}}
+            <img src="{{{logo-alt}}}" class="logoAlt">
+            {{/logo-alt}}
+            <div class="repoImg">{{{LCTpwi_image}}}</div>
+            
+            
+          </div><!-- end posterSection -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+      placeholderControler();
+
+    </script>
+
+
+  </body>
+</html>
