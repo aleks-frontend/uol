@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css');
+
+      :root {
+        --white: #fff;
+        --yellow: #fcac17;
+      }
+
+
+      html {
+        font-family: 'Frutiger 65';
+        font-size: 11pt;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .container {
+        display: flex;
+      }
+
+      .main {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 68.6pt 58.2pt 68.9pt 70pt;
+      }
+
+      .layout--sports-tv-no-image .main {
+        padding: 68.6pt 67.2pt 68.9pt 70pt;
+      }
+
+      .format--f1140x820 .main {
+        padding: 54.6pt 31.2pt 53pt 39pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .main {
+        padding: 54.6pt 39.2pt 53pt 39pt;
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-top: 98pt;
+        padding-bottom: 12pt;
+        border-bottom: 4pt solid var(--white); 
+      }
+
+      .format--f1140x820 .content {
+        padding-top: 68pt;
+        padding-bottom: 8pt;
+        border-bottom: 2.6pt solid var(--white);
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .content {
+        padding-top: 78pt;
+      }
+
+      .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 212pt;
+      }
+
+      .format--f1140x820 .logo {
+        display: none;
+      }
+
+      .logoSupporting {
+        width: auto;
+        max-width: 224pt;
+        max-height: 100pt;
+        margin-top: 19.7pt;
+      }
+
+      .layout--sports-tv-no-image .logoSupporting {
+        margin-top: 21pt;
+      }
+
+      .format--f1140x820 .logoSupporting {
+        margin-top: 37.3pt;
+        max-width: 151pt;
+        max-height: 67pt;
+      }
+      .layout--sports-tv-no-image.format--f1140x820 .logoSupporting {
+        margin-top: 18.2pt;
+        max-width: 151pt;
+        max-height: 74pt;
+      }
+
+      .section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+      }
+
+      .section__wrapper {
+        flex: 1;
+      }
+
+      .heading {
+        position: relative;
+        margin-bottom: 20pt;
+        font-size: 57pt;
+      }
+
+      .layout--sports-tv .heading {
+        max-height: 230px;
+      }
+
+      .layout--sports-tv.format--f1140x820 .heading {
+        max-height: 172px;
+      }
+
+      .layout--sports-tv-event .heading {
+        max-height: 236px;
+      } 
+
+      .layout--sports-tv-event.format--f1140x820 .heading {
+        max-height: 170px;
+      }
+
+      .layout--sports-tv-no-image .heading {
+        margin-bottom: 7pt;
+        max-height: 464px;
+      }
+
+      .format--f1140x820 .heading {
+        margin-bottom: 11.5pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .heading {
+        margin-bottom: 9.5pt;
+      }
+
+      .heading h1 {
+        font-size: 1em;
+        line-height: 0.9em;     
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1.5pt;
+        color: var(--yellow);
+        font-family: 'Frutiger';
+        font-weight: 900;
+      }
+
+      .layout--sports-tv-no-image .heading h1 {
+        font-size: 1.94em;
+        line-height: 0.95em;
+      }
+
+      .format--f1140x820 .heading h1 {
+        font-size: 0.73em;
+        line-height: 0.93em;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .heading h1 {
+        font-size: 1.47em;
+      }
+
+      .copy {
+        margin-bottom: 43pt;
+        max-height: 168pt;
+        font-size: 22pt;
+      }
+
+      .copy strong {
+        font-family: 'Frutiger 65';
+        font-weight: bold;
+      }
+
+      .format--f1140x820 .copy {
+        max-height: 130pt;
+      }
+
+      .layout--sports-tv-event .copy {
+        max-height: 90pt;
+      }
+      
+      .format--f1920x1080.layout--sports-tv-event .copy {
+        margin-bottom: 29pt;
+      }
+      
+      .format--f1140x820.layout--sports-tv .copy {
+        margin-bottom: 41pt;
+      }
+
+      .format--f1140x820.layout--sports-tv-event .copy {
+        max-height: 68pt;
+        margin-bottom: 27pt;
+      }
+
+      .layout--sports-tv-no-image .copy {
+        max-height: 160pt;
+      }
+      
+      .format--f1920x1080.layout--sports-tv-no-image .copy {
+        margin-bottom: 18pt;
+      }
+
+      .format--f1140x820.layout--sports-tv-no-image .copy {
+        max-height: 123pt;
+        margin-bottom: 15pt;
+      }
+
+      .copy p {
+        font-size: 22pt;
+        line-height: 1.25em;
+        font-family: 'Frutiger 55 Roman';
+        letter-spacing: -0.7pt;
+      }
+
+      .layout--sports-tv-no-image .copy p {
+        font-size: 29.7pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .copy p {
+        font-size: 22.3pt;
+        letter-spacing: -0.3pt;
+      }
+
+      .format--f1140x820 .copy p {
+        font-size: 16.2pt;
+        letter-spacing: -0.3pt;
+      }
+
+      .eventDetails__container {
+        max-height: 113px;
+        font-size: 20pt;
+        text-align: right;
+      }
+
+      .layout--sports-tv .eventDetails__container,
+      .layout--sports-tv-no-image .eventDetails__container {
+        display: none;
+      }
+
+      .format--f1140x820 .eventDetails__container {
+        display: flex;
+        flex-direction: column;
+        max-height: 86px;
+      }
+
+      .eventDetails {
+        font-size: 23.2pt;
+        font-family: 'Frutiger 65';
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .format--f1140x820 .eventDetails {
+        font-size: 17.2pt;
+      }
+
+      .eventDetails--address {
+        font-size: 17.7pt;
+      }
+
+      .format--f1140x820 .eventDetails--address {
+        margin-top: 3pt;
+        font-size: 13.1pt;
+      }
+
+      .contant__container {}
+
+      .contact__text {
+        font-family: 'Frutiger 55 Roman';
+        font-size: 17pt;
+        line-height: 1.2em;
+        text-align: right;
+      }
+
+      .layout--sports-tv-no-image .contact__text {
+        font-size: 25.7pt;
+      }
+
+      .layout--sports-tv-event .contact__text {
+        margin-top: 19pt;
+      }
+
+      .layout--sports-tv-event.format--f1140x820 .contact__text {
+        margin-top: 15pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .contact__text {
+        font-size: 19.9pt;
+      } 
+
+      .format--f1140x820 .contact__text {
+        font-size: 12.4pt;
+      }
+
+      .contact__container {
+        max-height: 90px;
+        font-size: 20pt;
+        {{^UOL_supporting-logo--sts}}margin-bottom: 15pt;{{/UOL_supporting-logo--sts}}
+      }
+
+      .format--f1140x820 .contact__container {
+        max-height: 70px;
+      }
+
+      .layout--sports-tv-no-image .contact__container {
+        margin-top: 5pt;
+        max-height: 100pt;
+        font-size: 30pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .contact__container {
+        max-height: 70pt;
+      }
+
+      .contact {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .contact__item {
+        display: flex;
+        margin-left: 7pt;
+        align-items: baseline;
+      }
+
+      .contact__label {
+        font-family: 'Frutiger 65';
+        font-size: 17pt;
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .layout--sports-tv-no-image .contact__label {
+        font-size: 27.8pt;
+      }
+
+      .format--f1140x820 .contact__label {
+        font-size: 12.5pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .contact__label {
+        font-size: 20.9pt;
+        letter-spacing: 0.3pt;
+      }
+
+      .contact__value {
+        font-family: 'Frutiger 65';
+        font-size: 17pt;
+        line-height: 1.2em;
+        font-weight: bold;
+        letter-spacing: 0.7pt;
+      }
+
+      .layout--sports-tv-no-image .contact__value {
+        font-size: 27.8pt;
+        letter-spacing: 0.1pt;
+      }
+
+      .format--f1140x820 .contact__value {
+        font-size: 12.5pt;
+        letter-spacing: 0.3pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .contact__value {
+        font-size: 20.9pt;
+        letter-spacing: 0.3pt;
+      }
+
+      .social {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1;
+        margin-top: 14pt;
+      }
+
+      .layout--sports-tv-no-image .social {
+        margin-top: 12pt;
+      }
+
+      .format--f1140x820 .social {
+        margin-top: 11pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .social {
+        margin-top: 8pt;
+      }
+
+      .social__item {
+        display: flex;
+        margin-left: 25pt;
+        align-items: flex-end;
+      }
+
+      .social__item:first-child {
+        margin-left: 0;
+      }
+
+      .layout--sports-tv-no-image .social__item {
+        margin-left: 24pt;
+      }
+
+      .format--f1140x820 .social__item {
+        margin-left: 16pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .social__item {
+        margin-left: 19pt;
+      }
+
+      .social__icon {
+        width: 22pt;
+        height: 22pt;
+        object-position: bottom right;
+        object-fit: contain;
+      }
+
+      .layout--sports-tv-no-image .social__icon {
+        width: 29pt;
+        height: 29pt;
+      }
+
+      .format--f1140x820 .social__icon {
+        width: 14pt;
+        height: 14pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .social__icon {
+        width: 22pt;
+        height: 22pt;
+      }
+
+      .social__value {
+        margin-left: 9pt;
+        font-family: 'Frutiger 65';
+        font-size: 14pt;
+        line-height: 1.2em;
+        font-weight: bold;
+        letter-spacing: 0.5pt;
+        margin-bottom: -4pt;
+      }
+
+      .layout--sports-tv-no-image .social__value {
+        margin-left: 11.2pt;
+        margin-bottom: -7pt;
+        font-size: 21.2pt;
+      }
+
+      .format--f1140x820 .social__value {
+        margin-left: 6pt;
+        margin-bottom: -3.1pt;
+        font-size: 9.8pt;
+        letter-spacing: 0.3pt;
+      }
+
+      .layout--sports-tv-no-image.format--f1140x820 .social__value {
+        margin-left: 7.3pt;
+        font-size: 15.1pt;
+        letter-spacing: 0.7pt;
+      }
+
+      .bgImage__container {
+        width: 942pt;
+        position: relative;
+      }
+
+      .bgImage--alt {
+        height: 100%;
+      } 
+
+      .bgImage--alt img {
+        height: 100%;
+      }
+
+      .format--f1140x820 .bgImage__container {
+        width: 542pt;
+      }
+
+      .layout--sports-tv-no-image .bgImage__container {
+        display: none;
+      }
+
+      .cornerMark {
+        position: absolute;
+        width: 0.75rem;
+        height: 1.26rem;
+      }
+
+      .format--f1140x820 .cornerMark {
+        width: 0.62rem;
+        height: 1.02rem;
+      }
+
+      .cornerMark--topRight {
+        top: 0;
+        right: 0;
+        border-top: 0.25rem solid var(--white);
+        border-right: 0.25rem solid var(--white);
+      }
+
+      .format--f1140x820 .cornerMark--topRight {
+        border-top: 0.17rem solid var(--white);
+        border-right: 0.19rem solid var(--white);
+      }
+
+      .cornerMark--bottomLeft {
+        bottom: 0.21rem;
+        left: 0;
+        border-bottom: 0.24rem solid var(--white);
+        border-left: 0.25rem solid var(--white);
+      }
+
+      .format--f1140x820  .cornerMark--bottomLeft {
+        border-bottom: 0.20rem solid var(--white);
+        border-left: 0.2rem solid var(--white);
+      }
+
+      .bgImage__img {
+        height: 100%;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         layout--{{{UOL_layout--sts}}}
+                                         format--{{{UOL_format--sts}}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="main">
+            <div class="backgroundImage"><div class="reposition-fix">{{{UOL_front-background-image--sts}}}</div></div><!--backgroundImage-->
+            <div class="content">
+              <div class="cornerMark cornerMark--topRight"></div><!--cornerMark-->
+              <div class="cornerMark cornerMark--bottomLeft"></div><!--cornerMark-->
+              <img class="logo" src="{{{account.logos.reversed}}}">
+              <div class="section__wrapper">
+                <div class="section section--primary" data-max-height="dynamic">
+                  {{#UOL_heading--sts}}
+                  <div class="heading u-heading-patch" data-max-height="css"><div class="heading__inner" style="font-size: {{UOL_heading-size--sts}}%;">{{{UOL_heading--sts}}}</div></div><!--heading-->
+                  {{/UOL_heading--sts}}
+
+                  <div class="copy" data-max-height="css">{{{UOL_copy--sts}}}{{^UOL_copy--sts}}Information goes,here, up to 3 lines of text{{/UOL_copy--sts}}</div><!--copy-->
+
+                </div><!--section--primary-->
+                <div class="eventDetails__container" data-max-height="css">
+                  {{#spreadsheet.BD_event-details--sts}}
+                  <div class="eventDetails">{{{day}}}&nbsp;{{{date}}}&nbsp;{{{month}}}</div><!--eventDetails-->
+                  <div class="eventDetails">{{{time}}}</div><!--eventDetails-->
+                  <div class="eventDetails eventDetails--address">{{{address}}}</div><!--eventDetails-->
+                  {{/spreadsheet.BD_event-details--sts}}
+                </div><!--eventDetails__container-->
+                <div class="contact__text" data-max-line="1">{{{UOL_contact-copy--sts}}}</div><!--contact__label-->
+                <div class="contact__container" data-max-height="css">
+                  {{#spreadsheet.BD_contact-details--sts}}
+                  <div class="contact">
+                    <div class="contact__item">
+                      {{#name}}
+                      <div class="contact__label"></div><!--contact__label-->
+                      {{/name}}
+                      <div class="contact__value">{{{name}}}</div><!--contact__value-->
+                    </div><!--contact__item-->
+                    {{#email}}
+                    <div class="contact__item">
+                      <div class="contact__label">e:&nbsp  </div><!--contact__label-->
+                      <div class="contact__value">{{{email}}}</div><!--contact__value-->
+                    </div><!--contact__item-->
+                    {{/email}}
+                    {{^web-address}}
+                    {{#telephone}}
+                    <div class="contact__item">
+                      <div class="contact__label">t:&nbsp</div><!--contact__label-->
+                      <div class="contact__value">{{{telephone}}}</div><!--contact__value-->
+                    </div><!--contact__item-->
+                    {{/telephone}}
+                    {{/web-address}}
+                    {{#web-address}}
+                    <div class="contact__item">
+                      <div class="contact__label">w:&nbsp</div><!--contact__label-->
+                      <div class="contact__value">{{{web-address}}}</div><!--contact__value-->
+                    </div><!--contact__item-->
+                    {{/web-address}}
+                  </div><!--contact-->
+                  <div class="social">
+                    {{#facebook}}
+                    <div class="social__item">
+                      {{#facebook}}
+                      <img class="social__icon" src="https://files.outfit.io/media_library_items/117456/FB%2520icon.svg"><!--social__icon-->
+                      {{/facebook}}
+                      <div class="social__value">{{{facebook}}}</div><!--social__value-->
+                    </div><!--social__item-->
+                    {{/facebook}}
+                    {{#twitter}}
+                    <div class="social__item">
+                      {{#twitter}}
+                      <img class="social__icon" src="https://files.outfit.io/media_library_items/117457/Twitter%2520Icon.svg"><!--social__icon-->
+                      {{/twitter}}
+                      <div class="social__value">{{{twitter}}}</div><!--social__value-->
+                    </div><!--social__item-->
+                    {{/twitter}}
+                    {{#instagram}}
+                    <div class="social__item">
+                      {{#instagram}}
+                      <img class="social__icon" src="https://files.outfit.io/media_library_items/117455/Instagram%2520Icon.svg"><!--social__icon-->
+                      {{/instagram}}
+                      <div class="social__value">{{{instagram}}}</div><!--social__value-->
+                    </div><!--social__item-->
+                    {{/instagram}}
+                  </div><!--social-->
+                  {{/spreadsheet.BD_contact-details--sts}}
+                </div><!--contact__container-->
+              </div><!--section__wrapper-->  
+              <div class="section section--secondary">
+                <img class="logoSupporting" src="{{{UOL_supporting-logo--sts}}}"><!--logo-->
+              </div><!--section--secondary-->
+            </div><!--content-->
+          </div><!--main-->
+          <div class="bgImage__container">
+            <div class="bgImage"><div class="reposition-fix">{{{UOL_feature-image--sts}}}</div></div><!--bgImage-->
+            {{^UOL_feature-image--sts}}
+            <div class="bgImage bgImage--alt"><img src="https://files.outfit.io/media_library_items/117459/Background.jpg"></div><!--bgImage-->
+            {{/UOL_feature-image--sts}}
+          </div><!--bgImage__container-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>

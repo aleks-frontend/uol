@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+
+
+      :root {
+        --white: #fff;
+        --yellow: #f6af1b;
+        --red: {{{account.colors.primary-red-update}}};
+        --black: #000;
+      }
+
+      html {
+        font-family: 'Frutiger 65';
+        font-size: 11pt;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage--noImage {
+        background: url(https://files.outfit.io/media_library_items/117459/Background.jpg) center no-repeat;
+        background-size: cover;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fit--secondary { padding: 1.1rem 0.9rem; }
+
+      .main {
+        display: flex;
+        flex: 1;
+        padding: 1.15rem 0.85rem;
+      }
+
+      .layout--standardWithImage .main,
+      .layout--event .main { 
+        padding-bottom: 0.6rem; 
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .content--secondary {
+        padding-bottom: 0.3rem;
+        border-bottom: 0.03rem solid var(--black); 
+      }
+
+      .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3.05rem;
+        z-index: 1;
+      }
+
+      .logo--support {
+        position: relative;
+        top: unset;
+        left: unset;
+        align-self: flex-end;
+        width: auto;
+        max-height: 1.4rem;
+      }
+
+      .logo--secondary { width: 3.3rem; }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 7.6rem;
+        padding: 0 0.05rem 0.07rem 3rem;
+        border-bottom: 0.03rem solid var(--white);
+      }
+
+      .layout--event .header {
+        margin-bottom: 0.2rem;
+        justify-content: flex-start;
+        height: 7.8rem;
+        padding-top: 1.76rem;
+        padding-bottom: 0.35rem;
+      }
+
+      .layout--largeText .header {
+        height: 5.3rem;
+        padding-left: 3rem;
+      }
+
+      .layout--standardWithImage .header {
+        height: 5.1rem;
+      }
+
+      .cornerMark { 
+        position: absolute;
+        width: 0.6rem;
+        height: 1rem;
+      }
+
+      .cornerMark--topRight {
+        top: 0;
+        right: 0;
+        border-top: 0.2rem solid var(--white);
+        border-right: 0.2rem solid var(--white);
+      }
+
+      .cornerMark--bottomLeft {
+        bottom: 0.2rem;
+        left: 0;
+        border-bottom: 0.2rem solid var(--white);
+        border-left: 0.2rem solid var(--white);
+      }
+
+      .cornerMark--topRightBlack {
+        border-top: 0.2rem solid var(--black);
+        border-right: 0.2rem solid var(--black);
+      }
+
+      .cornerMark--bottomLeftBlack {
+        border-bottom: 0.2rem solid var(--black);
+        border-left: 0.2rem solid var(--black);
+      }
+
+      .heading {
+        font-size: 1.48rem;
+        text-align: right;
+        color: var(--yellow);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: 'Frutiger';
+        font-weight: 900;
+      }
+
+      .layout--largeText .heading { text-align: left; }      
+      .layout--standardWithImage .heading { font-size: 1.38rem; }
+
+      .layout--event .heading { 
+        margin-bottom: 0.3rem;
+        font-size: 1.37rem;
+      }
+
+      .body {
+        flex: 1;
+        padding: 0.5rem 0rem 0.5rem 4rem;
+      }
+
+      .layout--largeText .body { padding: 0.6rem 0rem 0.4rem 3rem; }
+      .layout--event .body { display: none; }
+
+      .body--secondary {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 0 0;
+      }
+
+      .copy__container,
+      .layout--event .copy--secondary {
+        display: none;
+      }
+
+      .copy--primary { max-height: 1.25rem; }
+      .copy--secondary { max-height: 5.9rem; }
+      .layout--largeText .copy--secondary { max-height: 9.5rem; }
+      .layout--standardWithImage .copy--secondary { max-height: 2rem; }
+
+      .layout--event .copy__container { display: block; }
+
+      .copy__container { flex: 1; }
+
+      .copy p {
+        font-size: 0.4rem;
+        line-height: 1.35em;
+        text-align: right;
+        font-family: 'Frutiger 55 Roman';
+      }
+
+      .layout--largeText .copy p { 
+        font-size: 0.41rem;
+        line-height: 1.25em;
+        text-align: left;
+        font-family: 'Frutiger 45';
+      }
+
+      .layout--standardWithImage .copy p { font-size: 0.39rem; }
+
+      .layout--largeText .copy p { margin-bottom: 0.2rem; }
+      .layout--largeText .copy p:last-child { margin-bottom: 0; }
+
+
+      .footer { display: flex; }
+
+      .content--secondary .footer { color: var(--black); }
+
+      .logo__container { 
+        display: flex;
+        width: 4rem;
+      }
+
+      .contact__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        text-align: right;
+      }
+
+      .contact__text { margin-bottom: 0.1rem; }
+
+      .layout--standard .contact__text { margin-bottom: 0.05rem; }
+      .content--secondary .contact__text { margin-bottom: 0; }
+
+      .contact__label {
+        font-size: 0.248rem;
+        line-height: 1.2em;
+        font-family: 'Frutiger 45';
+      }
+
+      .contact__text {
+        font-size: 0.25rem;
+        line-height: 1.2em;
+        font-family: 'Frutiger 55 Roman';
+      }
+
+      .content--secondary .contact__label,
+      .content--secondary .contact__text {
+        font-size: 0.285rem;
+      }
+
+      .contact__label { font-weight: bold; }
+
+      .contact { margin-bottom: 0.28rem; }
+
+      .layout--textLarge .contact { margin-bottom: 0.3rem; }
+      .layout--event .contact { margin-bottom: 0.33rem; }
+      .social { max-height: 0.5rem; }
+
+      .fit--secondary .social { max-height: 0.7rem; }
+
+      .contact,
+      .social {
+        font-size: 0.274rem;
+      }
+
+      .content--secondary .contact,
+      .content--secondary .social {
+        font-size: 0.3rem;
+      }
+
+      .social__icon { height: 0.35rem; }   
+
+      .content--secondary .social__icon { 
+        height: 0.43rem;
+        margin-right: 0.1rem;
+      }    
+
+      .social__item + .social__item { margin-left: 0.18rem; }
+      .content--secondary .social__item + .social__item { margin-left: 0.35rem; }
+
+      .contact__item,
+      .contact__label,
+      .contact__value,
+      .social__item,
+      .social__icon,
+      .social__value { 
+        display: inline-block;
+      }
+
+      .backgroundImage__container {
+        position: relative;
+        display: none;
+        height: 8.9rem;
+      }
+
+      .layout--standardWithImage .backgroundImage__container,
+      .layout--event .backgroundImage__container { 
+        display: block; 
+      }
+
+      .eventDetails__container { 
+        display: none; 
+        text-align: right;
+      }   
+
+      .eventDetails { font-size: 0.45rem; }
+
+      .layout--event .eventDetails__container { display: block; }
+
+      .eventDetails--address {
+        margin-top: 0.15rem;
+        font-size: 0.32rem;
+      }
+
+      .featureImage { 
+        position: relative;
+        margin-bottom: 0.3rem;
+        height: 5.05rem;
+      }
+
+      .featureImage--secondary { margin-bottom: 0.54rem; }
+
+      .table__container { flex: 1;     margin-bottom: 0.2em;}
+
+      .table {
+        display: grid;
+        grid-template-columns: 2.05rem 3.06rem 3.05rem 4.16rem;
+        grid-template-rows: 0.9rem;
+        grid-auto-rows: 1.13rem;
+      }
+
+      .table__cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center; 
+        padding: 0.05rem;
+        font-size: 0.3rem;
+        color: var(--black);
+        border-left: 1px solid var(--black);
+        border-top: 1px solid var(--black);
+      }
+
+      .table__cell:nth-child(4n) {
+        border-right: 1px solid var(--black);
+      }
+
+      .table__cell:nth-last-child(-n + 4) {
+        border-bottom: 1px solid var(--black);
+      }
+
+      .table__cell--head {
+        font-size: 0.3rem;
+        color: var(--white);
+        text-transform: uppercase;
+        background-color: var(--red);
+      }
+
+      .table__cell--highlight { background-color: #ffe3b8 }
+
+      .info {
+        margin-bottom: 0.05rem;
+        font-size: 0.185rem;
+        font-weight: bold;
+        color: var(--black);
+      }
+
+      .text__container { 
+        margin-bottom: 0.7rem; 
+        flex: 1;
+      }
+
+      .text h3 { 
+        font-size: 0.36rem;
+        color: var(--yellow);
+      }
+
+      .text p,
+      .text {
+        font-size: 0.295rem;
+        line-height: 1.35em;
+        color: var(--black);
+      }
+
+      .text h3 + p { margin-top: 0.25rem; }
+      .text p + h3 { margin-top: 0.26rem; }
+      .text p + p { margin-top: 0.2rem; }
+
+      .u-hide-telephone .contact__item--telephone { display: none;}
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page layout--{{{UOL_front-layout--sp}}}">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="main">
+            <div class="backgroundImage">
+              <div class="reposition-fix">{{{UOL_front-background-image--sp}}}</div><!--reposition-fix-->
+            </div><!-- backgroundImage -->
+            <div class="content">
+              <img src="{{{account.logos.white-labelling-logo}}}" class="logo" />
+              <div class="header">
+                <div class="cornerMark cornerMark--topRight"></div> <!-- cornerMark -->
+                {{#UOL_heading--sp}}
+                <div class="heading" data-max-line="2">
+                  <div style="font-size: {{^UOL_heading-font-size--sp}}100{{/UOL_heading-font-size--sp}}{{UOL_heading-font-size--sp}}%; line-height: 0.9em;"> 
+                    {{{UOL_heading--sp}}}
+                  </div> <!-- heading__inner -->
+                </div> <!-- heading -->
+                {{/UOL_heading--sp}}
+
+                <div class="copy__container">
+                  <div class="copy copy--primary" data-max-height="css">{{{UOL_copy--sp}}}{{^UOL_copy--sp}}<span style="font-size: 0.4rem; line-height: 1.35em;text-align: right; font-family: 'Frutiger 55 Roman';">Information goes, here, up to 3 lines of text.{{/UOL_copy--sp}}</span></div> <!-- copy -->
+                </div> <!-- copy__container -->
+
+                {{#spreadsheet.UOL_event-details--sp}}
+                <div class="eventDetails__container">
+                  <div class="eventDetails" data-max-line="1">{{day}}&nbsp;{{date}}&nbsp;{{month}}&nbsp;{{time}}</div> <!-- eventDetails -->
+                  <div class="eventDetails eventDetails--address" data-max-line="1">{{address}}</div> <!-- eventDetails -->
+                </div> <!-- eventDetails__container -->
+                {{/spreadsheet.UOL_event-details--sp}}
+                <div class="cornerMark cornerMark--bottomLeft"></div> <!-- cornerMark -->
+              </div><!-- header -->
+              <div class="body">
+                <div class="copy copy--secondary" data-max-height="css">{{{UOL_copy--sp}}}{{^UOL_copy--sp}}<span style="font-size: 0.4rem; line-height: 1.35em;text-align: right; font-family: 'Frutiger 55 Roman';">Information goes, here, up to 3 lines of text.</span>{{/UOL_copy--sp}}</div> <!-- copy--secondary -->
+              </div> <!-- body -->
+              <div class="footer">
+                <div class="logo__container">
+                  {{#UOL_logo-support--sp}} <img src="{{{UOL_logo-support--sp}}}" class="logo logo--support"/>{{/UOL_logo-support--sp}}
+                </div> <!-- logo__container -->
+                <div class="contact__container">
+                  <div class="contact__text" data-max-line="1">{{{UOL_contact-copy--sp}}}</div> <!-- contact__label-->
+                  {{#spreadsheet.UOL_contact-details--sp}}
+                  <div class="contact {{#website}} u-hide-telephone {{/website}}" data-max-line="1">
+                    {{#name}}
+                    <div class="contact__item">
+                      <div class="contact__value">{{name}}</div> <!-- contact__value -->
+                    </div><!-- contact__item -->
+                    {{/name}}
+                    {{#email}}
+                    <div class="contact__item">
+                      <div class="contact__label"> e:</div> <!-- contact__label -->
+                      <div class="contact__value">{{email}}</div> <!-- contact__value -->
+                    </div><!-- contact__item -->
+                    {{/email}}
+                    {{#telephone}}
+                    <div class="contact__item contact__item--telephone">
+                      <div class="contact__label"> t:</div> <!-- contact__label -->
+                      <div class="contact__value">{{telephone}}</div> <!-- contact__value -->
+                    </div><!-- contact__item -->
+                    {{/telephone}}
+                    {{#website}}
+                    <div class="contact__item">
+                      <div class="contact__label"> w:</div> <!-- contact__label -->
+                      <div class="contact__value">{{website}}</div> <!-- contact__value -->
+                    </div><!-- contact__item -->
+                    {{/website}}
+                  </div> <!-- contact -->
+                  <div class="social" data-max-height="css">
+                    {{#facebook}}
+                    <div class="social__item">
+                      <img src="https://files.outfit.io/media_library_items/117456/FB%2520icon.svg" class="social__icon" /><!-- social__icon -->
+                      <div class="social__value">/{{facebook}}</div><!-- social__value -->
+                    </div><!-- social__item -->
+                    {{/facebook}}
+                    {{#twitter}}
+                    <div class="social__item">
+                      <img src="https://files.outfit.io/media_library_items/117457/Twitter%2520Icon.svg" class="social__icon" /><!-- social__icon -->
+                      <div class="social__value">@{{twitter}}</div><!-- social__value -->
+                    </div><!-- social__item -->
+                    {{/twitter}}
+                    {{#instagram}}
+                    <div class="social__item">
+                      <img src="https://files.outfit.io/media_library_items/117455/Instagram%2520Icon.svg" class="social__icon" /><!-- social__icon -->
+                      <div class="social__value">#{{instagram}}</div><!-- social__value -->
+                    </div><!-- social__item -->
+                    {{/instagram}}
+                  </div> <!-- social -->
+                  {{/spreadsheet.UOL_contact-details--sp}}
+                </div> <!-- contact__container -->
+              </div> <!-- footer -->
+            </div> <!-- content -->
+          </div> <!-- main -->
+          <div class="backgroundImage__container">
+            <div class="backgroundImage {{^UOL_feature-image--sp}}backgroundImage--noImage{{/UOL_feature-image--sp}}">
+              <div class="reposition-fix">{{{UOL_feature-image--sp}}}</div><!--reposition-fix-->
+            </div> <!-- backgroundImage -->
+          </div> <!-- backgroundImage__container -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{#collection.UOL_back-page--sp.length}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--secondary">
+          <div class="content content--secondary">
+            <div class="cornerMark cornerMark--topRight cornerMark--topRightBlack"></div> <!-- cornerMark -->
+            <div class="body body--secondary">
+              <img src="{{{account.logos.primary}}}" class="logo logo--secondary" />
+              {{#collection.UOL_back-page--sp}}
+              {{#block.UOL_table-page--sp}}
+              {{#UOL_feature-image-2--sp}}
+              <div class="featureImage">
+                <div class="reposition-fix">{{{UOL_feature-image-2--sp}}}</div> <!-- reposition-fix -->
+              </div> <!-- featureImage -->
+              {{/UOL_feature-image-2--sp}}
+              <div class="table__container">
+                <div class="table" data-max-height="370">
+                  <div class="table__cell table__cell--head"><div data-max-line="1" style="max-height: 60px;">{{{UOL_table-heading-1--sp}}}</div></div> <!-- table__cell--head -->
+                  <div class="table__cell table__cell--head"><div data-max-line="1" style="max-height: 60px;">{{{UOL_table-heading-2--sp}}}</div></div> <!-- table__cell--head -->
+                  <div class="table__cell table__cell--head"><div data-max-line="1" style="max-height: 60px;">{{{UOL_table-heading-3--sp}}}</div></div> <!-- table__cell--head -->
+                  <div class="table__cell table__cell--head"><div data-max-line="1" style="max-height: 60px;">{{{UOL_table-heading-4--sp}}}</div></div> <!-- table__cell--head -->
+                  {{#spreadsheet.UOL_table--sp}}
+                  <div class="table__cell table__cell--highlight"><div data-max-height="60">{{{day}}}</div></div><!--table__cell-->
+                  <div class="table__cell"><div data-max-height="60">{{{class}}}</div></div><!--table__cell-->
+                  <div class="table__cell"><div data-max-height="60">{{{time}}}</div></div><!--table__cell-->
+                  <div class="table__cell"><div data-max-height="60">{{{location}}}</div></div><!--table__cell-->
+                  {{/spreadsheet.UOL_table--sp}}
+                </div> <!-- table -->
+              </div> <!-- table__container -->
+              {{#UOL_copy-2--sp}}<div class="info" data-max-line="1">{{{UOL_copy-2--sp}}}</div> <!-- info -->{{/UOL_copy-2--sp}}
+              {{/block.UOL_table-page--sp}}
+              {{#block.UOL_text-page--sp}}
+
+              <div class="featureImage featureImage--secondary">
+                <div class="reposition-fix">{{{UOL_feature-image-2--sp}}}{{^UOL_feature-image-2--sp}}<img src="https://files.outfit.io/media_library_items/117459/Background.jpg">{{/UOL_feature-image-2--sp}}</div> <!-- reposition-fix -->
+              </div> <!-- featureImage -->
+
+              <div class="text__container">
+                <div class="text" data-max-height="335">{{{UOL_text--sp}}}{{^UOL_text--sp}}Lorem ipsum dolor sit amet, pri elitr viderer dissentiet te, mel id prodesset theophrastus.{{/UOL_text--sp}}</div> <!-- text -->
+              </div> <!-- text__container -->
+              {{/block.UOL_text-page--sp}}
+              {{/collection.UOL_back-page--sp}}
+            </div> <!-- body--secoondary --> 
+            <div class="footer">
+              <div class="contact__container">
+                <div class="contact__text" data-max-line="1">{{{UOL_contact-copy--sp}}}</div> <!-- contact__label-->
+                {{#spreadsheet.UOL_contact-details--sp}}
+                <div class="contact {{#website}} u-hide-telephone {{/website}}" data-max-line="1">
+                  {{#name}}
+                  <div class="contact__item">
+                    <div class="contact__value">{{name}}</div> <!-- contact__value -->
+                  </div><!-- contact__item -->
+                  {{/name}}
+                  {{#email}}
+                  <div class="contact__item">
+                    <div class="contact__label"> e:</div> <!-- contact__label -->
+                    <div class="contact__value">{{email}}</div> <!-- contact__value -->
+                  </div><!-- contact__item -->
+                  {{/email}}
+                  {{#telephone}}
+                  <div class="contact__item contact__item--telephone">
+                    <div class="contact__label"> t:</div> <!-- contact__label -->
+                    <div class="contact__value">{{telephone}}</div> <!-- contact__value -->
+                  </div><!-- contact__item -->
+                  {{/telephone}}
+                  {{#website}}
+                  <div class="contact__item">
+                    <div class="contact__label"> w:</div> <!-- contact__label -->
+                    <div class="contact__value">{{website}}</div> <!-- contact__value -->
+                  </div><!-- contact__item -->
+                  {{/website}}
+                </div> <!-- contact -->
+                <div class="social" data-max-height="css">
+                  {{#facebook}}
+                  <div class="social__item">
+                    <img src="https://files.outfit.io/media_library_items/117708/FB%2520icon%2520Black.svg" class="social__icon" /><!-- social__icon -->
+                    <div class="social__value">/{{facebook}}</div><!-- social__value -->
+                  </div><!-- social__item -->
+                  {{/facebook}}
+                  {{#twitter}}
+                  <div class="social__item">
+                    <img src="https://files.outfit.io/media_library_items/117709/Twitter%2520Icon%2520black.svg" class="social__icon" /><!-- social__icon -->
+                    <div class="social__value">@{{twitter}}</div><!-- social__value -->
+                  </div><!-- social__item -->
+                  {{/twitter}}
+                  {{#instagram}}
+                  <div class="social__item">
+                    <img src="https://files.outfit.io/media_library_items/117710/Instagram%2520Icon%2520black.svg" class="social__icon" /><!-- social__icon -->
+                    <div class="social__value">#{{instagram}}</div><!-- social__value -->
+                  </div><!-- social__item -->
+                  {{/instagram}}
+                </div> <!-- social -->
+                {{/spreadsheet.UOL_contact-details--sp}}
+              </div> <!-- contact__container -->
+            </div> <!-- footer -->
+            <div class="cornerMark cornerMark--bottomLeft cornerMark--bottomLeftBlack"></div> <!-- cornerMark -->
+          </div> <!-- content--secondary -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/collection.UOL_back-page--sp.length}}
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
