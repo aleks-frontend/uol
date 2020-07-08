@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --red: #c30430;
+        --grey: {{{account.colors.grey}}};
+        --blue: #0a2341;
+        --white: #fff;
+      }
+
+      html {
+        font-family: 'Frutiger 55 Roman';
+        font-size: 11pt;
+        line-height: 1.2em;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .backgroundImage {
+        background-size: cover;
+      }
+
+      .portrait .backgroundImage {
+        background-position: right;
+      }
+
+      .landscape.red.graphic-1 .backgroundImage,
+      .portrait.red.graphic-1 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123559/Cover-1-Red.jpg);
+      }
+     
+      .landscape.red.graphic-2 .backgroundImage,
+      .portrait.red.graphic-2 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123555/Cover-2-Red.jpg);
+      }
+
+      .landscape.red.graphic-3 .backgroundImage,
+      .portrait.red.graphic-3 .backgroundImage{
+        background-image: url(https://files.outfit.io/media_library_items/123552/Cover-3-Red.jpg);
+      }
+
+      .landscape.red.graphic-4 .backgroundImage,
+      .portrait.red.graphic-4 .backgroundImage{
+        background-image: url(https://files.outfit.io/media_library_items/123556/Cover-4-Red.jpg);
+      }
+
+      .landscape.red.graphic-5 .backgroundImage,
+      .portrait.red.graphic-5 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123548/Cover-5-Red.jpg);
+
+      }
+
+      .landscape.red.graphic-6 .backgroundImage,
+      .portrait.red.graphic-6 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123554/Cover-6-Red.jpg);
+      }
+
+      .landscape.red.graphic-7 .backgroundImage,
+      .portrait.red.graphic-7 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123547/Cover-7-Red.jpg);
+      }
+
+      .landscape.blue.graphic-1 .backgroundImage,
+      .portrait.blue.graphic-1 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123557/Cover-1-Blue.jpg);
+      }
+
+      .landscape.blue.graphic-2 .backgroundImage,
+      .portrait.blue.graphic-2 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123553/Cover-2-Blue.jpg);
+      }
+
+      .landscape.blue.graphic-3 .backgroundImage,
+      .portrait.blue.graphic-3 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123550/Cover-3-Blue.jpg);
+
+      }
+
+      .landscape.blue.graphic-4 .backgroundImage,
+      .portrait.blue.graphic-4 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123558/Cover-4-Blue.jpg);
+      }
+
+      .landscape.blue.graphic-5 .backgroundImage,
+      .portrait.blue.graphic-5 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123549/Cover-5-Blue.jpg);
+
+      }
+
+      .landscape.blue.graphic-6 .backgroundImage,
+      .portrait.blue.graphic-6 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123551/Cover-6-Blue.jpg);
+      }
+
+      .landscape.blue.graphic-7 .backgroundImage,
+      .portrait.blue.graphic-7 .backgroundImage {
+        background-image: url(https://files.outfit.io/media_library_items/123546/Cover-7-Blue.jpg);
+      }
+
+      .landscape .page--back {
+        display: none;
+      }
+
+      .portrait .fit--front {
+        padding: 1.2rem 0.85rem 1.06rem 0.85rem;
+      }
+
+      .landscape .fit--front {
+        padding: 1.76rem 0.67rem 0.87rem 0.7rem;
+      }
+
+      .fit--back {
+        padding: 2.35rem 10.35rem 12.86rem 0.85rem;
+      }
+
+      .red .fit--back {
+        background-color: var(--red);
+      }
+
+      .blue .fit--back {
+        background-color: var(--blue);
+      }
+
+      .wrapper {
+        display: flex;
+        position: relative;
+        height: 100%;
+      }
+
+      .wrapper__page {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .landscape .wrapper__page--primary {
+        width: 11.32rem;
+        padding-right: 25%;
+        padding-top: 0.18rem;
+      }
+
+      .landscape .wrapper__page--secondary {
+        flex: 1;
+      }
+
+      .portrait .wrapper__page--primary {
+        display: none;
+      }
+
+      .wrapper__page--secondary {
+        width: 100%;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        justify-content: center;
+        align-items: flex-end;
+        border-bottom: 0.03rem solid var(--white);
+        text-transform: uppercase;
+        text-align: right;
+      }
+
+      .portrait .header {
+        height: 4.12rem;
+        padding: 1.13rem 0rem 0rem 1rem;
+        text-transform: uppercase;
+      }
+
+      .landscape .header {
+        height: 2.58rem;
+        padding: 0.15rem 0rem 0rem 0.8rem;
+      }
+
+      .header:before, 
+      .header:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+      } 
+
+      .portrait .header:before, 
+      .portrait .header:after {
+        width: 0.57rem;
+        height: 0.94rem;
+      } 
+
+      .landscape .header:before, 
+      .landscape .header:after {
+        width: 0.45rem;
+        height: 0.789rem;
+      } 
+
+      .portrait .header:before {
+        border-top: 0.18rem solid var(--white);
+        border-right: 0.18rem solid var(--white);
+        top: 0.01rem;
+        right: 0.01rem;
+      }
+
+      .landscape .header:before {
+        border-top: 0.15rem solid var(--white);
+        border-right: 0.15rem solid var(--white);
+        top: -0.79rem;
+        right: 0.01rem;
+      }
+
+      .portrait .header:after {
+        border-bottom: 0.18rem solid var(--white);
+        border-left: 0.18rem solid var(--white);
+        bottom: 0.21rem;
+        left: 0.02rem;
+      }
+
+      .landscape .header:after {
+        border-bottom: 0.15rem solid var(--white);
+        border-left: 0.15rem solid var(--white);
+        bottom: 0.17rem;
+        left: 0.02rem;
+      }
+
+      .logo {
+        position: absolute;
+        font-size: 0;
+      }
+
+      .portrait .logo {
+        top: 0;
+        left: 0;
+        width: 3rem;
+      }
+
+      .portrait .logo--secondary {
+        width: 3rem;
+        left: 0.85rem;
+        top: 1.2rem;
+      }
+
+      .landscape .logo {
+        width: 2.44rem;
+        top: -0.8rem;
+        left: 0;
+      }
+
+
+      .portrait .heading1 {
+        max-height: 0.6rem;
+        margin-bottom: 0.1rem;
+        font-size: 0.339rem;  
+      }
+
+      .landscape .heading1 {
+        max-height: 0.4rem;
+        margin-bottom: 0.08rem;
+        font-size: 0.2775rem;  
+      }
+
+      .heading1 h1,
+      .heading1 h2 {
+        line-height: 1.2em;
+      }
+
+      .portrait .heading1 h1 {
+        font-size: 0.339rem;     
+      }
+
+      .landscape .heading1 h1 {
+        font-size: 0.2775rem;     
+      }
+
+      .portrait .heading1 h2 {
+        font-size: 0.31rem;
+      }
+
+      .landscape .heading1 h2 {
+        font-size: 0.255rem;
+      }
+
+      .heading2 {
+        font-family: 'Adobe Caslon Pro';
+        text-align: right;
+      }
+
+      .portrait .heading2 {
+        max-height: 1.6rem;
+        font-size: 0.694rem;
+      }
+
+      .landscape .heading2 {
+        max-height: 1.4rem;
+        font-size: 0.566rem;
+      }
+
+      .heading2 h1 {
+        font-size: 1em;
+        line-height: 1.1em;
+      }
+
+      .heading2 h2 {
+        font-size: 0.8em;
+        line-height: 1.1em;
+      }
+
+      .body {
+        flex: 1;
+      }
+
+      .footer {
+        border-top: 0.01rem solid var(--white);
+      }
+
+      .footer__text {
+        font-size: 0.4rem;
+        text-transform: uppercase;
+        text-align: right;
+      }
+
+      .portrait .footer__text {
+        max-height: 1rem;
+        margin-top: 0.2rem;
+      }
+
+      .landscape .footer__text {
+        max-height: 1rem;
+        margin-top: 0.15rem;
+      }
+
+      .footer__text h3 {
+        line-height: 1.2em;
+      }
+
+      .portrait .footer__text h3 {
+        font-size: 0.354rem;
+      }
+
+      .landscape .footer__text h3 {
+        font-size: 0.29rem;
+      }
+
+      .portrait .info__container {
+        margin-bottom: 0.4rem;
+      }
+
+      .landscape .info__container {
+        margin-bottom: 0.33rem;
+      }
+
+      .portrait .info {
+        margin-bottom: 0.3em;
+        font-size: 0.19rem;
+        line-height: 1.2em;
+      }
+
+      .landscape .info {
+        margin-bottom: 0.3em;
+        font-size: 0.15rem;
+        line-height: 1.2em;
+      }
+
+      .info span {
+        display: inline-block;
+      }
+
+      .portrait .info span {
+        width: 0.3rem;
+      }
+
+      .landscape .info span {
+        width: 0.26rem;
+      }
+
+      .portrait .info--address {
+        max-height: 1.5rem;
+        margin-bottom: 0.18rem;
+      }
+
+      .landscape .info--address {
+        max-height: 1.2rem;
+        margin-bottom: 0.18rem;
+      }
+
+      .info--address p {
+        line-height: 1.2em;
+      }
+
+      .portrait .info--address p {
+        margin-bottom: 0.43em;
+        font-size: 0.184rem;
+      }
+
+      .landscape .info--address p {
+        margin-bottom: 0.36em;
+        font-size: 0.1495rem;
+      }
+
+      .info--address strong {
+        font-weight: bold;
+      }
+
+      .social__container {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .social__container a{
+        text-decoration: none;
+        color: #ffffff;
+      }
+
+      .social {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .portrait .social {
+        margin-bottom: 0.176em;
+        margin-left: 0.02rem;
+      }
+
+      .landscape .social {
+        margin-bottom: 0.15em;
+      }
+
+      .social__img {
+        font-size: 0;
+      }
+
+      .portrait .social__img {
+        margin-right: 0.13rem;
+        width: 0.31rem;
+      }
+
+      .landscape .social__img {
+        margin-right: 0.14rem;
+        width: 0.24rem;
+      }
+
+      .social__text {
+        line-height: 1.2em;
+        font-weight: bold;
+      }
+
+      .portrait .social__text {
+        font-size: 0.19rem;
+      }
+
+      .landscape .social__text {
+        font-size: 0.15rem;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+    {{{UOL_background-colour--hc}}}
+    {{{UOL_heading1--hc}}}
+    {{UOL_heading2--hc}}}
+    {{{UOL_heading2-size--hc}}}
+    {{{UOL_graphic--hc}}}
+    {{{UOL_footer--hc}}}
+    {{{UOL_address--hc}}}
+    {{{UOL_phone--hc}}}
+    {{{UOL_email--hc}}}
+    {{{UOL_website--hc}}}
+  -->
+  <body style="background: white" class="{{{UOL_format--hc}}}{{^UOL_format--hc}}portrait{{/UOL_format--hc}}
+                                         {{{UOL_background-colour--hc}}}{{^UOL_background-colour--hc}}red{{/UOL_background-colour--hc}}
+                                         {{{UOL_graphic--hc}}}{{^UOL_graphic--hc}}graphic-2{{/UOL_graphic--hc}}" 
+        data-crop="{{show-crop}}">
+    <div class="page page--front">
+
+      <div class="bleed">
+
+        <div class="container fit fit--front">
+
+          <div class="backgroundImage"></div><!--backgroundImage-->
+
+          <div class="wrapper">
+            <div class="wrapper__page wrapper__page--primary">
+              <img class="logo" src="{{{account.logos.reversed}}}" /> <!--logo-->
+
+              <div class="info__container">
+                {{#UOL_address--hc}}
+                <div class="info info--address" data-max-height="css">{{{UOL_address--hc}}}</div> <!--info--address-->
+                {{/UOL_address--hc}}
+                {{#UOL_phone--hc}}
+                <div class="info" data-max-line="1"><span>t:</span>{{{UOL_phone--hc}}}</div> <!--info-->
+                {{/UOL_phone--hc}}
+                {{#UOL_email--hc}}
+                <div class="info" data-max-line="1"><span>e:</span>{{{UOL_email--hc}}}</div> <!--info-->
+                {{/UOL_email--hc}}
+                {{#UOL_website--hc}}
+                <div class="info" data-max-line="1"><span>w:</span>{{{UOL_website--hc}}}</div> <!--info-->
+                {{/UOL_website--hc}}
+              </div> <!--info__container-->
+              {{#collection.social}}
+                <div class="social__container">
+                  {{#facebookSocial}}<a href="{{{facebookHyperLink}}}"><div class="social">
+                  <img class="social__img" src="https://files.outfit.io/media_library_items/115009/Fb%2520Icon.svg" /> <!--social__img-->
+                  <div class="social__text" data-max-line="1">/{{{facebookSocial}}}</div> <!--social__text-->
+                  </div></a> <!--social-->{{/facebookSocial}}
+                  {{#instagramSocial}}<a href="{{{instagramHyperLink}}}"><div class="social">
+                  <img class="social__img" src="https://files.outfit.io/media_library_items/115010/Instagram%2520Icon.svg" /> <!--social__img-->
+                  <div class="social__text" data-max-line="1">{{{instagramSocial}}}</div> <!--social__text-->
+                  </div></a> <!--social-->{{/instagramSocial}}
+                  {{#twitterSocial}}<a href="{{{twitterHyperLink}}}"><div class="social">
+                  <img class="social__img" src="https://files.outfit.io/media_library_items/115008/Twitter%2520Icon.svg" /> <!--social__img-->
+                  <div class="social__text" data-max-line="1">@{{{twitterSocial}}}</div> <!--social__text-->
+                  </div></a> <!--social-->{{/twitterSocial}}
+                </div> <!--social__container-->
+              {{/collection.social}}
+            </div> <!--wrapper__page-->
+            <div class="wrapper__page wrapper__page--secondary">
+              <div class="header">
+                <img class="logo" src="{{{account.logos.reversed}}}" /> <!--logo-->
+                {{#UOL_heading1--hc}}
+                <div class="heading1 u-heading-patch" data-max-height="css">{{{UOL_heading1--hc}}}</div> <!--heading1-->
+                {{/UOL_heading1--hc}}
+                {{#UOL_heading2--hc}}
+                <div class="heading2 u-heading-patch" data-max-height="css">
+                  <div class="heading2__inner" style="font-size: {{{UOL_heading2-size--hc}}}%;">
+                    {{{UOL_heading2--hc}}}
+                  </div> <!--heading2__inner-->
+                </div> <!--heading2-->
+                {{/UOL_heading2--hc}}
+              </div> <!--header-->
+              <div class="body"></div> <!--body-->
+              {{#UOL_footer--hc}}
+              <div class="footer">
+                <div class="footer__text u-heading-patch" data-max-height="css">{{{UOL_footer--hc}}}</div> <!--text-->
+              </div> <!--footer-->
+              {{/UOL_footer--hc}}
+            </div> <!--wrapper__page-->
+          </div> <!--wrapper-->
+        </div><!--container-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <div class="page page--back">
+
+      <div class="bleed">
+
+        <div class="container fit fit--back"> 
+          <img class="logo logo--secondary" src="{{{account.logos.reversed}}}" /> <!--logo-->
+
+          <div class="info__container">
+            {{#UOL_address--hc}}
+            <div class="info info--address" data-max-height="css">{{{UOL_address--hc}}}</div> <!--info--address-->
+            {{/UOL_address--hc}}
+            {{#UOL_phone--hc}}
+            <div class="info" data-max-line="1"><span>t:</span>{{{UOL_phone--hc}}}</div> <!--info-->
+            {{/UOL_phone--hc}}
+            {{#UOL_email--hc}}
+            <div class="info" data-max-line="1"><span>e:</span>{{{UOL_email--hc}}}</div> <!--info-->
+            {{/UOL_email--hc}}
+            {{#UOL_website--hc}}
+            <div class="info" data-max-line="1"><span>w:</span>{{{UOL_website--hc}}}</div> <!--info-->
+            {{/UOL_website--hc}}
+          </div> <!--info__container-->
+          
+          {{#collection.social}}
+          <div class="social__container">
+            {{#facebookSocial}}<a href="{{{facebookHyperLink}}}"><div class="social">
+            <img class="social__img" src="https://files.outfit.io/media_library_items/115009/Fb%2520Icon.svg" /> <!--social__img-->
+            <div class="social__text" data-max-line="1">/{{{facebookSocial}}}</div> <!--social__text-->
+            </div></a> <!--social-->{{/facebookSocial}}
+            {{#instagramSocial}}<a href="{{{instagramHyperLink}}}"><div class="social">
+            <img class="social__img" src="https://files.outfit.io/media_library_items/115010/Instagram%2520Icon.svg" /> <!--social__img-->
+            <div class="social__text" data-max-line="1">{{{instagramSocial}}}</div> <!--social__text-->
+            </div></a> <!--social-->{{/instagramSocial}}
+            {{#twitterSocial}}<a href="{{{twitterHyperLink}}}"><div class="social">
+            <img class="social__img" src="https://files.outfit.io/media_library_items/115008/Twitter%2520Icon.svg" /> <!--social__img-->
+            <div class="social__text" data-max-line="1">@{{{twitterSocial}}}</div> <!--social__text-->
+            </div></a> <!--social-->{{/twitterSocial}}
+          </div> <!--social__container-->
+          {{/collection.social}}
+        </div><!--container-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>

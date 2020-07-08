@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Circular/stylesheet.css');
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+
+
+      :root {
+        --white: #fff;
+        --warm-yellow: #f6af1b;
+        --black: #000;
+        --pantone: #7b858d;
+        --tableHighlightWarmYellow: #fce8c5;
+      }
+
+      html {
+        font-family: 'Frutiger 65';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+      
+      h1{
+        font-family: 'Frutiger';
+        font-weight: 900;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 51pt 36pt 47pt 37pt;
+        background-color: var(--black);
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-bottom: 23pt;
+        text-align: right;
+        height: 165pt;
+        padding-left: 80pt;
+        padding-bottom: 4pt;
+        border-bottom: 2pt solid var(--white);
+      }
+
+      .logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 127pt;
+        z-index: 999;
+      }
+
+      .heading {
+        font-size: 51pt;
+        text-transform: uppercase;
+        color: var(--warm-yellow);
+      }
+
+      .cornerMark {
+        content: "";
+        position: absolute;
+        width: 24pt;
+        height: 41pt;
+      }
+
+      .cornerMark--bottomLeft {
+        bottom: 7pt;
+        left: 0;
+        border-bottom: 8pt solid var(--white);
+        border-left: 8pt solid var(--white);
+      }
+
+      .cornerMark--topRight {
+        top: 0;
+        right: 0;
+        border-top: 8pt solid var(--white);
+        border-right: 8pt solid var(--white);
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .table {
+        position: relative;
+        display: grid;
+        margin-bottom: 9pt;
+        grid-template-columns: 88pt 133pt 121pt 197pt;
+        grid-template-rows: 37pt;
+        grid-auto-rows: 47pt;
+      }
+
+      .table__cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: var(--white);
+        border-left: 1px solid var(--black);
+        border-top: 1px solid var(--black);
+        /* border: 0.5px solid var(--black); */
+        font-size: 12pt;
+      }
+      
+      .table__cell:nth-child(4n) {
+        border-right: 1px solid var(--black);
+      }
+      
+      .table__cell:nth-last-child(-n + 4) {
+       border-bottom: 1px solid var(--black);
+      }
+     
+      .table__cellInner { padding: 2pt 5pt; }
+
+      .table__cell p {
+        font-family: 'Frutiger 55 Roman';
+        line-height: 1.2em;
+      }
+
+      .table__cell strong {
+        font-weight: bold;
+      }
+
+      .table__cell i {
+        font-style: italic;
+      }
+
+      .table__cell--head {
+        font-size: 14pt;
+        text-transform: uppercase;
+        color: var(--white);
+        background-color: var(--pantone);
+      }
+
+      .table__cell--highlight {
+        background-color: var(--tableHighlightWarmYellow);
+      }
+
+      .table__caption {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 14pt;
+        font-family: 'Frutiger 45';
+        font-size: 8.8pt;
+        line-height: 1.2em;
+        font-weight: 300;
+        color: var(--white);
+      }
+
+      .content {
+        position: relative;
+        font-family: 'Frutiger 55 Roman';
+        font-size: 10.8pt;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .content strong {
+        font-weight: bold;
+      }
+
+      .content ul {
+        margin-bottom: 14pt;
+        padding-left: 8pt;
+      }
+
+      .content li {
+        position: relative;
+        margin-bottom: 7pt;
+      }
+
+      .content li:before {
+        content: '\2022';
+        position: absolute;
+        top: 0pt;
+        left: -8pt;
+      }
+
+      .footer {
+        position: relative;
+        display: flex;
+        height: 58pt;
+      }
+
+      .supporterLogo {
+        width: 115pt;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom left;
+        margin-right: 25pt;
+      }
+
+      .contact__container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        flex: 1;
+        padding-bottom: 3pt;
+      }
+
+      .contact {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-top: 3pt;
+      }
+
+      .contact__item {
+        display: flex;
+        margin-left: 4pt;
+        font-size: 11.5pt;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .contact__heading {
+        font-size: 9.7pt;
+        line-height: 1.2em;
+        color: var(--white);
+        font-family: 'Frutiger 55 Roman';
+      }
+
+      .contact__label {
+        margin-right: 3pt;
+      }
+
+      .contact__value {
+        font-size: 12pt;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .social {
+        display: flex;
+        margin-top: 14pt;     
+      }
+
+      .social__item {
+        display: flex;
+        margin-left: 8pt;
+        align-items: flex-end;
+      }
+
+      .social__icon {
+        margin-right: 4pt;
+        width: 15pt;
+        height: 15pt;
+      }
+
+      .social__value {
+        margin-bottom: -3pt;
+        font-size: 12pt;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage">
+            <div class="reposition-fix">{{{UOL_front-background-image--tlt}}}</div><!--reposition-fix-->
+          </div><!--backgroundImage-->
+          <div class="header">
+            <img src="{{{account.logos.reversed}}}" class="logo"><!--logo-->
+            {{#UOL_heading--tlt}}
+            <div class="heading">
+              <div class="heading__inner" style="font-size: {{UOL_heading-size--tlt}}%; line-height: 0.95em;" data-max-height="145">{{{UOL_heading--tlt}}}</div><!--heading__inner-->
+            </div><!--heading-->
+            {{/UOL_heading--tlt}}
+            <div class="cornerMark cornerMark--topRight"></div><!--cornerMark--topRight-->
+            <div class="cornerMark cornerMark--bottomLeft"></div><!--cornerMark--bottomLeft-->
+          </div><!--header-->
+          <div class="body">
+            <div class="table" data-max-height="dynamic">
+
+
+              {{#collection.UOL_timetable--tlt.length}}
+              <div class="table__cell table__cell--head"><div data-max-height="60">day</div></div><!--table__cell-->
+              <div class="table__cell table__cell--head"><div data-max-height="60">class</div></div><!--table__cell-->
+              <div class="table__cell table__cell--head"><div data-max-height="60">time</div></div><!--table__cell-->
+              <div class="table__cell table__cell--head"><div data-max-height="60">location</div></div><!--table__cell-->
+
+
+              {{#collection.UOL_timetable--tlt}}
+              {{#block.UOL_row--tlt}}
+              <div class="table__cell table__cell--highlight"><div class="table__cellInner" data-max-line="3">{{{UOL_day--tlt}}}</div></div><!--table__cell-->
+              <div class="table__cell"><div class="table__cellInner" data-max-line="3">{{{UOL_row-class--tlt}}}</div></div><!--table__cell-->
+              <div class="table__cell"><div class="table__cellInner" data-max-line="3">{{{UOL_time--tlt}}}</div></div><!--table__cell-->
+              <div class="table__cell"><div class="table__cellInner" data-max-line="3">{{{UOL_location--tlt}}}</div></div><!--table__cell-->
+              {{/block.UOL_row--tlt}}
+              {{/collection.UOL_timetable--tlt}}
+
+              {{/collection.UOL_timetable--tlt.length}}
+
+
+            </div><!--table-->
+            {{#UOL_timetable-caption--tlt}}
+            <div class="table__caption" data-max-line="2">{{{UOL_timetable-caption--tlt}}}</div><!--table__caption-->
+            {{/UOL_timetable-caption--tlt}}
+            {{#UOL_copy--tlt}}
+            <div class="content js-subtrahend" data-max-height="130">{{{UOL_copy--tlt}}}</div><!--content-->
+            {{/UOL_copy--tlt}}
+          </div><!--body-->
+          <div class="footer">
+            {{#UOL_supporter-logo--tlt}}
+            <img src="{{{UOL_supporter-logo--tlt}}}" class="supporterLogo"><!--supporterLogo-->
+            {{/UOL_supporter-logo--tlt}}
+            <div class="contact__container">
+              {{#UOL_contact-copy--tlt}}
+              <div class="contact__heading" data-max-line="1">{{{UOL_contact-copy--tlt}}}</div><!--contact__label-->
+              {{/UOL_contact-copy--tlt}}
+
+
+              {{#spreadsheet.UOL_contactDetails--yc}}
+              <div class="contact">
+                <div class="contact__item">
+                  <div class="contact__label"></div><!--name-->
+                  <div class="contact__value">{{{name}}}</div><!--name-->
+                </div><!--contact__item-->
+                <div class="contact__item">
+                  {{#email}}
+                  <div class="contact__label">e: </div><!--email-->
+                  <div class="contact__value">{{{email}}}</div><!--email-->
+                  {{/email}}
+                </div><!--contact__item-->
+                {{^web-address}}
+                <div class="contact__item">
+                  <div class="contact__label">t: </div><!--telephone-->
+                  <div class="contact__value">{{{telephone}}}</div><!--telephone-->
+                </div><!--contact__item-->
+                {{/web-address}}
+                {{#web-address}}
+                <div class="contact__item">
+                  <div class="contact__label">w: </div><!--telephone-->
+                  <div class="contact__value">{{{web-address}}}</div><!--web address-->
+                </div><!--contact__item-->
+                {{/web-address}}
+              </div><!--contact-->
+              <div class="social">
+                <div class="social__item">
+                  {{#facebook}}
+                  <img src="https://files.outfit.io/media_library_items/117456/FB%2520icon.svg" class="social__icon"><!--facebook-->
+                  <div class="social__value">{{{facebook}}}</div><!--facebook-->
+                  {{/facebook}}
+                </div><!--social__item--> 
+                <div class="social__item">
+                  {{#twitter}}
+                  <img src="https://files.outfit.io/media_library_items/117457/Twitter%2520Icon.svg" class="social__icon"><!--twitter-->
+                  <div class="social__value">{{{twitter}}}</div><!--twitter-->
+                  {{/twitter}}
+                </div><!--social__item-->
+                <div class="social__item">
+                  {{#instagram}}
+                  <img src="https://files.outfit.io/media_library_items/117455/Instagram%2520Icon.svg" class="social__icon"><!--instagram-->
+                  <div class="social__value">{{{instagram}}}</div><!--instagram-->
+                  {{/instagram}}
+                </div><!--social__item-->
+              </div><!--social-->
+              {{/spreadsheet.UOL_contactDetails--yc}}
+
+            </div><!--contact__Container-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>
