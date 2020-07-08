@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --primary: {{{account.colors.primary-red-update}}};
+        --secondary: {{{account.colors.grey}}};
+        --pantone-200: {{{account.colors.primary-red-update}}};
+        --pantone-431: #5b6770;
+      }
+
+      html {
+        font-family: "Frutiger";
+        font-size: 19pt;
+        color: var(--secondary);
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        padding-top: 35.1pt;
+      }
+
+      .hero {
+        position: relative;
+        grid-column: 1 / -1;
+        grid-row: 3 / 4;
+        height: 190pt;
+      }
+
+      .noImage {
+        text-align: center;
+        margin-left: 30pt;
+      }
+
+      .hero:after {
+        content: '';
+        position: absolute;
+        left: 31.2%;
+        height: 100%;
+        width: 1px;
+        background-color: var(--secondary);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 31.4% 1fr;
+        grid-template-rows: 26pt 24pt auto 1fr 97pt;
+        width: 100%;
+        height: 100%;
+      }
+
+      .grid__item {
+        display: flex;
+      }
+
+      .grid__item strong {
+        font-family: 'Frutiger 65';
+        font-weight:900;
+      }
+
+      .grid__item a {
+        font-family: 'Frutiger 65';
+        font-weight: bold;
+        color: var(--secondary);
+        text-decoration: none;       
+      }
+
+      .grid__item--separator {
+        grid-column: 1 / -1;
+      }
+
+      .grid__item--logo {
+        grid-column: span 1 / -1;
+      }
+
+      .logo {
+        max-width: 92pt;
+        max-height: 25pt;
+      }
+
+      .logo--support {
+        max-height: 19.7pt;
+        margin-top: 2pt;
+      }
+
+      .logo--secondary {
+        position: absolute;
+        right: 35pt;
+        bottom: 35pt;
+        width: 118pt;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .heading {
+        margin-top: 15.3pt;
+        margin-bottom: 7pt;
+        font-size: 28pt;
+        letter-spacing: 0.6pt;
+        color: var(--pantone-200);
+      }
+
+      .subheading {
+        margin-bottom: 10pt;
+        font-size: 17pt;
+        line-height: 1em;
+        color: var(--pantone-431);
+      }
+
+      .content {
+        font-family: 'Frutiger 45';
+        font-size: 9pt;
+        line-height: 1.33em;
+      }
+      
+      .content p {
+        margin-bottom: 7pt;
+      }
+      
+      .content p:last-child {
+        margin-bottom: 0;
+      }
+      
+      .grid__label {
+        padding-right: 10pt;
+        padding-left: calc(3mm + 10pt);
+        font-family: 'Frutiger';
+        font-size: 9.6pt;
+        line-height: 1em;
+        color: var(--primary);
+        font-weight: 900;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .grid__contact {
+        width: 140pt;
+        padding-left: 9pt;
+        font-family: 'Frutiger 65';
+        font-size: 9.4pt;
+        line-height: 1.3em;
+      }
+
+      .grid__contact a {
+        color: var(--secondary);
+        text-decoration: none;
+      }
+
+      .grid__contact .tinymce_style--dark a {
+        color: var(--primary);
+      }
+
+      .grid__contact strong {
+        font-size: 10pt;
+      }
+            .tinymce_style--dark {
+        color: var(--primary);
+      }
+      
+      .u-pl-36 { padding-left: 36pt; }
+      .u-pl-10 { padding-left: 10pt;  }
+      .u-pb-21 { padding-bottom: 21pt;  }
+      .u-pb-13 { padding-bottom: 13pt; }
+      .u-pl-7 { padding-left: 7pt;  }
+      .u-pt-12 { padding-top: 12pt;  }
+      .u-mr-35 { margin-right: 35pt; }
+      .u-border-left { border-left: 1pt solid var(--secondary);  }
+      .u-border-right { border-right: 1pt solid var(--secondary);  }
+      .u-border-top { border-top: 1pt solid var(--secondary);  }
+      .u-border-bottom { border-bottom: 1pt solid var(--secondary);  }
+
+      .u-flex-col {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .u-block {
+        display: block;
+      }
+
+      .u-flex-start {
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      .u-text-color-primary {
+        color: var(--primary);
+      }
+
+      .u-text-uppercase-bold {
+        font-family: "Frutiger";
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .u-text-align-right {
+        justify-content: flex-end;
+        text-align: right;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          
+          <div class="grid" data-max-height="dynamic">
+            <div class="grid__item u-border-right u-pl-36">
+              <img src="{{{account.logos.primary}}}" class="logo" />
+            </div> <!-- grid__item -->
+             <div class="hero"><div class="reposition-fix"> {{{LU_hero--tvs}}}{{^LU_hero--tvs}}<div class="noImage">Insert Image Here </div>{{/LU_hero--tvs}}</div></div><!--hero-->
+            <div class="grid__item u-pl-7">
+              <img src="{{{LU_logo-support--tvs}}}" class="logo logo--support" />
+            </div> <!-- grid__item -->
+            <div class="grid__item grid__item--separator"> </div> <!-- grid__item -->
+            <div class="grid__item u-border-right u-border-bottom"> </div> <!-- grid__item -->
+            <div class="grid__item u-border-bottom u-flex-col u-pl-10 u-pb-13 u-mr-35">
+              {{#LU_heading--tvs}}
+              <div class="heading u-text-uppercase-bold">
+                <div style="font-size:{{{LU_heading-font-size-audit--l1}}}%; line-height: 0.95em;" data-max-line="3">
+                  {{{LU_heading--tvs}}}
+                </div> <!-- font-size-resizer --> 
+              </div> <!-- heading -->
+              {{/LU_heading--tvs}}
+              {{#LU_subheading--tvs}}
+              <div class="subheading u-text-uppercase-bold">
+                <div data-max-line="2">
+                  {{{LU_subheading--tvs}}}
+                </div> <!-- font-size-resizer --> 
+              </div> <!-- subheading -->
+              {{/LU_subheading--tvs}}
+              <div class="content">{{{LU_content--tvs}}}</div><!--content-->
+            </div> <!-- grid__item -->
+            <div class="grid__item u-block u-pt-12 u-border-right">
+              <div class="grid__label" data-max-height="20">
+                {{{UOL_contact-footer-label--fly}}}
+              </div> <!-- grid__label -->
+            </div> <!-- grid__item -->
+            <div class="grid__item u-block u-pt-16">
+              <div class="grid__contact u-pt-12" data-max-height="88">
+                {{{UOL_contact-footer-value--fly}}}
+              </div> <!-- grid__contact -->
+              <img src="https://files.outfit.io/media_library_items/68637/LU-logo.svg" class="logo logo--secondary" />
+            </div><!--grid__item-->
+          </div> <!-- grid -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+
+
+  </body>
+</html>
