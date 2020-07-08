@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+      html {
+        font-family: 'Roboto', sans-serif;
+        font-size: 11pt;
+        color: #fff;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-size: cover;
+      }
+
+      .backgroundImage--option-1 { background-image: url('https://files.outfit.io/media_library_items/68626/background.jpg'); }
+      .backgroundImage--option-2 { background-image: url('https://files.outfit.io/media_library_items/68625/backgrouund.jpg'); }
+
+      .logo {
+        position: absolute;
+        top: 44pt;
+        left: 45.3pt;
+        width: 194.7pt;
+        height: 58pt;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: 100%;
+        padding: 0pt 46pt 38.8pt 0pt;
+      }
+
+      .theme--2 .body { padding: 0pt 32pt 48.8pt 0pt; }
+      .theme--3 .body { padding: 0pt 45.6pt 40.5pt 0pt; }
+
+      .heading {
+        position: relative;
+        width: 668pt;
+        padding-bottom: 15pt;
+        padding-left: 32pt;
+        text-transform: uppercase;
+        text-align: right;
+        border-bottom: 2px solid #fff;
+      }
+
+      .heading::before,
+      .heading::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        width: 31pt;
+        height: 52pt;
+      }
+
+      .heading::after {
+        right: 0pt;
+        top: -64.8pt;
+        border-top: 10pt solid #fff;
+        border-right: 10pt solid #fff;
+      }
+
+      .heading::before {
+        left: 0.8pt;
+        bottom: 11.4pt;
+        border-bottom: 10.3pt solid #fff;
+        border-left: 10.3pt solid #fff;
+      }
+
+      .heading__item {
+        font-size: 40.4pt;
+        font-weight: 700;
+      }
+
+      .theme--1 .heading__item { max-height: 1.6rem; }
+      .theme--2 .heading__item { max-height: 3.2rem; }
+      .theme--3 .heading__item { max-height: 4.8rem; }
+
+      .heading__item--secondary { font-size: 28.4pt; }
+
+      .theme--1 .heading__item--secondary { max-height: 3.3rem; }
+      .theme--2 .heading__item--secondary { max-height: 2.2rem; }
+      .theme--3 .heading__item--secondary { max-height: 1.1rem; }
+
+      .subheading {
+        width: 668pt;
+        padding-top: 7pt;
+        text-align: right;
+      }
+
+      .subheading__item { font-size: 30.4pt; }
+
+      .theme--1 .subheading__item { max-height: 2.4rem; }
+      .theme--2 .subheading__item,
+      .theme--3 .subheading__item { 
+        max-height: 1.2rem; 
+      }
+
+      .subheading__item--secondary { font-size: 22.7pt;}
+
+      .theme--1 .subheading__item--secondary,
+      .theme--3 .subheading__item--secondary { 
+        max-height: 1.1rem; 
+      }
+
+      .theme--2 .subheading__item--secondary { max-height: 2.2rem; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         theme--{{UOL_theme--fbu}}{{^UOL_theme--fbu}}1{{/UOL_theme--fbu}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage backgroundImage--{{{UOL_background-choice--f1}}}{{^UOL_background-choice--f1}}option-1{{/UOL_background-choice--f1}}"></div>
+          <img class="logo" src="{{account.logos.reversed}}"><!--logo-->
+          <div class="body">
+            <div class="heading">
+              <div class="heading__item" data-max-height="css">{{{UOL_headline--f1}}}</div><!--heading__item-->
+              <div class="heading__item heading__item--secondary" data-max-height="css">{{{UOL_subheadline--f1}}}</div><!--heading__item-->
+            </div><!--heading-->
+            <div class="subheading">
+              <div class="subheading__item" data-max-height="css">{{{UOL_information-1--f1}}}</div><!--subheading__item-->
+              <div class="subheading__item subheading__item--secondary" data-max-height="css">{{{UOL_information-2--f1}}}</div><!--subheading__item-->
+            </div><!--subheading-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+    </script>
+
+
+  </body>
+</html>
