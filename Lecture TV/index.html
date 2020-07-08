@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html data-sign="OSR">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <style>
+      {{{account.snippets.fonts}}}
+      /* order inputs */
+
+      /*
+      {{show-crop}}     
+
+      {{LE_format-choice--ltv}}
+      {{LE_layout-choice--ltv}}
+      {{LE_logo-container-direction--ltv}}
+      {{LE_theme-colours--ltv}}
+      {{{LE_right-image--ltv}}}
+      {{{LE_left-image--ltv}}}
+      {{{LE_website--ltv}}}
+      {{{LE_secondary-information--ltv}}}
+      {{{LE_heading--ltv}}}
+      {{{LE_standfirst--ltv}}}
+      {{{LE_body-copy--ltv}}}
+      {{{LE_third-party-logo-1--ltv}}}
+      {{{LE_third-party-logo-2--ltv}}}
+      */
+
+      :root {
+        --white: {{{account.colors.white}}};
+        --core-red: {{{account.colors.core-red}}};
+        --orange: {{{account.colors.orange}}};
+        --green: {{{account.colors.green}}};
+        --blue: {{{account.colors.blue}}};
+        --purple: {{{account.colors.purple}}};
+        --grey: {{{account.colors.grey-1}}};
+        --light-gray: #cccccc;
+      }
+
+      .themeColor--orange { --dynamic-colour: var(--orange); }
+      .themeColor--green { --dynamic-colour: var(--green); }
+      .themeColor--blue { --dynamic-colour: var(--blue); }
+      .themeColor--purple { --dynamic-colour: var(--purple); }
+
+      html {
+        font-family: 'Maison Neue';
+        word-break: break-word;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .formatChoice--1140x820 .fit { padding-top: 74pt; }
+      .formatChoice--1920x1080 .fit { padding-top: 100pt; }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        background-color: var(--light-gray);
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .backgroundImage--left { width: 62%; }
+
+      .formatChoice--1140x820.layoutChoice--version-2 .backgroundImage--left {
+        top: 6.2%;
+        left: 4.4%;
+        width: 53.2%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-3 .backgroundImage--left {
+        top: 24.6%;
+        bottom: 38%;
+        width: 29%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-3 .backgroundImage--right {
+        top: 6.2%;
+        right: 0;
+        width: 49.3%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-4 .backgroundImage--left {
+        top: 6.3%;
+        width: 49.2%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-4 .backgroundImage--right {
+        right: 0;
+        bottom: 34%;
+        width: 34.7%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-5 .backgroundImage--left {
+        left: 4.3%;
+        bottom: 6.3%;
+        width: 50.5%;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-5 .backgroundImage--right {
+        top: 16%;
+        right: 0;
+        bottom: 36.9%;
+        width: 26.6%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .backgroundImage--left { width: 67.6%; }
+
+      .formatChoice--1920x1080.layoutChoice--version-2 .backgroundImage--left {
+        top: 6.8%;
+        left: 3.5%;
+        width: 60%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-3 .backgroundImage--left {
+        top: 25.2%;
+        bottom: 39.2%;
+        width: 29%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-3 .backgroundImage--right {
+        top: 6.5%;
+        right: 0;
+        width: 48.3%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-4 .backgroundImage--left {
+        top: 6.8%;
+        width: 45.5%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-4 .backgroundImage--right {
+        right: 0;
+        width: 30%;
+        bottom: 34%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-5 .backgroundImage--left {
+        left: 3.5%;
+        bottom: 6.4%;
+        width: 48.5%;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-5 .backgroundImage--right {
+        right: 0;
+        top: 17%;
+        width: 22.5%;
+        bottom: 31%;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        height: 50pt;
+        background-color: var(--core-red);
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .header,
+      .formatChoice--1140x820.layoutChoice--version-2 .header,
+      .formatChoice--1140x820.layoutChoice--version-3 .header {
+        height: 65pt;
+        padding: 0 14pt 9pt;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .header { margin: 0 74pt 70pt; }
+      .formatChoice--1140x820.layoutChoice--version-2 .header { margin: 0 74pt 48pt; }
+      .formatChoice--1140x820.layoutChoice--version-3 .header { margin: 0 74pt 48pt; }
+      .formatChoice--1140x820.layoutChoice--version-4 .header {
+        height: 65pt;
+        padding: 0 14pt 9pt;
+        margin: 0 74pt 45pt;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-5 .header {
+        height: 65pt;
+        padding: 0 14pt 9pt;
+        margin: 0 65pt 45pt;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .header,
+      .formatChoice--1920x1080.layoutChoice--version-2 .header,
+      .formatChoice--1920x1080.layoutChoice--version-3 .header {
+        height: 90pt;
+        padding: 0 20pt 17pt;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .header {  margin: 0 97pt 46pt; }
+      .formatChoice--1920x1080.layoutChoice--version-2 .header { margin: 0 97pt 35pt; }
+      .formatChoice--1920x1080.layoutChoice--version-3 .header { margin: 0 97pt 49pt; }
+
+      .formatChoice--1920x1080.layoutChoice--version-4 .header {
+        height: 90pt;
+        padding: 0 20pt 17pt;
+        margin: 0 97pt 49pt;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-5 .header {
+        height: 90pt;
+        padding: 0 20pt 17pt;
+        margin: 0 97pt 47pt;
+      }
+
+      .website {
+        line-height: 1.2em;
+        color: var(--white);
+      }
+
+      .formatChoice--1140x820 .website {
+        margin: 0 11pt 6pt 0;
+        font-size: 13.1pt;
+      }
+
+      .formatChoice--1920x1080 .website {
+        margin: 0 0pt 2pt 0;
+        font-size: 20pt;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .layoutChoice--version-1 .body {
+        background: var(--white);
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .body {
+        margin: 0 52pt 0 313pt;
+        padding: 21pt 21pt 51pt;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .body {
+        margin: 0 96pt 0 597pt;
+        padding: 30pt 21pt 65pt 31pt;
+      }
+
+      .body__top {
+        display: flex;
+        flex-direction: column;
+        background: var(--white);
+      }
+      
+      .no-secondary-information.no-heading.no-standfirst .body__top {
+        display: none;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .body__top,
+      .formatChoice--1920x1080.layoutChoice--version-1 .body__top {
+        margin-bottom: 23pt;
+      }
+      
+      .formatChoice--1140x820.layoutChoice--version-2 .body__top,
+      .formatChoice--1140x820.layoutChoice--version-3 .body__top,
+      .formatChoice--1140x820.layoutChoice--version-4 .body__top,
+      .formatChoice--1140x820.layoutChoice--version-5 .body__top {
+        padding: 21pt 23pt 19pt 21pt;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-2 .body__top { margin: 0 52pt 0 313pt; }
+      .formatChoice--1140x820.layoutChoice--version-3 .body__top { margin: 0 172pt 0 193pt; }
+      .formatChoice--1140x820.layoutChoice--version-4 .body__top { margin: 0 166pt 0 199pt; }
+      .formatChoice--1140x820.layoutChoice--version-5 .body__top { margin: 0 233pt 0 122pt; }
+      
+      .formatChoice--1920x1080.layoutChoice--version-2 .body__top,
+      .formatChoice--1920x1080.layoutChoice--version-3 .body__top,
+      .formatChoice--1920x1080.layoutChoice--version-4 .body__top,
+      .formatChoice--1920x1080.layoutChoice--version-5 .body__top {
+        padding: 31pt 141pt 30pt 30pt;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-2 .body__top { margin: 0 52pt 0 563pt; }
+      .formatChoice--1920x1080.layoutChoice--version-3 .body__top { margin: 0 233pt 0 382pt; }
+      .formatChoice--1920x1080.layoutChoice--version-4 .body__top { margin: 0 243pt 0 382pt; }
+      .formatChoice--1920x1080.layoutChoice--version-5 .body__top { margin: 0 269pt 0 356pt; }
+
+      .body__bottom {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        flex: 1;
+      }
+
+      .layoutChoice--version-2 .body__bottom,
+      .layoutChoice--version-4 .body__bottom,
+      .layoutChoice--version-5 .body__bottom {
+        flex-direction: row-reverse;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-2 .body__bottom { margin: 0 52pt 58pt 74pt; }
+      .formatChoice--1140x820.layoutChoice--version-3 .body__bottom { margin: 0 74pt 58pt; }
+      .formatChoice--1140x820.layoutChoice--version-4 .body__bottom { margin: 0 74pt 58pt; }
+      .formatChoice--1140x820.layoutChoice--version-5 .body__bottom { margin: 0 65pt 58pt; }
+
+      .formatChoice--1920x1080.layoutChoice--version-2 .body__bottom { margin: 0 52pt 53pt 97pt; }
+      .formatChoice--1920x1080.layoutChoice--version-3 .body__bottom { margin: 0 97pt 53pt 119pt; }
+      .formatChoice--1920x1080.layoutChoice--version-4 .body__bottom { margin: 0 52pt 53pt 97pt; }
+      .formatChoice--1920x1080.layoutChoice--version-5 .body__bottom { margin: 0 97pt 53pt; }
+
+      .preheading {
+        text-transform: uppercase;
+        line-height: 1em;
+        letter-spacing: 1.1pt;
+        color: var(--dynamic-colour);
+      }
+
+      .formatChoice--1140x820 .preheading {
+        margin-bottom: 15pt;
+        font-size: 12pt;
+      }
+
+      .formatChoice--1920x1080 .preheading {
+        margin-bottom: 22pt;
+        font-size: 18.4pt;
+      }
+
+      .heading {
+        line-height: 1.15em;
+        font-weight: 600;
+        word-spacing: 3pt;
+        color: var(--dynamic-colour);
+      }
+
+      .formatChoice--1140x820 .heading {
+        font-size: 38pt;
+        max-height: 180px;
+      }
+      
+      .formatChoice--1920x1080 .heading {
+        font-size: 55pt;
+        max-height: 255px;
+      }
+
+      .formatChoice--1140x820 .heading {
+        margin-bottom: 0.28em;
+        font-size: 38pt;
+      }
+
+      .formatChoice--1920x1080 .heading {
+        margin-bottom: 0.35em;
+        font-size: 55pt;
+      }
+
+      .copy {
+        line-height: 1.2em;
+        font-family: 'Tiempos Headline';
+      }
+
+      .formatChoice--1140x820 .copy { font-size: 15.5pt; }
+      .formatChoice--1920x1080 .copy { font-size: 23pt; }
+
+      .preheading:last-child,
+      .heading:last-child { margin-bottom: 0; }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .content { width: 300pt; }
+      
+      .formatChoice--1140x820.layoutChoice--version-2 .content,
+      .formatChoice--1140x820.layoutChoice--version-3 .content,
+      .formatChoice--1140x820.layoutChoice--version-4 .content,
+      .formatChoice--1920x1080.layoutChoice--version-2 .content,
+      .formatChoice--1920x1080.layoutChoice--version-3 .content,
+      .formatChoice--1920x1080.layoutChoice--version-4 .content { padding-right: 17pt; }
+
+      .formatChoice--1140x820.layoutChoice--version-2 .content { width: 290pt; }
+      .formatChoice--1140x820.layoutChoice--version-3 .content { width: 320pt; }
+      .formatChoice--1140x820.layoutChoice--version-4 .content { width: 304pt; }
+      .formatChoice--1140x820.layoutChoice--version-5 .content { width: 276pt; }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .content { width: 420pt; }
+      .formatChoice--1920x1080.layoutChoice--version-2 .content { width: 432pt; }
+      .formatChoice--1920x1080.layoutChoice--version-3 .content { width: 570pt; }
+      .formatChoice--1920x1080.layoutChoice--version-4 .content { width: 475pt; }
+      .formatChoice--1920x1080.layoutChoice--version-5 .content { width: 511pt; }
+
+      .info {
+        font-size: 25pt;
+        line-height: 1.2em;
+      }
+      
+      .is-firefox .info {
+        font-size: 24.3pt;
+      }
+
+      .formatChoice--1140x820 .info { max-height: 120pt; }
+      
+      .formatChoice--1920x1080 .info { max-height: 170pt; }
+
+      .info h3 {
+        line-height: 1.2em;
+        font-weight: 600;
+        color: var(--dynamic-colour);
+      }
+
+      .formatChoice--1140x820 .info h3 { font-size: 0.6em; }
+      .formatChoice--1920x1080 .info h3 { font-size: 0.87em; }
+
+      .info h4 { line-height: 1.25em; }
+
+      .formatChoice--1140x820 .info h4 { font-size: 0.6em; }
+      .formatChoice--1920x1080 .info h4 { font-size: 0.86em; }
+
+      .formatChoice--1140x820 .info h4 + h3 { margin-top: 16pt; }
+      .formatChoice--1920x1080 .info h4 + h3 { margin-top: 28pt;  }
+
+      .logo__container {
+        display: flex;
+      }
+      
+      .logoContainerDirection--vertical .logo__container {
+        flex-direction: column;
+      }
+      
+      .logoContainerDirection--horizontal .logo__container {
+        flex-direction: row;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .logo__container {
+        margin-right: -20pt;
+        margin-bottom: -12pt;
+      }
+
+      .logo {
+        object-fit: contain;
+        object-position: right bottom;
+        flex-shrink: 0;
+      }
+
+      .formatChoice--1140x820 .logo {
+        width: 131pt;
+        max-height: 54pt;
+      }
+
+      .formatChoice--1140x820.logoContainerDirection--vertical.layoutChoice--version-2 .logo {
+        width: 131pt;
+        max-height: 54pt;
+      }
+      
+      .formatChoice--1140x820.logoContainerDirection--horizontal.layoutChoice--version-2 .logo {
+        max-width: 131pt;
+        height: 54pt;
+      }
+
+      .formatChoice--1140x820.logoContainerDirection--vertical.layoutChoice--version-3 .logo {
+        width: 131pt;
+        max-height: 54pt;
+      }
+      
+      .formatChoice--1140x820.logoContainerDirection--horizontal.layoutChoice--version-3 .logo {
+        max-width: 131pt;
+        height: 54pt;
+      }
+
+      .formatChoice--1140x820.logoContainerDirection--vertical.layoutChoice--version-4 .logo {
+        width: 131pt;
+        max-height: 54pt;
+      }
+      
+      .formatChoice--1140x820.logoContainerDirection--horizontal.layoutChoice--version-4 .logo {
+        max-width: 131pt;
+        height: 54pt;
+      }
+
+      .formatChoice--1140x820.logoContainerDirection--vertical.layoutChoice--version-5 .logo {
+        width: 131pt;
+        max-height: 54pt;
+      }
+      
+      .formatChoice--1140x820.logoContainerDirection--horizontal.layoutChoice--version-5 .logo {
+        max-width: 131pt;
+        height: 54pt;
+      }
+
+      .formatChoice--1920x1080.logoContainerDirection--vertical.layoutChoice--version-1 .logo {
+        width: 194pt;
+        max-height: 80pt;
+      }
+      
+      .formatChoice--1920x1080.logoContainerDirection--horizontal.layoutChoice--version-1 .logo {
+        max-width: 194pt;
+        height: 80pt;
+      }
+
+      .formatChoice--1920x1080.logoContainerDirection--vertical.layoutChoice--version-2 .logo {
+        width: 194pt;
+        max-height: 80pt;
+      }
+      
+      .formatChoice--1920x1080.logoContainerDirection--horizontal.layoutChoice--version-2 .logo {
+        max-width: 194pt;
+        height: 80pt;
+      }
+
+      .formatChoice--1920x1080.logoContainerDirection--vertical.layoutChoice--version-3 .logo {
+        width: 171pt;
+        max-height: 70pt;
+      }
+      
+      .formatChoice--1920x1080.logoContainerDirection--horizontal.layoutChoice--version-3 .logo {
+        max-width: 171pt;
+        height: 70pt;
+      }
+
+      .formatChoice--1920x1080.logoContainerDirection--vertical.layoutChoice--version-4 .logo {
+        width: 171pt;
+        max-height: 70pt;
+      }
+      
+      .formatChoice--1920x1080.logoContainerDirection--horizontal.layoutChoice--version-4 .logo {
+        max-width: 171pt;
+        height: 70pt;
+      }
+
+      .formatChoice--1920x1080.logoContainerDirection--vertical.layoutChoice--version-5 .logo {
+        width: 171pt;
+        max-height: 70pt;
+      }
+      
+      .formatChoice--1920x1080.logoContainerDirection--horizontal.layoutChoice--version-5 .logo {
+        max-width: 171pt;
+        height: 70pt;
+      }
+
+      .formatChoice--1140x820.logoContainerDirection--vertical .logo + .logo { margin-top: 15pt; }
+      .formatChoice--1920x1080.logoContainerDirection--vertical .logo + .logo { margin-top: 19pt; }
+      
+      .formatChoice--1140x820.logoContainerDirection--horizontal .logo + .logo { margin-left: 15pt; }
+      .formatChoice--1920x1080.logoContainerDirection--horizontal .logo + .logo { margin-left: 19pt; }
+      
+
+      .logo--header {
+        object-position: left bottom !important;
+        margin-right: 100pt !important;
+      }
+
+      .formatChoice--1140x820.layoutChoice--version-1 .logo--header,
+      .formatChoice--1140x820.layoutChoice--version-2 .logo--header,
+      .formatChoice--1140x820.layoutChoice--version-3 .logo--header,
+      .formatChoice--1140x820.layoutChoice--version-4 .logo--header,
+      .formatChoice--1140x820.layoutChoice--version-5 .logo--header {
+        max-width: 155pt !important;
+        height: 46pt !important;
+      }
+
+      .formatChoice--1920x1080.layoutChoice--version-1 .logo--header,
+      .formatChoice--1920x1080.layoutChoice--version-2 .logo--header,
+      .formatChoice--1920x1080.layoutChoice--version-3 .logo--header,
+      .formatChoice--1920x1080.layoutChoice--version-4 .logo--header,
+      .formatChoice--1920x1080.layoutChoice--version-5 .logo--header{
+        max-width: 217pt !important;
+        height: 57pt !important;
+      }
+      
+      .textFit--vert.overflow:hover:after{ content: 'Min font size exceeded'; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" 
+        data-crop="{{show-crop}}" 
+        data-reduce-export-font-size-by-percent="0" 
+        data-reduce-firefox-font-size-by-percent="0"  
+        data-prevent-export-overflow="false"
+        class="formatChoice--{{{LE_format-choice--ltv}}}
+               layoutChoice--{{{LE_layout-choice--ltv}}}
+               themeColor--{{{LE_theme-colours--ltv}}}{{^LE_theme-colours--ltv}}blue{{/LE_theme-colours--ltv}}
+               {{^LE_secondary-information--ltv}}no-secondary-information{{/LE_secondary-information--ltv}}
+               {{^LE_heading--ltv}}no-heading{{/LE_heading--ltv}}
+               {{^LE_standfirst--ltv}}no-standfirst{{/LE_standfirst--ltv}}
+               logoContainerDirection--{{{LE_logo-container-direction--ltv}}}{{^LE_logo-container-direction--ltv}}horizontal{{/LE_logo-container-direction--ltv}}">
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage backgroundImage--left">
+            <div class="reposition-fix">{{{LE_left-image--ltv}}}</div><!--reposition-fix-->
+          </div><!--backgroundImage--left-->
+          <div class="backgroundImage backgroundImage--right">
+            <div class="reposition-fix">{{{LE_right-image--ltv}}}</div><!--reposition-fix-->
+          </div><!--backgroundImage--right-->
+          <div class="header">
+            <img src="https://files.outfit.io/media_library_items/187451/UOL-logo.svg" class="logo logo--header"><!--logo-->
+            {{#LE_website--ltv}}
+            <div class="website" data-max-line="1">{{{LE_website--ltv}}}</div><!--website-->
+            {{/LE_website--ltv}}
+          </div><!--header-->
+          <div class="body">
+            <div class="body__top">
+              {{#LE_secondary-information--ltv}}
+              <div class="preheading" data-max-line="1">{{{LE_secondary-information--ltv}}}</div><!--preheading-->
+              {{/LE_secondary-information--ltv}}
+              {{#LE_heading--ltv}}
+              <div class="heading">
+                <div class="heading__inner textFit--vert" style="line-height: 1.15em;">
+                  {{{LE_heading--ltv}}}
+                </div><!--heading__inner-->
+              </div><!--heading-->
+              {{/LE_heading--ltv}}
+              {{#LE_standfirst--ltv}}
+              <div class="copy" data-max-line="2">{{{LE_standfirst--ltv}}}</div><!--copy-->
+              {{/LE_standfirst--ltv}}
+            </div><!--body__top-->
+            <div class="body__bottom">
+              {{#LE_body-copy--ltv}}
+              <div class="content">
+                <div class="info" data-max-height="css">{{{LE_body-copy--ltv}}}</div><!--info-->
+              </div><!--content-->
+              {{/LE_body-copy--ltv}}
+              <div class="logo__container">
+                {{#LE_third-party-logo-1--ltv}}
+                <img src="{{{LE_third-party-logo-1--ltv}}}" class="logo logo--primary"><!--logo--primary-->
+                {{/LE_third-party-logo-1--ltv}}
+                {{#LE_third-party-logo-2--ltv}}
+                <img src="{{{LE_third-party-logo-2--ltv}}}" class="logo logo--secondary"><!--logo--secondary-->
+                {{/LE_third-party-logo-2--ltv}}
+              </div><!--logo__container-->
+            </div><!--body__bottom-->
+          </div><!--body-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/custom-rich-text.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="js/fontfaceobserver.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      // All external font-families need to be added to 'fonts' array
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const fonts = ['Maison Neue', 'Tiempos Headline'];
+        const fontObservers = [];
+
+        fonts.forEach(font => {
+          const obs = new FontFaceObserver(font);
+          fontObservers.push(obs.load())
+        });
+
+        Promise.all(fontObservers).then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+
+          document.dispatchEvent(new Event('printready'));
+        });
+      });      
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit--vert',
+        fitMode: 'vertical'
+      });
+
+
+      setInterval(() => {textFitMin('.textFit--vert', 25)}, 500);
+    </script>
+
+
+  </body>
+</html>

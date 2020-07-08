@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html data-sign="OS?">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url("https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css");
+      @font-face {
+        font-family: 'Frutiger';
+        src: url('https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/Frutiger-65Bold.woff2') format('woff2'), 
+          url('https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/Frutiger-65Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+      }
+      
+      :root {
+        --white: #ffffff;
+        --light-grey: #d0d2d6;
+        --grey: #5F6E7D;
+        --red: #c21e3c;
+        --dark-grey: #231F20;
+        --black: #000000;
+      }    
+
+      html {
+        font-family: "Adobe Caslon Pro";
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+      
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+      
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+      body:not(.show-crop) .container {
+        top: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+      }
+      
+      .bg {
+        background-color: var(--red);
+      }
+      
+      .wrapper {
+        height: 100%;
+        width: 100%;        
+        padding: 60px 20px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;        
+      }           
+      
+      .heading-container {        
+        width: 100%;
+        padding: 50px 0 3px 50px;
+        margin-bottom: 10px;
+        border-bottom: solid 3px var(--white);
+        position: relative;
+      }
+      
+      .heading-container:before, .heading-container:after {
+        content: "";
+        display: block;
+        height: 34px;
+        width: 21px;
+        position: absolute;
+        border: solid var(--white);
+      }
+      
+      .heading-container:before {
+        bottom: 5px;
+        left: 0;
+        border-width: 0 0 6px 7px;
+      }
+
+      .heading-container:after {
+        top: 0;
+        right: 0;
+        border-width: 6px 7px 0 0;
+      }
+
+      .heading {
+        font-family: "{{{font}}}{{^font}}Adobe Caslon Pro{{/font}}", sans-serif;
+        font-size: 29px;
+        font-weight: normal;
+        line-height: 1em;
+        letter-spacing: 0.025em;
+        text-align: right;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      
+      .heading.Frutiger {
+        letter-spacing: 0.01em;
+      }
+
+      .subheading {
+        font-family: "Frutiger", sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.1em;
+        letter-spacing: 0.04em;
+        text-align: right;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="bg reposition-fix">{{{background-image}}}</div>
+          <div class="wrapper">
+            <div class="heading-container">              
+              {{#heading}}
+              <div class="heading {{{font}}}{{^font}}Adobe Caslon Pro{{/font}}" data-max-height="58">{{{heading}}}</div>
+              {{/heading}}
+            </div>
+            {{#subheading}}
+              <div class="subheading" data-max-height="31">{{{subheading}}}</div>
+            {{/subheading}}            
+          </div>
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+    </script>
+    <script>
+      
+      console.clear();
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+      
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+      
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+      
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+    </script>
+
+
+  </body>
+</html>

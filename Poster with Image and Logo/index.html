@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html data-sign="OSS/OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="placeholder-controller.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Caslon/stylesheet.css);
+      @import url(https://outfit-assets-production.s3.amazonaws.com/fonts/Frutiger-New/stylesheet.css);
+
+      :root {
+        --white: #fff;
+        --black: #000;
+        --primary: {{{account.colors.primary}}};
+        --primary-red: {{{account.colors.primary-red-update}}};
+        --grey: {{{account.colors.grey}}};
+        --navy: {{{account.colors.navy}}};
+      }
+
+
+      html {
+        font-family: 'Frutiger';
+        color: var(--black);
+      }
+
+      body {
+        color: var(--white);
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .overflow[data-char-limit]:hover:after {
+        content: 'Character limit exceeded';        
+      }
+
+      .posterSection {
+        position: absolute;
+        left: 0;
+        right: 0;        
+      }
+
+      .posterSection--top {
+        top: 0;
+        bottom: 44.1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: {{account.colors.primary-red-update}};
+      }
+
+      .posterSection--bottom {
+        bottom: 0;
+        height: 44.3%;
+        overflow: hidden;
+      }
+
+      .repoImg{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;             
+        text-align: right;
+      }
+
+      .variation--a3 .body {
+        margin: 0 0.82rem 0;
+        padding: 1.17rem 0rem 0rem 0rem;
+      }
+
+      .variation--a4 .body {
+        margin: 0 0.83rem 0;
+        padding: 1.15rem 0rem 0rem 0rem;
+      }
+
+      .body::before,
+      .body::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 0.5839rem;
+        height: 0.9809rem;
+      }
+
+      .body::before {
+        right: 0;
+        top: 0;
+        border-top: 0.1868rem solid #fff;
+        border-right: 0.1868rem solid #fff;
+      }
+
+      .body::after {
+        left: 0;
+        bottom: 0.2rem;
+        border-bottom: 0.1868rem solid #fff;
+        border-left: 0.1868rem solid #fff;
+      }
+
+      .variation--a3 .body__maxHeight {
+        max-height: 8.2rem;
+      }
+
+      .variation--a4 .body__maxHeight {
+        max-height: 8rem;
+      }
+
+      .logoMain {
+        position: absolute;
+      }
+
+      .variation--a3 .logoMain {
+        top: 1.1912rem;
+        left: 0.8408rem;
+        width: 2.9896rem;
+      }
+
+      .variation--a4 .logoMain {
+        top: 1.25rem;
+        left: 0.84rem;
+        width: 3rem;
+      }
+
+      .main {
+        width: 76%;
+      }
+
+      .u-logo-hidden .main__maxHeight {
+        max-height: 6.7rem;
+      }
+
+      .main__maxHeight {
+        max-height: 8rem;
+      }  
+
+      .secondary {
+        width: 85%;
+        margin-bottom: 0.35rem;
+      }
+
+      .heading {
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 0.005rem;
+      }
+
+      .variation--a3 .heading {
+        margin-bottom: 0.06rem;
+        font-size: 1.15rem;
+        line-height: 1em;
+      }
+
+      .variation--a4 .heading {
+        font-size: 1.14rem;
+        line-height: 1.04em;
+      }
+
+      .mainSubheading {
+        font-size: 0.66rem;
+        margin-bottom: 0.23rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .variation--a3 .subheading {
+        margin-bottom: 0.3rem;
+      }
+
+      .variation--a4 .subheading {
+        margin-bottom: 0.32rem;
+      }
+
+      .subheading__name {
+        font-size: 0.333rem;
+        font-weight: bold;
+        margin-bottom: 0.03rem;
+      }
+
+      .subheading__description {
+        margin-bottom: 0.3rem;
+        font-size: 0.31em;
+        font-weight: 100;
+        line-height: 1.2em;
+      }
+
+      .variation--a4 .subheading__description {
+        margin-bottom: 0.2905rem;
+        margin-top: 0.04rem;
+        font-size: 0.31rem;
+      }        
+
+      .content{
+        font-size: 0.3293rem;
+        line-height: 1.2em;
+      }
+
+      .secondary {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .date {
+        font-family: 'Frutiger 55 Roman';
+        font-weight: bold;
+      }
+
+      .variation--a3 .date {
+        font-size: 0.435rem;
+        line-height: 1.1em;
+      }
+
+      .variation--a4 .date {
+        font-size: 0.43rem;
+      }
+
+      .variation--a3 .date__maxHeight{
+        max-height: 1.2em;
+      }
+
+      .variation--a4 .date__maxHeight {
+        max-height: 1.5em;
+      } 
+
+      .venue {
+        font-weight: bold;
+        line-height: 1.2em;
+      }
+
+      .variation--a3 .venue {
+        margin-top: 0.1rem;
+        font-size: 0.33rem;
+      }
+
+      .variation--a4 .venue {
+        font-size: 0.327rem;
+        margin-top: 0.12rem;
+      }
+
+      .venue p {
+        display: inline;
+      }
+
+      .venue__maxHeight{
+        max-height: 2.6em;
+      }
+
+      .variation--a3 .additionalInf {
+        margin-top: 0.07rem;
+        font-size: 0.3527rem;
+        font-weight: 300;
+        line-height: 1.2em;
+      }
+
+      .variation--a4 .additionalInf {
+        margin-top: 0.02rem;
+        font-size: 0.3527rem;
+        font-weight: 300;
+        line-height: 1.4em;
+      }
+
+      .additionalInf__maxHeight {
+        max-height: 1.3em;
+      }
+
+      .variation--a4 .secondary {
+        margin-bottom: 0.3rem;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 0.0467rem solid #fff;
+      }
+
+      .variation--a4 .footer {
+        margin: 0 0.835rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.52rem;
+      }
+
+      .variation--a3 .footer {
+        margin: 0 0.8rem 0 0.835rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.33rem;
+      }
+
+      .footer__col {
+        width: 35%;
+      }
+
+      .variation--a4 .footer__col {
+        margin-top: 0.03rem;
+        letter-spacing: 0.02102rem;
+        line-height: 1.2em;
+      }
+
+      .variation--a3 .footer__col {
+        letter-spacing: 0.02102rem;
+        line-height: 1.2em;
+      }
+
+      .u-fontFamily {
+        font-family: "Frutiger 65";
+        font-size: 0.25726rem;
+      }
+
+      .footer__col__maxHeight {
+        max-height: 2rem;
+      }
+
+      .footer__col--out {
+        width: 53.7%;
+        text-align: right;
+      }
+
+      .variation--a4 .footer {
+        padding-top: 0.305rem;
+        padding-bottom: 0.32rem;
+      }
+
+      .u-fontFamily p:first-child {
+        margin-top: 0.11rem;
+      }
+
+      .variation--a4 .u-fontFamily p:first-child {
+        margin-top: 0.11rem;
+      }
+
+      .info__label {
+        margin-bottom: 0.1168rem;
+        font-size: 0.2616rem;
+        letter-spacing: 0.01167rem;
+        word-spacing: -0.02802rem;
+        line-height: 1.2em;
+      } 
+
+      .info__label__maxHeight{
+        max-height: 1.5em;
+      }
+
+      .info {
+        font-weight: bold;
+        font-size: 0.2686rem;
+        letter-spacing: -0.002335em;
+      }
+
+      .variation--a3 .info {
+        line-height: 1.2em;
+      }
+
+      .variation--a4 .info {
+        line-height: 1.4em;
+      }
+
+      .info a {
+        color: var(--white);
+        text-decoration: none;
+      }
+
+      .info__maxHeight {
+        max-height: 2em;
+      }
+
+      .logoAlt {
+        width: 2.7561rem;
+        margin-top: 0.4438rem;
+        z-index: 1;
+        position: relative;
+        left: 0.85rem;
+      }
+
+      .logoSupport {
+        object-fit: contain;
+        object-position: left top;
+      }
+
+      .variation--a3 .logoSupport {
+        height: 1.55rem;
+        width: 5rem;
+      }
+
+      .variation--a4 .logoSupport {
+        height: 1.6rem;
+        width: 4.8rem;
+      }
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-order="{{LCTpwi_headline_size}} {{{LCTpwi_event-name}}} {{{LCTpwi_presenter-name}}}" class="{{ placeholder-toggle }} variation--{{{LCTpwi_variation}}}{{^LCTpwi_variation}}a4{{/LCTpwi_variation}}">    
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      {{#placeholder-image-1}}
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      {{/placeholder-image-1}}
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="container fit">
+
+          <div class="posterSection posterSection--top">
+            <img src="{{ account.logos.reversed }}" class="logoMain" />
+
+            <div  class="body__maxHeight">
+              <div class="check-overflow">            
+                <div class="body">
+                  <div class="main">
+                    {{#LCTpwi_event-name}}
+                    <div class="heading" >
+                      <div style="font-size: {{LCTpwi_headline_size}}{{^LCTpwi_headline_size}}100{{/LCTpwi_headline_size}}%; line-height: 1em;">
+                        <div class="check-overflow" data-max-line="2">
+                          {{{LCTpwi_event-name}}}
+                        </div><!-- end check-overflow -->
+                      </div><!--end font-size-->
+                    </div><!-- end heading-->
+                    {{/LCTpwi_event-name}}
+                    {{#LCTpwi_subheading}}
+                    <div class="mainSubheading">
+                      <div style="font-size: {{LCTpwi_subheading_size}}%; line-height: 1.1em;">
+                        {{{LCTpwi_subheading}}}
+                      </div><!-- end font-size -->
+                    </div><!--end mainSubheading-->
+                    {{/LCTpwi_subheading}}
+                    <div class="subheading">
+                      {{#LCTpwi_presenter-name}}
+                      <div class="subheading__name">
+                        <div style="max-height: 2em;">
+                          <div class="check-overflow">
+                            {{{LCTpwi_presenter-name}}}
+                          </div><!-- end check-overflow -->
+                        </div><!-- end max-height -->
+                      </div><!-- end subheding__name -->
+                      {{/LCTpwi_presenter-name}}
+                      {{#LCTpwi_presenter-description}}
+                      <div class="subheading__description">
+                        <div style="max-height: 3.7em;">
+                          <div class="check-overflow">
+                            {{{LCTpwi_presenter-description}}}
+                          </div><!-- end check-overflow -->
+                        </div><!-- end max-height -->
+                      </div><!-- end subheading__description -->
+                      {{/LCTpwi_presenter-description}}
+                    </div><!-- end subheading -->
+                  </div><!-- end main -->
+                  <div class="secondary">
+                    {{#LCTpwi_date}}
+                    <div class="date">
+                      <div class="date__maxHeight">
+                        <div class="check-overflow">
+                          {{{LCTpwi_date}}}
+                        </div><!-- end check-overflow -->
+                      </div><!-- end date__maxHeight -->
+                    </div><!-- end date -->
+                    {{/LCTpwi_date}}
+                    {{#LCTpwi_venue}}
+                    <div class="venue">
+                      <div class="venue__maxHeight">
+                        <div class="check-overflow">
+                          VENUE {{{LCTpwi_venue}}}
+                        </div><!-- end check-overflow -->
+                      </div><!-- end venue__maxHeight -->
+                    </div><!-- end venue -->
+                    {{/LCTpwi_venue}}
+                    {{#LCTpwi_additional-notes}}
+                    <div class="additionalInf">
+                      {{{LCTpwi_additional-notes}}}
+                    </div><!--end  aditionalInfo -->
+                    {{/LCTpwi_additional-notes}}
+                  </div><!-- end secondary -->
+                </div><!-- end body -->
+              </div><!-- end check-overflow -->
+            </div><!-- end body__maxHeight -->
+            <div class="footer">
+              <div class="footer__col u-fontFamily">
+                <div class="footer__col__maxHeight">
+                  {{#LCTpwi_supporting-logo}}
+                  <img class="logoSupport" src="{{{LCTpwi_supporting-logo}}}" />
+                  {{/LCTpwi_supporting-logo}}
+                </div><!-- end info__label__maxHeight -->
+              </div><!-- end footer__col-->
+              <div class="footer__col footer__col--out">
+                {{#LCTpwi_audience}}    
+                <div class="info__label">
+                  <div class="info__label__maxHeight">
+                    <div class="check-overflow">
+                      {{{LCTpwi_audience}}}                  
+                    </div><!-- end check-overflow -->
+                  </div><!-- end info__label__maxHeight -->
+                </div><!-- end info__label -->
+                {{/LCTpwi_audience}}   
+                {{#LCTpwi_more-info}}
+                <div class="info">
+                  <div class="info__maxHeight">
+                    <div class="check-overflow">
+                      {{{LCTpwi_more-info}}}
+                    </div><!-- end check-overflow -->
+                  </div><!-- end info__maxHeight -->                
+                </div><!-- end info -->
+                {{/LCTpwi_more-info}}
+              </div><!-- end footer__col--out -->
+            </div><!-- end footer -->
+          </div><!-- end posterSection -->
+          <div class="posterSection posterSection--bottom">
+            {{#logo-alt}}
+            <img src="{{{logo-alt}}}" class="logoAlt">
+            {{/logo-alt}}
+            <div class="repoImg">{{{LCTpwi_image}}}</div>
+          </div><!-- end posterSection -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+    <script src="js/max-line-check.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      // Adding class 'is-export-mode' to the body element in case template is in the export mode
+      function checkExport() {
+        var isExportPage = window.location.href.indexOf('exports') > -1;
+
+        if (isExportPage) {
+          document.body.classList.add('is-export-mode');
+        }
+      }            
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+        maxLineCheck();
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();  
+      checkExport();   
+      placeholderControler();
+
+    </script>
+
+
+  </body>
+</html>
